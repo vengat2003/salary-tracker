@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Work Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p1:#0F4C75;--p1l:#E3EFF8;--p1d:#0a3355;
+  --teal:#1B9AAA;--teall:#E0F5F7;
+  --accent:#06D6A0;--accentl:#E0FAF4;
+  --p2:#FF6B6B;--p2l:#FFF0F0;
+  --present:#06D6A0;--presentl:#E0FAF4;
+  --absent:#FF6B6B;--absentl:#FFF0F0;
+  --half:#FFB347;--halfl:#FFF3E0;
+  --advance:#F7941D;--advancel:#FFF4E5;
+  --petrol:#06D6A0;--petroll:#E0FAF4;
+  --gpay:#1B9AAA;--gpayl:#E0F5F7;
+  --cash:#06D6A0;--cashl:#E0FAF4;
+  --bg:#EEF4F8;--card:#fff;
+  --text:#0D1B2A;--text2:#5C7A99;
+  --border:#D4E3F0;--radius:16px;
+  --shadow:0 2px 12px rgba(15,76,117,0.09);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'Inter','Noto Sans Tamil',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;max-width:430px;margin:0 auto;height:100dvh;}
+.header{background:linear-gradient(135deg,#0F4C75 0%,#1B9AAA 100%);padding:48px 18px 14px;color:#fff;flex-shrink:0;}
+.header-top{display:flex;justify-content:space-between;align-items:center;}
+.header h1{font-size:18px;font-weight:800;letter-spacing:-0.3px;}
+.header-sub{font-size:11px;opacity:.7;margin-top:2px;}
+.month-pill{background:rgba(255,255,255,.18);border-radius:20px;padding:4px 12px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px;}
+.month-pill button{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;line-height:1;padding:0 2px;}
+.tab-bar{display:flex;background:#fff;border-bottom:2px solid var(--border);flex-shrink:0;overflow-x:auto;scrollbar-width:none;}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab{flex:1;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 4px 7px;font-size:9px;color:var(--text2);font-weight:600;border-bottom:3px solid transparent;transition:all .2s;gap:2px;white-space:nowrap;flex-shrink:0;min-width:60px;}
+.tab .ti{font-size:16px;}
+.tab.active{color:var(--teal);border-bottom-color:var(--teal);}
+.pages{flex:1;overflow:hidden;position:relative;}
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:14px 13px 28px;display:none;-webkit-overflow-scrolling:touch;}
+.page.active{display:block;}
+.card{background:var(--card);border-radius:var(--radius);padding:15px;margin-bottom:12px;box-shadow:var(--shadow);border:1px solid var(--border);}
+.chips{display:grid;gap:8px;margin-bottom:12px;}
+.chips.c3{grid-template-columns:repeat(3,1fr);}
+.chips.c2{grid-template-columns:repeat(2,1fr);}
+.chips.c4{grid-template-columns:repeat(2,1fr);}
+.chip{border-radius:12px;padding:12px 8px;text-align:center;}
+.chip-val{font-size:16px;font-weight:800;line-height:1.1;}
+.chip-label{font-size:9px;font-weight:600;margin-top:3px;opacity:.7;text-transform:uppercase;letter-spacing:.3px;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-dow{text-align:center;font-size:10px;font-weight:700;color:var(--text2);padding:2px 0 5px;}
+.cal-day{aspect-ratio:1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--text2);transition:all .15s;position:relative;border:2px solid transparent;user-select:none;}
+.cal-day:active{transform:scale(.86);}
+.cal-day.empty{background:transparent;cursor:default;pointer-events:none;}
+.cal-day.saturday{background:#EBF5FF;color:var(--teal);cursor:default;}
+.cal-day.future{background:#f0f0f0;color:#bbb;cursor:not-allowed;opacity:.45;}
+.cal-day.today{border-color:var(--teal);}
+.cal-day.present{background:var(--present);color:#fff;border-color:var(--present);}
+.cal-day.absent{background:var(--absent);color:#fff;border-color:var(--absent);}
+.cal-day.half{background:var(--half);color:#fff;border-color:var(--half);}
+.cal-day.advance-work{background:var(--advance);color:#fff;border-color:var(--advance);}
+.cal-day.petrol-day::before{content:'⛽';position:absolute;top:0;left:0;font-size:7px;}
+.cal-day.petrol-bonus{background:#0E7490;color:#fff;border-color:#0E7490;}
+.cal-day.petrol-bonus::after{content:'⛽';position:absolute;bottom:1px;right:2px;font-size:7px;color:#fff;}
+.legend{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
+.leg{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text2);}
+.leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+.txn-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.txn-row:last-child{border-bottom:none;padding-bottom:0;}
+.txn-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.txn-desc{font-size:13px;font-weight:600;}
+.txn-meta{font-size:11px;color:var(--text2);}
+.txn-amt{margin-left:auto;font-size:14px;font-weight:800;white-space:nowrap;}
+.sal-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:12px;margin-bottom:7px;}
+.sal-info{display:flex;align-items:center;gap:10px;}
+.sal-dot{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;}
+.sal-date{font-size:13px;font-weight:600;}
+.sal-desc{font-size:11px;color:var(--text2);}
+.sal-amt{font-size:15px;font-weight:800;}
+.ig{margin-bottom:9px;}
+.il{font-size:10px;font-weight:700;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
+input,select{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:11px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;background:#fff;color:var(--text);outline:none;transition:border-color .2s;}
+input:focus,select:focus{border-color:var(--teal);}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.btn{width:100%;padding:12px;border-radius:12px;border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:linear-gradient(135deg,var(--p1),var(--teal));color:#fff;}
+.btn-green{background:linear-gradient(135deg,var(--present),#04b885);color:#fff;}
+.btn-red{background:linear-gradient(135deg,var(--absent),#e04040);color:#fff;}
+.btn-orange{background:linear-gradient(135deg,var(--advance),#ffaa44);color:#fff;}
+.btn-teal{background:linear-gradient(135deg,var(--teal),#147885);color:#fff;}
+.st{font-size:14px;font-weight:700;margin-bottom:11px;display:flex;align-items:center;gap:6px;}
+.empty{text-align:center;padding:20px 12px;color:var(--text2);font-size:13px;}
+.empty-icon{font-size:34px;margin-bottom:7px;}
+.mb{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;}
+.mb-g{background:var(--gpayl);color:var(--gpay);}
+.mb-c{background:var(--cashl);color:#059669;}
+.adv-box{background:linear-gradient(135deg,#0F4C75,#1B9AAA);border-radius:12px;padding:12px;margin-bottom:10px;color:#fff;}
+.adv-box-title{font-size:12px;font-weight:700;opacity:.85;margin-bottom:3px;}
+.adv-box-text{font-size:12px;opacity:.9;}
+.bar-wrap{display:flex;gap:6px;align-items:flex-end;height:100px;margin:10px 0 6px;}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.bar-rect{width:100%;border-radius:6px 6px 0 0;min-height:4px;}
+.bar-num{font-size:9px;font-weight:700;text-align:center;}
+.bar-lbl{font-size:9px;color:var(--text2);font-weight:600;text-align:center;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .25s;}
+.modal-overlay.show{opacity:1;pointer-events:all;}
+.modal-box{background:#fff;border-radius:24px 24px 0 0;padding:18px 18px 36px;width:100%;max-width:430px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto;}
+.modal-overlay.show .modal-box{transform:translateY(0);}
+.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 14px;}
+.modal-title{font-size:15px;font-weight:800;margin-bottom:14px;}
+.abtn{background:#fff;border-radius:8px;padding:4px 9px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;line-height:1.4;border:1px solid var(--border);}
+.loan-summary-top{background:linear-gradient(135deg,#0F4C75,#1B9AAA);border-radius:16px;padding:15px;margin-bottom:12px;color:#fff;}
+.lst-title{font-size:11px;font-weight:700;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
+.lst-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
+.lst-box{background:rgba(255,255,255,.15);border-radius:10px;padding:9px 6px;text-align:center;}
+.lst-val{font-size:14px;font-weight:800;line-height:1;}
+.lst-lbl{font-size:9px;opacity:.7;margin-top:3px;font-weight:600;}
+.lst-bar-bg{height:6px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden;}
+.lst-bar-fill{height:100%;background:#06D6A0;border-radius:4px;transition:width .5s;}
+.lst-bar-txt{font-size:10px;opacity:.65;margin-top:4px;text-align:right;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top">
+    <div><h1>💼 Work Tracker</h1><div class="header-sub" id="headerDate"></div></div>
+    <div class="month-pill">
+      <button onclick="changeMonth(-1)">‹</button>
+      <span id="monthLabel"></span>
+      <button onclick="changeMonth(1)">›</button>
+    </div>
+  </div>
+</div>
+<div class="tab-bar">
+  <div class="tab active" onclick="switchTab(0)" id="tab0"><span class="ti">📅</span>Job 1</div>
+  <div class="tab" onclick="switchTab(1)" id="tab1"><span class="ti">💰</span>Job 2</div>
+  <div class="tab" onclick="switchTab(2)" id="tab2"><span class="ti">🏦</span>Loan</div>
+  <div class="tab" onclick="switchTab(3)" id="tab3"><span class="ti">📊</span>Analysis</div>
+</div>
+<div class="pages">
+
+<!-- PAGE 0: JOB 1 -->
+<div class="page active" id="page0">
+  <div class="chips c3" id="p1chips"></div>
+  <div class="card">
+    <div class="st">⚙️ Settings</div>
+    <div class="ig"><div class="il">Daily Salary ₹</div><input type="number" id="dailySal" value="600" oninput="saveSettings();renderAll()"></div>
+  </div>
+  <div class="card">
+    <div class="st">📅 Attendance Calendar</div>
+    <div id="advInfoBox"></div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="legend">
+      <div class="leg"><div class="leg-dot" style="background:var(--present)"></div>Present</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--absent)"></div>Absent</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--half)"></div>Half</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--advance)"></div>Salary days</div>
+      <div class="leg"><div class="leg-dot" style="background:#0E7490"></div>Petrol days</div>
+      <div class="leg"><div class="leg-dot" style="background:#EBF5FF"></div>Saturday</div>
+      <div class="leg">⛽ Petrol entry</div>
+    </div>
+    <p style="font-size:11px;color:var(--text2);margin-top:8px;">Tap = Present → Absent → Half → Clear</p>
+  </div>
+  <div class="card">
+    <div class="st">💵 Salary வாங்கியது</div>
+    <div id="salaryDueBox" style="margin-bottom:12px;"></div>
+    <p style="font-size:12px;color:var(--text2);margin-bottom:10px;">Boss கிட்ட எவ்வளவு salary வாங்கினன்னு போடு</p>
+    <div class="r2">
+      <div class="ig"><div class="il">Amount ₹</div><input type="number" id="advAmt" placeholder="6000"></div>
+      <div class="ig"><div class="il">Date</div><input type="date" id="advDate"></div>
+    </div>
+    <div class="ig"><div class="il">Payment Method</div>
+      <select id="advMethod"><option value="gpay">📱 GPay</option><option value="cash">💵 Cash</option></select>
+    </div>
+    <button class="btn btn-orange" onclick="addAdvance()">+ Salary வாங்கினேன்</button>
+    <div id="advList" style="margin-top:12px;"></div>
+  </div>
+  <div class="card">
+    <div class="st">⛽ Petrol Bonus</div>
+    <div class="chips c3" id="petrolChips" style="margin-bottom:8px;"></div>
+    <p style="font-size:11px;color:var(--text2);margin-bottom:10px;">₹50=1 நாள் | ₹100=2 நாள் | ₹200=4 நாள்</p>
+    <div class="r2">
+      <div class="ig"><div class="il">Date</div><input type="date" id="petrolDate"></div>
+      <div class="ig"><div class="il">Amount ₹</div><input type="number" id="petrolAmt" value="50"></div>
+    </div>
+    <button class="btn btn-teal" onclick="addPetrol()">⛽ Petrol வாங்கினேன்</button>
+    <div id="petrolList" style="margin-top:12px;"></div>
+  </div>
+</div>
+
+<!-- PAGE 1: JOB 2 -->
+<div class="page" id="page1">
+  <div class="chips c2" id="p2chips"></div>
+  <div class="card">
+    <div class="st">➕ Entry போடு</div>
+    <div class="r2">
+      <div class="ig"><div class="il">Type</div>
+        <select id="p2type"><option value="income">💚 Income</option><option value="expense">❤️ Expense</option></select>
+      </div>
+      <div class="ig"><div class="il">Date</div><input type="date" id="p2date"></div>
+    </div>
+    <div class="ig"><div class="il">Description</div><input type="text" id="p2desc" placeholder="என்ன work / expense?"></div>
+    <div class="r2">
+      <div class="ig"><div class="il">Amount ₹</div><input type="number" id="p2amt" placeholder="0"></div>
+      <div class="ig"><div class="il">Method</div>
+        <select id="p2method"><option value="gpay">📱 GPay</option><option value="cash">💵 Cash</option></select>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="addP2()">+ Add Entry</button>
+  </div>
+  <div class="card"><div class="st">📋 Transactions</div><div id="p2list"></div></div>
+</div>
+
+<!-- PAGE 2: LOAN -->
+<div class="page" id="page2">
+  <!-- LOAN SUMMARY at top -->
+  <div class="loan-summary-top">
+    <div class="lst-title">📋 Loan Summary</div>
+    <div class="lst-grid" id="lstGrid"></div>
+    <div class="lst-bar-bg"><div class="lst-bar-fill" id="lstBarFill" style="width:0%"></div></div>
+    <div class="lst-bar-txt" id="lstBarTxt">0% repaid</div>
+    <div id="lstPerLoan" style="margin-top:10px;display:flex;flex-direction:column;gap:6px;"></div>
+  </div>
+  <!-- LOAN CARDS -->
+  <div class="card">
+    <div class="st" style="justify-content:space-between;">
+      <span>🏦 என் Loans</span>
+      <button class="btn btn-primary" style="width:auto;padding:6px 14px;font-size:12px;" onclick="openAddLoan()">+ Add Loan</button>
+    </div>
+    <div id="loanListCards"></div>
+  </div>
+  <!-- LOAN PAYMENT -->
+  <div class="card">
+    <div class="st">💳 Loan கட்டு</div>
+    <div class="ig"><div class="il">எந்த Loan?</div>
+      <select id="loanSelectPay" onchange="updateLoanPayDetails()">
+        <option value="">-- Select Loan --</option>
+      </select>
+    </div>
+    <div id="loanPayInfo" style="margin-bottom:8px;"></div>
+    <div class="r2">
+      <div class="ig"><div class="il">Date</div><input type="date" id="loanDate"></div>
+      <div class="ig"><div class="il">Amount ₹</div><input type="number" id="loanAmt" placeholder="0"></div>
+    </div>
+    <div class="ig"><div class="il">Payment Method</div>
+      <select id="loanMethod"><option value="gpay">📱 GPay</option><option value="cash">💵 Cash</option></select>
+    </div>
+    <button class="btn btn-red" onclick="addLoan()">💳 Loan கட்டினேன்</button>
+  </div>
+  <div class="card"><div class="st">📋 Payment History</div><div id="loanList"></div></div>
+</div>
+
+<!-- PAGE 3: ANALYSIS -->
+<div class="page" id="page3">
+  <div class="chips c4" id="p3chips"></div>
+  <div class="card">
+    <div class="st">📊 Comparison</div>
+    <div class="bar-wrap" id="analysisBar"></div>
+    <div class="legend" style="justify-content:center;">
+      <div class="leg"><div class="leg-dot" style="background:var(--p1)"></div>J1</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--present)"></div>J2 Inc</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--p2)"></div>Exp</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--half)"></div>Loan</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--petrol)"></div>Petrol</div>
+    </div>
+  </div>
+  <div class="card"><div class="st">💳 GPay vs Cash</div><div id="methodSummary"></div></div>
+  <div class="card"><div class="st">📝 Full Summary</div><div id="summaryList"></div></div>
+</div>
+</div><!-- /pages -->
+
+<!-- Add/Edit Loan Modal -->
+<div class="modal-overlay" id="addLoanModal" onclick="if(event.target===this)closeAddLoan()">
+  <div class="modal-box">
+    <div class="modal-handle"></div>
+    <div class="modal-title">🏦 Loan Add / Edit</div>
+    <input type="hidden" id="addLoanEditId" value="">
+    <div class="ig"><div class="il">Loan பேர்</div><input type="text" id="newLoanName" placeholder="Bank / நண்பன் / etc..."></div>
+    <div class="r2">
+      <div class="ig"><div class="il">Total Amount ₹</div><input type="number" id="newLoanTotal" placeholder="0" oninput="calcLoanEMI()"></div>
+      <div class="ig"><div class="il">Monthly Pay ₹</div><input type="number" id="newLoanMonthly" placeholder="Auto" oninput="calcInterestFromInputs()"></div>
+    </div>
+    <div class="r2">
+      <div class="ig"><div class="il">Interest % <span style="font-size:9px;color:var(--teal);">(Auto)</span></div><input type="number" id="newLoanInterest" placeholder="Auto-calculate" step="0.01" readonly style="background:var(--p1l);color:var(--p1);font-weight:700;"></div>
+      <div class="ig"><div class="il">Duration (months)</div><input type="number" id="newLoanDuration" placeholder="12" oninput="calcLoanEMI();calcInterestFromInputs()"></div>
+    </div>
+    <div id="loanEMIPreview" style="background:var(--p1l);border-radius:11px;padding:11px;margin-bottom:12px;display:none;">
+      <div style="font-size:11px;font-weight:700;color:var(--p1);margin-bottom:6px;">💡 Auto Calculation</div>
+      <div id="loanEMIDetails" style="font-size:12px;color:var(--text);line-height:1.9;"></div>
+    </div>
+    <div class="ig">
+      <div class="il">Payment Day (எந்த தேதி கட்டுவோம்?)</div>
+      <select id="newLoanPayType" onchange="updatePayDayUI()">
+        <option value="nthday">📅 Every Month — குறிப்பிட்ட Date</option>
+        <option value="2ndthurs">📅 Every Month — 2nd Thursday</option>
+        <option value="custom">✏️ Custom Date</option>
+      </select>
+      <div id="payDayNthDay" style="margin-top:8px;">
+        <input type="number" id="newLoanPayDay" placeholder="e.g. 5 (every month 5th)" min="1" max="31">
+        <div style="font-size:11px;color:var(--text2);margin-top:4px;">e.g. 5 போட்டா → every month 5th தேதி கட்டணும்</div>
+      </div>
+      <div id="payDayCustom" style="margin-top:8px;display:none;">
+        <input type="date" id="newLoanCustomDate">
+        <div style="font-size:11px;color:var(--text2);margin-top:4px;">Specific date மட்டும் — ஒரே தடவை payment</div>
+      </div>
+      <div id="payDay2ndThurs" style="margin-top:8px;display:none;">
+        <div style="background:var(--teall);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--teal);font-weight:600;">📅 Every month 2nd Thursday automatically calculate ஆகும்</div>
+      </div>
+    </div>
+    <div class="ig"><div class="il">Loan வாங்கிய Date</div><input type="date" id="newLoanStart"></div>
+    <button class="btn btn-primary" onclick="saveNewLoan()" style="margin-bottom:8px;">✅ Save பண்ணு</button>
+    <button class="btn" style="background:var(--bg);color:var(--text2);border:1px solid var(--border);" onclick="closeAddLoan()">Cancel</button>
+  </div>
+</div>
+
+<!-- Edit Petrol Modal -->
+<div class="modal-overlay" id="editPetrolModal" onclick="if(event.target===this)closeEditPetrol()">
+  <div class="modal-box">
+    <div class="modal-handle"></div>
+    <div class="modal-title">✏️ Petrol Edit</div>
+    <input type="hidden" id="editPetrolId">
+    <div class="ig"><div class="il">Date</div><input type="date" id="editPetrolDate"></div>
+    <div class="ig"><div class="il">Amount ₹</div><input type="number" id="editPetrolAmt"></div>
+    <button class="btn btn-teal" onclick="saveEditPetrol()" style="margin-bottom:8px;">✅ Save</button>
+    <button class="btn" style="background:var(--bg);color:var(--text2);border:1px solid var(--border);" onclick="closeEditPetrol()">Cancel</button>
+  </div>
+</div>
+<!-- Edit Salary Modal -->
+<div class="modal-overlay" id="editAdvModal" onclick="if(event.target===this)closeEditAdv()">
+  <div class="modal-box">
+    <div class="modal-handle"></div>
+    <div class="modal-title">✏️ Salary Edit</div>
+    <input type="hidden" id="editAdvId">
+    <div class="ig"><div class="il">Amount ₹</div><input type="number" id="editAdvAmt"></div>
+    <div class="ig"><div class="il">Date</div><input type="date" id="editAdvDate"></div>
+    <div class="ig"><div class="il">Method</div>
+      <select id="editAdvMethod"><option value="gpay">📱 GPay</option><option value="cash">💵 Cash</option></select>
+    </div>
+    <button class="btn btn-orange" onclick="saveEditAdvance()" style="margin-bottom:8px;">✅ Save</button>
+    <button class="btn" style="background:var(--bg);color:var(--text2);border:1px solid var(--border);" onclick="closeEditAdv()">Cancel</button>
+  </div>
+</div>
+<!-- Edit Loan Payment Modal -->
+<div class="modal-overlay" id="editLoanModal" onclick="if(event.target===this)closeEditLoan()">
+  <div class="modal-box">
+    <div class="modal-handle"></div>
+    <div class="modal-title">✏️ Loan Payment Edit</div>
+    <input type="hidden" id="editLoanId">
+    <div class="ig"><div class="il">Date</div><input type="date" id="editLoanDate"></div>
+    <div class="ig"><div class="il">Amount ₹</div><input type="number" id="editLoanAmt"></div>
+    <div class="ig"><div class="il">Method</div>
+      <select id="editLoanMethod"><option value="gpay">📱 GPay</option><option value="cash">💵 Cash</option></select>
+    </div>
+    <button class="btn btn-red" onclick="saveEditLoan()" style="margin-bottom:8px;">✅ Save</button>
+    <button class="btn" style="background:var(--bg);color:var(--text2);border:1px solid var(--border);" onclick="closeEditLoan()">Cancel</button>
+  </div>
+</div>
+
+<script>
+const todayFull=new Date();
+const todayStr=todayFull.toISOString().split('T')[0];
+let curYear=todayFull.getFullYear(),curMonth=todayFull.getMonth();
+function load(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function save(k,v){localStorage.setItem(k,JSON.stringify(v));}
+let attendance=load('wt_att',{});
+let loanPayments=load('wt_loans',[]);
+let advances=load('wt_adv',[]);
+let petrolLog=load('wt_petrol',[]);
+let p2entries=load('wt_p2',[]);
+let settings=load('wt_settings',{dailySal:600});
+let loanSettings=load('wt_loan_settings',{source:'',total:0,monthly:0,payDay:1,startDate:''});
+let loans=load('wt_loans_list',[]);
+if(loans.length===0&&loanSettings.total>0){
+  loans.push({id:Date.now(),name:loanSettings.source||'Loan 1',total:loanSettings.total,monthly:loanSettings.monthly,payDay:loanSettings.payDay,startDate:loanSettings.startDate,totalWithInterest:loanSettings.total});
+  save('wt_loans_list',loans);
+}
+document.getElementById('dailySal').value=settings.dailySal||600;
+document.getElementById('loanDate').value=todayStr;
+document.getElementById('advDate').value=todayStr;
+document.getElementById('petrolDate').value=todayStr;
+document.getElementById('p2date').value=todayStr;
+document.getElementById('headerDate').textContent=todayFull.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+function saveSettings(){settings.dailySal=parseFloat(document.getElementById('dailySal').value)||0;save('wt_settings',settings);}
+function switchTab(n){
+  [0,1,2,3].forEach(i=>{
+    document.getElementById('tab'+i).classList.toggle('active',i===n);
+    document.getElementById('page'+i).classList.toggle('active',i===n);
+  });renderAll();
+}
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function changeMonth(d){
+  curMonth+=d;
+  if(curMonth>11){curMonth=0;curYear++;}
+  if(curMonth<0){curMonth=11;curYear--;}
+  if(curYear<2026&&curMonth<0){curMonth=0;curYear=2026;}
+  renderAll();
+}
+function getPetrolDays(amt){return Math.max(1,Math.round(amt/50));}
+function getPetrolBonusDaySet(){
+  const days=new Set();
+  petrolLog.forEach(p=>{
+    const n=getPetrolDays(p.amt);
+    const start=new Date(p.date+'T00:00:00');
+    start.setDate(start.getDate()+1);
+    let added=0;const cursor=new Date(start);
+    while(added<n){
+      const dow=cursor.getDay();
+      if(dow!==6){days.add(cursor.toISOString().split('T')[0]);added++;}
+      cursor.setDate(cursor.getDate()+1);
+    }
+  });
+  return days;
+}
+function getAdvWorkDays(adv){return Math.ceil(adv.amt/(settings.dailySal||1));}
+function getAdvanceDays(){
+  const days=new Set();
+  advances.forEach(adv=>{
+    const n=getAdvWorkDays(adv);
+    const start=new Date(adv.date+'T00:00:00');start.setDate(start.getDate()+1);
+    for(let i=0;i<n;i++){const d=new Date(start);d.setDate(d.getDate()+i);days.add(d.toISOString().split('T')[0]);}
+  });return days;
+}
+function mb(m){return m==='gpay'?'<span class="mb mb-g">📱 GPay</span>':'<span class="mb mb-c">💵 Cash</span>';}
+function isSaturday(ds){return new Date(ds+'T00:00:00').getDay()===6;}
+
+// CALENDAR
+function renderCal(){
+  const mlEl=document.getElementById('monthLabel');if(!mlEl) return;
+  mlEl.textContent=MONTHS[curMonth].slice(0,3)+' '+curYear;
+  const grid=document.getElementById('calGrid');grid.innerHTML='';
+  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach((d,i)=>{
+    const el=document.createElement('div');el.className='cal-dow';
+    if(i===6) el.style.color='var(--teal)';
+    el.textContent=d;grid.appendChild(el);
+  });
+  const first=new Date(curYear,curMonth,1).getDay();
+  const dim=new Date(curYear,curMonth+1,0).getDate();
+  const advDays=getAdvanceDays();
+  const petrolDaySet=new Set(petrolLog.map(p=>p.date));
+  const petrolBonusSet=getPetrolBonusDaySet();
+  for(let i=0;i<first;i++){const el=document.createElement('div');el.className='cal-day empty';grid.appendChild(el);}
+  for(let d=1;d<=dim;d++){
+    const key=curYear+'-'+String(curMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const isFuture=key>todayStr;const st=attendance[key]||'';
+    const isAdv=advDays.has(key);const isPetrol=petrolDaySet.has(key);
+    const isPetrolBonus=petrolBonusSet.has(key);
+    const isToday=key===todayStr;const isSat=isSaturday(key);
+    const el=document.createElement('div');let cls='cal-day';
+    if(isFuture){cls+=' future';if(isSat) cls+=' saturday';}
+    else if(st){cls+=' '+st;}
+    else if(isAdv){cls+=' advance-work';}
+    else if(isPetrolBonus){cls+=' petrol-bonus';}
+    else if(isSat){cls+=' saturday';}
+    if(isToday) cls+=' today';
+    if(isPetrol&&!isFuture) cls+=' petrol-day';
+    el.className=cls;el.textContent=d;
+    if(!isFuture&&!isSat) el.addEventListener('click',()=>cycleDay(key));
+    else if(!isFuture&&isSat&&st) el.addEventListener('click',()=>cycleDay(key));
+    grid.appendChild(el);
+  }
+  const infoBox=document.getElementById('advInfoBox');
+  if(advances.length){
+    const a=advances[advances.length-1];const n=getAdvWorkDays(a);
+    const start=new Date(a.date+'T00:00:00');start.setDate(start.getDate()+1);
+    const end=new Date(start);end.setDate(end.getDate()+n-1);
+    infoBox.innerHTML=`<div class="adv-box"><div class="adv-box-title">💵 Salary ₹${a.amt.toLocaleString()} வாங்கியது — ${mb(a.method)}</div><div class="adv-box-text">${start.toLocaleDateString('en-IN',{day:'numeric',month:'short'})} to ${end.toLocaleDateString('en-IN',{day:'numeric',month:'short'})} — <strong>${n} நாள்</strong> work பண்ணணும்</div></div>`;
+  } else infoBox.innerHTML='';
+}
+function cycleDay(key){
+  if(key>todayStr) return;
+  const cycle=['','present','absent','half'];
+  const cur=attendance[key]||'';
+  const next=cycle[(cycle.indexOf(cur)+1)%cycle.length];
+  if(next==='') delete attendance[key]; else attendance[key]=next;
+  save('wt_att',attendance);renderAll();
+}
+
+// SALARY
+function addAdvance(){
+  const amt=parseFloat(document.getElementById('advAmt').value)||0;
+  const date=document.getElementById('advDate').value;
+  const method=document.getElementById('advMethod').value;
+  if(!amt||!date) return;
+  advances.push({amt,date,method,id:Date.now()});save('wt_adv',advances);
+  document.getElementById('advAmt').value='';renderAll();
+}
+function deleteAdvance(id){advances=advances.filter(a=>String(a.id)!==String(id));save('wt_adv',advances);renderAll();}
+function editAdvance(id){
+  const a=advances.find(a=>String(a.id)===String(id));if(!a) return;
+  document.getElementById('editAdvId').value=id;
+  document.getElementById('editAdvAmt').value=a.amt;
+  document.getElementById('editAdvDate').value=a.date;
+  document.getElementById('editAdvMethod').value=a.method||'cash';
+  document.getElementById('editAdvModal').classList.add('show');
+}
+function saveEditAdvance(){
+  const id=document.getElementById('editAdvId').value;
+  const amt=parseFloat(document.getElementById('editAdvAmt').value)||0;
+  const date=document.getElementById('editAdvDate').value;
+  const method=document.getElementById('editAdvMethod').value;
+  if(!amt) return;
+  advances=advances.map(a=>String(a.id)===String(id)?{...a,amt,date,method}:a);
+  save('wt_adv',advances);document.getElementById('editAdvModal').classList.remove('show');renderAll();
+}
+function closeEditAdv(){document.getElementById('editAdvModal').classList.remove('show');}
+
+// PETROL
+function addPetrol(){
+  const date=document.getElementById('petrolDate').value;
+  const amt=parseFloat(document.getElementById('petrolAmt').value)||50;
+  if(!date) return;
+  petrolLog.push({date,amt,id:Date.now()});save('wt_petrol',petrolLog);renderAll();
+}
+function deletePetrol(id){petrolLog=petrolLog.filter(p=>String(p.id)!==String(id));save('wt_petrol',petrolLog);renderAll();}
+function editPetrol(id){
+  const p=petrolLog.find(p=>String(p.id)===String(id));if(!p) return;
+  document.getElementById('editPetrolId').value=id;
+  document.getElementById('editPetrolDate').value=p.date;
+  document.getElementById('editPetrolAmt').value=p.amt;
+  document.getElementById('editPetrolModal').classList.add('show');
+}
+function saveEditPetrol(){
+  const id=document.getElementById('editPetrolId').value;
+  const date=document.getElementById('editPetrolDate').value;
+  const amt=parseFloat(document.getElementById('editPetrolAmt').value)||50;
+  petrolLog=petrolLog.map(p=>String(p.id)===String(id)?{...p,date,amt}:p);
+  save('wt_petrol',petrolLog);document.getElementById('editPetrolModal').classList.remove('show');renderAll();
+}
+function closeEditPetrol(){document.getElementById('editPetrolModal').classList.remove('show');}
+
+// Change 3: Auto-calculate interest from Total + Monthly + Duration
+function calcInterestFromInputs(){
+  const total=parseFloat(document.getElementById('newLoanTotal').value)||0;
+  const monthly=parseFloat(document.getElementById('newLoanMonthly').value)||0;
+  const duration=parseInt(document.getElementById('newLoanDuration').value)||0;
+  const preview=document.getElementById('loanEMIPreview');
+  if(!total||!monthly||!duration){
+    document.getElementById('newLoanInterest').value='';
+    preview.style.display='none';return;
+  }
+  const totalPay=monthly*duration;
+  const totalInt=totalPay-total;
+  // Reverse-calculate approximate annual interest rate using Newton's method on EMI formula
+  let rate=0;
+  if(totalInt>0){
+    let r=0.01;
+    for(let i=0;i<100;i++){
+      const f=total*(r*Math.pow(1+r,duration))/(Math.pow(1+r,duration)-1)-monthly;
+      const df=total*(Math.pow(1+r,duration)*(1+r*duration)-Math.pow(1+r,duration)+1)/Math.pow(Math.pow(1+r,duration)-1,2);
+      const nr=r-f/df;
+      if(Math.abs(nr-r)<1e-8){r=nr;break;}
+      r=Math.max(nr,0.0001);
+    }
+    rate=r*12*100;
+  }
+  document.getElementById('newLoanInterest').value=rate>0?rate.toFixed(2):0;
+  document.getElementById('loanEMIDetails').innerHTML=
+    `Monthly Pay: <strong>₹${monthly.toLocaleString()}</strong><br>`+
+    `Total Payable: <strong>₹${totalPay.toLocaleString()}</strong><br>`+
+    `Total Interest: <strong style="color:var(--absent);">₹${totalInt.toLocaleString()}</strong><br>`+
+    `Interest Rate: <strong style="color:var(--teal);">${rate>0?rate.toFixed(2):0}% / year</strong><br>`+
+    `Duration: <strong>${duration} months</strong>`;
+  preview.style.display='block';
+}
+function calcLoanEMI(){
+  const total=parseFloat(document.getElementById('newLoanTotal').value)||0;
+  const interest=parseFloat(document.getElementById('newLoanInterest').value)||0;
+  const duration=parseInt(document.getElementById('newLoanDuration').value)||0;
+  const preview=document.getElementById('loanEMIPreview');
+  if(!total||!duration){preview.style.display='none';return;}
+  let emi,totalPay,totalInt;
+  if(interest>0){
+    const r=interest/12/100;
+    emi=Math.round(total*(r*Math.pow(1+r,duration))/(Math.pow(1+r,duration)-1));
+    totalPay=emi*duration;totalInt=totalPay-total;
+  } else {emi=Math.round(total/duration);totalPay=total;totalInt=0;}
+  document.getElementById('newLoanMonthly').value=emi;
+  document.getElementById('loanEMIDetails').innerHTML=
+    `Monthly EMI: <strong>₹${emi.toLocaleString()}</strong><br>`+
+    `Total Payable: <strong>₹${totalPay.toLocaleString()}</strong><br>`+
+    `Total Interest: <strong style="color:var(--absent);">₹${totalInt.toLocaleString()}</strong><br>`+
+    `Duration: <strong>${duration} months</strong>`;
+  preview.style.display='block';
+}
+function onMonthlyInput(){document.getElementById('loanEMIPreview').style.display='none';}
+
+// Change 2: PayDay UI toggle
+function updatePayDayUI(){
+  const t=document.getElementById('newLoanPayType').value;
+  document.getElementById('payDayNthDay').style.display=t==='nthday'?'block':'none';
+  document.getElementById('payDayCustom').style.display=t==='custom'?'block':'none';
+  document.getElementById('payDay2ndThurs').style.display=t==='2ndthurs'?'block':'none';
+}
+
+function get2ndThursday(year,month){
+  let count=0;
+  for(let d=1;d<=31;d++){
+    const dt=new Date(year,month,d);
+    if(dt.getMonth()!==month) break;
+    if(dt.getDay()===4){count++;if(count===2) return dt;}
+  }
+  return new Date(year,month,14);
+}
+function getNextPayDate(loan){
+  const type=loan.payDayType||'nthday';
+  const now=new Date();now.setHours(0,0,0,0);
+  if(type==='2ndthurs'){
+    let d=get2ndThursday(now.getFullYear(),now.getMonth());
+    if(d<=now) d=get2ndThursday(now.getFullYear(),now.getMonth()+1);
+    return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+  }
+  if(type==='custom'){
+    return loan.customDate||'—';
+  }
+  const payDay=loan.payDay||1;
+  let d=new Date(now.getFullYear(),now.getMonth(),payDay);
+  if(d<=now) d=new Date(now.getFullYear(),now.getMonth()+1,payDay);
+  return d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+}
+
+function openAddLoan(editId){
+  document.getElementById('addLoanEditId').value=editId||'';
+  ['newLoanName','newLoanTotal','newLoanInterest','newLoanDuration','newLoanMonthly','newLoanPayDay'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('newLoanStart').value=todayStr;
+  document.getElementById('newLoanCustomDate').value=todayStr;
+  document.getElementById('newLoanPayType').value='nthday';
+  updatePayDayUI();
+  document.getElementById('loanEMIPreview').style.display='none';
+  if(editId){
+    const l=loans.find(l=>String(l.id)===String(editId));
+    if(l){
+      document.getElementById('newLoanName').value=l.name||'';
+      document.getElementById('newLoanTotal').value=l.total||'';
+      document.getElementById('newLoanInterest').value=l.interest||'';
+      document.getElementById('newLoanDuration').value=l.duration||'';
+      document.getElementById('newLoanMonthly').value=l.monthly||'';
+      document.getElementById('newLoanPayDay').value=l.payDay||'';
+      document.getElementById('newLoanStart').value=l.startDate||todayStr;
+      document.getElementById('newLoanPayType').value=l.payDayType||'nthday';
+      if(l.customDate) document.getElementById('newLoanCustomDate').value=l.customDate;
+      updatePayDayUI();
+    }
+  }
+  document.getElementById('addLoanModal').classList.add('show');
+}
+function closeAddLoan(){document.getElementById('addLoanModal').classList.remove('show');}
+function saveNewLoan(){
+  const editId=document.getElementById('addLoanEditId').value;
+  const name=document.getElementById('newLoanName').value||'Loan';
+  const total=parseFloat(document.getElementById('newLoanTotal').value)||0;
+  const interest=parseFloat(document.getElementById('newLoanInterest').value)||0;
+  const duration=parseInt(document.getElementById('newLoanDuration').value)||0;
+  const payDayType=document.getElementById('newLoanPayType').value||'nthday';
+  const payDay=parseInt(document.getElementById('newLoanPayDay').value)||1;
+  const customDate=document.getElementById('newLoanCustomDate').value||'';
+  const startDate=document.getElementById('newLoanStart').value||todayStr;
+  if(!name||!total) return;
+  let monthly=parseFloat(document.getElementById('newLoanMonthly').value)||0;
+  let totalWithInterest=total;
+  if(interest>0&&duration>0){
+    const r=interest/12/100;
+    monthly=Math.round(total*(r*Math.pow(1+r,duration))/(Math.pow(1+r,duration)-1));
+    totalWithInterest=monthly*duration;
+  } else if(duration>0&&!monthly){monthly=Math.round(total/duration);}
+  const obj={name,total,interest,duration,monthly,totalWithInterest:totalWithInterest||total,payDay,payDayType,customDate,startDate};
+  if(editId) loans=loans.map(l=>String(l.id)===String(editId)?{...l,...obj}:l);
+  else loans.push({id:Date.now(),...obj});
+  save('wt_loans_list',loans);closeAddLoan();renderAll();
+}
+function deleteLoanCard(id){
+  if(!confirm('Delete this loan?')) return;
+  loans=loans.filter(l=>String(l.id)!==String(id));
+  loanPayments=loanPayments.filter(p=>String(p.loanId)!==String(id));
+  save('wt_loans_list',loans);save('wt_loans',loanPayments);renderAll();
+}
+function updateLoanPayDetails(){
+  const id=document.getElementById('loanSelectPay').value;
+  const infoEl=document.getElementById('loanPayInfo');
+  if(!id){infoEl.innerHTML='';return;}
+  const loan=loans.find(l=>String(l.id)===id);if(!loan){infoEl.innerHTML='';return;}
+  const paid=loanPayments.filter(p=>String(p.loanId)===id).reduce((a,b)=>a+b.amt,0);
+  const totalPay=loan.totalWithInterest||loan.total;
+  const left=Math.max(totalPay-paid,0);
+  document.getElementById('loanAmt').value=loan.monthly||'';
+  infoEl.innerHTML=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px;">
+    <span style="background:var(--absentl);color:var(--absent);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">மிச்சம் ₹${Math.round(left).toLocaleString()}</span>
+    <span style="background:var(--presentl);color:var(--present);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">கட்டியது ₹${Math.round(paid).toLocaleString()}</span>
+    <span style="background:var(--p1l);color:var(--p1);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">Next: ${getNextPayDate(loan)}</span>
+  </div>`;
+}
+function addLoan(){
+  const loanId=document.getElementById('loanSelectPay').value;
+  const date=document.getElementById('loanDate').value;
+  const amt=parseFloat(document.getElementById('loanAmt').value)||0;
+  const method=document.getElementById('loanMethod').value;
+  if(!amt||!date||!loanId) return;
+  loanPayments.push({date,amt,method,loanId,id:Date.now()});
+  save('wt_loans',loanPayments);document.getElementById('loanAmt').value='';
+  updateLoanPayDetails();renderAll();
+}
+function deleteLoan(id){loanPayments=loanPayments.filter(l=>String(l.id)!==String(id));save('wt_loans',loanPayments);renderAll();}
+function editLoan(id){
+  const l=loanPayments.find(l=>String(l.id)===String(id));if(!l) return;
+  document.getElementById('editLoanId').value=id;
+  document.getElementById('editLoanDate').value=l.date;
+  document.getElementById('editLoanAmt').value=l.amt;
+  document.getElementById('editLoanMethod').value=l.method||'gpay';
+  document.getElementById('editLoanModal').classList.add('show');
+}
+function saveEditLoan(){
+  const id=document.getElementById('editLoanId').value;
+  const date=document.getElementById('editLoanDate').value;
+  const amt=parseFloat(document.getElementById('editLoanAmt').value)||0;
+  const method=document.getElementById('editLoanMethod').value;
+  if(!amt) return;
+  loanPayments=loanPayments.map(l=>String(l.id)===String(id)?{...l,date,amt,method}:l);
+  save('wt_loans',loanPayments);document.getElementById('editLoanModal').classList.remove('show');renderAll();
+}
+function closeEditLoan(){document.getElementById('editLoanModal').classList.remove('show');}
+
+// JOB 2
+function addP2(){
+  const type=document.getElementById('p2type').value;
+  const date=document.getElementById('p2date').value;
+  const desc=document.getElementById('p2desc').value||(type==='income'?'Income':'Expense');
+  const amt=parseFloat(document.getElementById('p2amt').value)||0;
+  const method=document.getElementById('p2method').value;
+  if(!amt) return;
+  p2entries.push({type,date,desc,amt,method,id:Date.now()});
+  save('wt_p2',p2entries);
+  document.getElementById('p2desc').value='';document.getElementById('p2amt').value='';renderAll();
+}
+
+// COMPUTE
+function compute(){
+  const sal=settings.dailySal||600;
+  const prefix=curYear+'-'+String(curMonth+1).padStart(2,'0')+'-';
+  let present=0,absent=0,half=0,j1earned=0;
+  Object.entries(attendance).forEach(([k,v])=>{
+    if(!k.startsWith(prefix)) return;
+    if(v==='present'){present++;j1earned+=sal;}
+    else if(v==='absent') absent++;
+    else if(v==='half'){half++;j1earned+=sal/2;}
+  });
+  const loanPaid=loanPayments.reduce((a,b)=>a+b.amt,0);
+  const loanTot=loans.reduce((a,l)=>a+(l.totalWithInterest||l.total),0);
+  const loanLeft=Math.max(loanTot-loanPaid,0);
+  const totalPetrol=petrolLog.reduce((a,b)=>a+b.amt,0);
+  const petrolDaysCount=petrolLog.reduce((a,b)=>a+getPetrolDays(b.amt),0);
+  let j2inc=0,j2exp=0;
+  p2entries.forEach(e=>{if(e.type==='income') j2inc+=e.amt; else j2exp+=e.amt;});
+  const totalAdvances=advances.reduce((a,b)=>a+b.amt,0);
+  return{present,absent,half,j1earned,loanPaid,loanLeft,loanTot,j2inc,j2exp,totalPetrol,petrolDaysCount,sal,totalAdvances};
+}
+
+// RENDER ALL
+function renderAll(){
+  renderCal();
+  const c=compute();
+
+  // p1 chips
+  document.getElementById('p1chips').innerHTML=`
+    <div class="chip" style="background:var(--presentl);"><div class="chip-val" style="color:var(--present);">${c.present}</div><div class="chip-label" style="color:var(--present);">Present</div></div>
+    <div class="chip" style="background:var(--absentl);"><div class="chip-val" style="color:var(--absent);">${c.absent}</div><div class="chip-label" style="color:var(--absent);">Absent</div></div>
+    <div class="chip" style="background:var(--p1l);"><div class="chip-val" style="color:var(--p1);">₹${Math.round(c.j1earned).toLocaleString()}</div><div class="chip-label" style="color:var(--p1);">Earned</div></div>`;
+
+  // SALARY DUE BOX — FIX #4: நான் Boss-க்கு தர வேண்டியது
+  const totalEarned=c.j1earned,totalTaken=c.totalAdvances;
+  const diff=totalEarned-totalTaken;
+  const youOweBoss=diff<0?Math.abs(diff):0;
+  const bossOwesYou=diff>0?diff:0;
+  document.getElementById('salaryDueBox').innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
+      <div class="chip" style="background:var(--presentl);"><div class="chip-val" style="color:var(--present);font-size:13px;">₹${Math.round(totalEarned).toLocaleString()}</div><div class="chip-label" style="color:var(--present);">சம்பாதிச்சது</div></div>
+      <div class="chip" style="background:var(--advancel);"><div class="chip-val" style="color:var(--advance);font-size:13px;">₹${Math.round(totalTaken).toLocaleString()}</div><div class="chip-label" style="color:var(--advance);">வாங்கியது</div></div>
+      <div class="chip" style="background:${youOweBoss>0?'var(--absentl)':'var(--presentl)'};"><div class="chip-val" style="color:${youOweBoss>0?'var(--absent)':'var(--present)'};font-size:13px;">₹${Math.round(youOweBoss>0?youOweBoss:bossOwesYou).toLocaleString()}</div><div class="chip-label" style="color:${youOweBoss>0?'var(--absent)':'var(--present)'};">${youOweBoss>0?'தர வேண்டியது':'கிடைக்கும்'}</div></div>
+    </div>
+    ${youOweBoss>0?`<div style="background:linear-gradient(135deg,#FF6B6B,#ee4040);border-radius:12px;padding:11px 13px;font-size:13px;color:#fff;font-weight:600;">⚠️ நான் Boss-க்கு <strong>₹${Math.round(youOweBoss).toLocaleString()}</strong> தர வேண்டியது — இன்னும் <strong>${Math.ceil(youOweBoss/(settings.dailySal||600))} நாள்</strong> work பண்ணணும்!</div>`:''}
+    ${bossOwesYou>0?`<div style="background:linear-gradient(135deg,#06D6A0,#04b885);border-radius:12px;padding:11px 13px;font-size:13px;color:#fff;font-weight:600;">✅ Boss உனக்கு <strong>₹${Math.round(bossOwesYou).toLocaleString()}</strong> தர வேண்டியது</div>`:''}`;
+
+  // Salary list
+  document.getElementById('advList').innerHTML=advances.length?
+    '<div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;">History</div>'+
+    [...advances].reverse().map(a=>`
+      <div class="sal-row" style="background:var(--advancel);flex-wrap:wrap;gap:6px;">
+        <div class="sal-info" style="flex:1;min-width:0;">
+          <div class="sal-dot" style="background:#FFE0C8;">💵</div>
+          <div><div class="sal-date">${a.date} ${mb(a.method)}</div><div class="sal-desc">${getAdvWorkDays(a)} நாள் work பண்ணணும்</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:5px;">
+          <div class="sal-amt" style="color:var(--advance);">₹${Math.round(a.amt).toLocaleString()}</div>
+          <button onclick="editAdvance('${a.id}')" class="abtn">✏️</button>
+          <button onclick="deleteAdvance('${a.id}')" class="abtn" style="color:var(--absent);">🗑️</button>
+        </div>
+      </div>`).join('')
+    :'<div class="empty"><div class="empty-icon">💵</div>இன்னும் salary வாங்கல</div>';
+
+  // Petrol
+  document.getElementById('petrolChips').innerHTML=`
+    <div class="chip" style="background:var(--petroll);"><div class="chip-val" style="color:var(--teal);">₹${Math.round(c.totalPetrol)}</div><div class="chip-label" style="color:var(--teal);">Total Bonus</div></div>
+    <div class="chip" style="background:#E8F5E9;"><div class="chip-val" style="color:#059669;">${c.petrolDaysCount}</div><div class="chip-label" style="color:#059669;">Days</div></div>
+    <div class="chip" style="background:#FFF8E1;"><div class="chip-val" style="color:#D97706;">₹${c.petrolDaysCount>0?Math.round(c.totalPetrol/c.petrolDaysCount):0}</div><div class="chip-label" style="color:#D97706;">Avg/Day</div></div>`;
+  document.getElementById('petrolList').innerHTML=petrolLog.length?
+    '<div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;">Petrol Log</div>'+
+    [...petrolLog].reverse().map(p=>`
+      <div class="sal-row" style="background:var(--petroll);flex-wrap:wrap;gap:6px;">
+        <div class="sal-info" style="flex:1;min-width:0;"><div class="sal-dot" style="background:#B2F5EA;">⛽</div>
+          <div><div class="sal-date">${p.date}</div><div class="sal-desc">Petrol bonus — ${getPetrolDays(p.amt)} நாள்</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:5px;">
+          <div class="sal-amt" style="color:var(--teal);">₹${p.amt}</div>
+          <button onclick="editPetrol('${p.id}')" class="abtn">✏️</button>
+          <button onclick="deletePetrol('${p.id}')" class="abtn" style="color:var(--absent);">🗑️</button>
+        </div>
+      </div>`).join('')
+    :'<div class="empty"><div class="empty-icon">⛽</div>Petrol entry இல்லை</div>';
+
+  // LOAN SUMMARY inline top
+  const totalLoanWithInt=loans.reduce((a,l)=>a+(l.totalWithInterest||l.total),0);
+  const totalLoanPaid=loanPayments.reduce((a,b)=>a+b.amt,0);
+  const totalLoanPending=Math.max(totalLoanWithInt-totalLoanPaid,0);
+  const repaidPct=totalLoanWithInt>0?Math.min(totalLoanPaid/totalLoanWithInt*100,100):0;
+  document.getElementById('lstGrid').innerHTML=`
+    <div class="lst-box"><div class="lst-val">₹${Math.round(totalLoanWithInt).toLocaleString()}</div><div class="lst-lbl">மொத்த Loan</div></div>
+    <div class="lst-box"><div class="lst-val">₹${Math.round(totalLoanPaid).toLocaleString()}</div><div class="lst-lbl">கட்டியது</div></div>
+    <div class="lst-box"><div class="lst-val">₹${Math.round(totalLoanPending).toLocaleString()}</div><div class="lst-lbl">மிச்சம்</div></div>`;
+  document.getElementById('lstBarFill').style.width=repaidPct.toFixed(1)+'%';
+  document.getElementById('lstBarTxt').textContent=repaidPct.toFixed(1)+'% repaid';
+  document.getElementById('lstPerLoan').innerHTML=loans.map(l=>{
+    const paid=loanPayments.filter(p=>String(p.loanId)===String(l.id)).reduce((a,b)=>a+b.amt,0);
+    const totalPay=l.totalWithInterest||l.total;
+    const left=Math.max(totalPay-paid,0);
+    const pct=totalPay>0?Math.min(paid/totalPay*100,100):0;
+    return `<div style="background:rgba(255,255,255,.12);border-radius:10px;padding:9px 11px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+        <div style="font-size:12px;font-weight:700;">🏦 ${l.name}</div>
+        <div style="font-size:11px;opacity:.8;">₹${Math.round(left).toLocaleString()} மிச்சம்</div>
+      </div>
+      <div style="height:5px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden;">
+        <div style="height:100%;background:#06D6A0;border-radius:4px;width:${pct.toFixed(1)}%;"></div>
+      </div>
+      <div style="font-size:10px;opacity:.65;margin-top:3px;">${pct.toFixed(1)}% done | Next: ${getNextPayDate(l)}</div>
+    </div>`;
+  }).join('');
+
+  // Loan select
+  const loanSelectEl=document.getElementById('loanSelectPay');
+  const prevSelId=loanSelectEl.value;
+  loanSelectEl.innerHTML='<option value="">-- Select Loan --</option>'+
+    loans.map(l=>{
+      const paid=loanPayments.filter(p=>String(p.loanId)===String(l.id)).reduce((a,b)=>a+b.amt,0);
+      const left=Math.max((l.totalWithInterest||l.total)-paid,0);
+      return `<option value="${l.id}">${l.name} (மிச்சம் ₹${Math.round(left).toLocaleString()})</option>`;
+    }).join('');
+  if(prevSelId) loanSelectEl.value=prevSelId;
+
+  // Loan cards
+  document.getElementById('loanListCards').innerHTML=loans.length?loans.map(l=>{
+    const paid=loanPayments.filter(p=>String(p.loanId)===String(l.id)).reduce((a,b)=>a+b.amt,0);
+    const totalPay=l.totalWithInterest||l.total;
+    const left=Math.max(totalPay-paid,0);
+    const pct=totalPay>0?Math.min(paid/totalPay*100,100):0;
+    const monthsLeft=l.monthly>0&&left>0?Math.ceil(left/l.monthly):0;
+    return `<div style="background:var(--bg);border:1.5px solid var(--border);border-radius:14px;padding:13px;margin-bottom:10px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <div style="font-size:14px;font-weight:800;color:var(--p1);">🏦 ${l.name}</div>
+        <div style="display:flex;gap:5px;">
+          <button onclick="openAddLoan('${l.id}')" class="abtn" style="color:var(--teal);border-color:var(--teal);">✏️</button>
+          <button onclick="deleteLoanCard('${l.id}')" class="abtn" style="color:var(--absent);border-color:var(--absent);">🗑️</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
+        <div class="chip" style="background:var(--p1l);padding:8px 4px;"><div class="chip-val" style="color:var(--p1);font-size:13px;">₹${Math.round(l.total).toLocaleString()}</div><div class="chip-label">Principal</div></div>
+        <div class="chip" style="background:var(--presentl);padding:8px 4px;"><div class="chip-val" style="color:var(--present);font-size:13px;">₹${Math.round(paid).toLocaleString()}</div><div class="chip-label">கட்டியது</div></div>
+        <div class="chip" style="background:var(--absentl);padding:8px 4px;"><div class="chip-val" style="color:var(--absent);font-size:13px;">₹${Math.round(left).toLocaleString()}</div><div class="chip-label">மிச்சம்</div></div>
+      </div>
+      ${l.interest>0?`<div style="background:var(--p1l);border-radius:9px;padding:7px 10px;margin-bottom:8px;font-size:12px;color:var(--p1);">💡 Interest ${l.interest}% | EMI ₹${Math.round(l.monthly||0).toLocaleString()}/month | Total ₹${Math.round(totalPay).toLocaleString()}</div>`:''}
+      <div style="height:7px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:6px;"><div style="height:100%;background:var(--teal);border-radius:4px;width:${pct.toFixed(1)}%;transition:width .4s;"></div></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;">
+        <span style="font-size:11px;color:var(--text2);">${pct.toFixed(1)}% done${monthsLeft?` | ~${monthsLeft} மாசம்`:''}</span>
+        <span style="background:var(--p1l);color:var(--p1);padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700;">📅 Next: ${getNextPayDate(l)}</span>
+      </div>
+    </div>`;
+  }).join(''):'<div class="empty"><div class="empty-icon">🏦</div>Loan இல்லை — Add பண்ணு!</div>';
+
+  // Payment history
+  document.getElementById('loanList').innerHTML=loanPayments.length?
+    [...loanPayments].sort((a,b)=>b.date.localeCompare(a.date)).map(p=>{
+      const ln=loans.find(l=>String(l.id)===String(p.loanId));
+      return `<div class="sal-row" style="background:var(--absentl);flex-wrap:wrap;gap:6px;">
+        <div class="sal-info" style="flex:1;min-width:0;">
+          <div class="sal-dot" style="background:#FFD0D0;">💳</div>
+          <div><div class="sal-date">${p.date} ${mb(p.method||'gpay')}</div><div class="sal-desc">${ln?ln.name:'Loan'} payment</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:5px;">
+          <div class="sal-amt" style="color:var(--absent);">-₹${Math.round(p.amt).toLocaleString()}</div>
+          <button onclick="editLoan('${p.id}')" class="abtn" style="color:var(--teal);">✏️</button>
+          <button onclick="deleteLoan('${p.id}')" class="abtn" style="color:var(--absent);">🗑️</button>
+        </div>
+      </div>`;
+    }).join('')
+    :'<div class="empty"><div class="empty-icon">💳</div>Payment history இல்லை</div>';
+
+  // P2
+  document.getElementById('p2chips').innerHTML=`
+    <div class="chip" style="background:var(--presentl);"><div class="chip-val" style="color:var(--present);">₹${Math.round(c.j2inc).toLocaleString()}</div><div class="chip-label" style="color:var(--present);">Income</div></div>
+    <div class="chip" style="background:var(--absentl);"><div class="chip-val" style="color:var(--absent);">₹${Math.round(c.j2exp).toLocaleString()}</div><div class="chip-label" style="color:var(--absent);">Expense</div></div>`;
+  document.getElementById('p2list').innerHTML=p2entries.length?[...p2entries].reverse().map(e=>{
+    const isInc=e.type==='income';
+    return `<div class="txn-row">
+      <div class="txn-icon" style="background:${isInc?'var(--presentl)':'var(--absentl)'};">${isInc?'💚':'❤️'}</div>
+      <div><div class="txn-desc">${e.desc}</div><div class="txn-meta">${e.date} ${mb(e.method||'cash')}</div></div>
+      <div class="txn-amt" style="color:${isInc?'var(--present)':'var(--absent)'};">${isInc?'+':'-'}₹${Math.round(e.amt).toLocaleString()}</div>
+    </div>`;}).join('')
+    :'<div class="empty"><div class="empty-icon">📋</div>Entry இல்லை</div>';
+
+  // Analysis
+  const net=c.j1earned+c.j2inc+c.totalPetrol-c.j2exp-c.loanPaid;
+  document.getElementById('p3chips').innerHTML=`
+    <div class="chip" style="background:var(--presentl);"><div class="chip-val" style="color:var(--present);">₹${Math.round(c.j1earned+c.j2inc).toLocaleString()}</div><div class="chip-label" style="color:var(--present);">Total Income</div></div>
+    <div class="chip" style="background:var(--absentl);"><div class="chip-val" style="color:var(--absent);">₹${Math.round(c.j2exp).toLocaleString()}</div><div class="chip-label" style="color:var(--absent);">Expense</div></div>
+    <div class="chip" style="background:var(--halfl);"><div class="chip-val" style="color:var(--half);">₹${Math.round(c.loanPaid).toLocaleString()}</div><div class="chip-label" style="color:var(--half);">Loan Paid</div></div>
+    <div class="chip" style="background:var(--p1l);"><div class="chip-val" style="color:var(--p1);">₹${Math.round(Math.max(net,0)).toLocaleString()}</div><div class="chip-label" style="color:var(--p1);">கையில் மிச்சம்</div></div>`;
+  const maxV=Math.max(c.j1earned,c.j2inc,c.j2exp,c.loanPaid,c.totalPetrol,1);
+  document.getElementById('analysisBar').innerHTML=[
+    {label:'J1\nIncome',val:c.j1earned,color:'var(--p1)'},
+    {label:'J2\nIncome',val:c.j2inc,color:'var(--present)'},
+    {label:'Expense',val:c.j2exp,color:'var(--p2)'},
+    {label:'Loan',val:c.loanPaid,color:'var(--half)'},
+    {label:'Petrol',val:c.totalPetrol,color:'var(--petrol)'},
+  ].map(b=>{
+    const h=Math.max(Math.round((b.val/maxV)*88),b.val>0?5:2);
+    return `<div class="bar-col"><div class="bar-num" style="color:${b.color};">₹${Math.round(b.val)}</div><div class="bar-rect" style="height:${h}px;background:${b.color};"></div><div class="bar-lbl">${b.label.replace('\n','<br>')}</div></div>`;
+  }).join('');
+  let gIn=0,cIn=0,gOut=0,cOut=0;
+  petrolLog.forEach(p=>{cIn+=p.amt;});
+  advances.forEach(a=>{a.method==='gpay'?gIn+=a.amt:cIn+=a.amt;});
+  loanPayments.forEach(l=>{l.method==='gpay'?gOut+=l.amt:cOut+=l.amt;});
+  p2entries.forEach(e=>{if(e.type==='income') e.method==='gpay'?gIn+=e.amt:cIn+=e.amt;else e.method==='gpay'?gOut+=e.amt:cOut+=e.amt;});
+  document.getElementById('methodSummary').innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div class="chip" style="background:var(--gpayl);"><div style="font-size:18px;margin-bottom:4px;">📱</div><div class="chip-val" style="color:var(--gpay);">₹${Math.round(gIn).toLocaleString()}</div><div class="chip-label" style="color:var(--gpay);">GPay வாங்கியது</div></div>
+      <div class="chip" style="background:var(--cashl);"><div style="font-size:18px;margin-bottom:4px;">💵</div><div class="chip-val" style="color:#059669;">₹${Math.round(cIn).toLocaleString()}</div><div class="chip-label" style="color:#059669;">Cash வாங்கியது</div></div>
+      <div class="chip" style="background:var(--gpayl);"><div class="chip-val" style="color:var(--gpay);">-₹${Math.round(gOut).toLocaleString()}</div><div class="chip-label" style="color:var(--gpay);">GPay கட்டியது</div></div>
+      <div class="chip" style="background:var(--cashl);"><div class="chip-val" style="color:#059669;">-₹${Math.round(cOut).toLocaleString()}</div><div class="chip-label" style="color:#059669;">Cash கட்டியது</div></div>
+    </div>`;
+  document.getElementById('summaryList').innerHTML=[
+    {label:'Job 1 சம்பாதிச்சது',val:'₹'+Math.round(c.j1earned).toLocaleString(),color:'var(--p1)'},
+    {label:'⛽ Petrol Bonus ('+c.petrolDaysCount+' days)',val:'+₹'+Math.round(c.totalPetrol).toLocaleString(),color:'var(--teal)'},
+    {label:'Job 2 Income',val:'+₹'+Math.round(c.j2inc).toLocaleString(),color:'var(--present)'},
+    {label:'Job 2 Expense',val:'-₹'+Math.round(c.j2exp).toLocaleString(),color:'var(--absent)'},
+    {label:'Loan கட்டியது',val:'-₹'+Math.round(c.loanPaid).toLocaleString(),color:'var(--half)'},
+    {label:'🏆 மொத்தம் கையில்',val:'₹'+Math.round(Math.max(net,0)).toLocaleString(),color:'var(--p1)',bold:true},
+  ].map(r=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:${r.bold?'15':'13'}px;font-weight:${r.bold?800:500};color:var(--text);">${r.label}</span>
+      <span style="font-size:14px;font-weight:800;color:${r.color};">${r.val}</span>
+    </div>`).join('');
+}
+renderAll();
+</script>
+</body>
+</html>
