@@ -3,42 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Work Tracker</title>
+<title>VKM Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --p1:#0F4C75;--p1l:#E3EFF8;--p1d:#0a3355;
-  --teal:#1B9AAA;--teall:#E0F5F7;
-  --accent:#06D6A0;--accentl:#E0FAF4;
-  --p2:#FF6B6B;--p2l:#FFF0F0;
-  --present:#06D6A0;--presentl:#E0FAF4;
-  --absent:#FF6B6B;--absentl:#FFF0F0;
-  --half:#FFB347;--halfl:#FFF3E0;
-  --advance:#F7941D;--advancel:#FFF4E5;
-  --petrol:#06D6A0;--petroll:#E0FAF4;
-  --gpay:#1B9AAA;--gpayl:#E0F5F7;
-  --cash:#06D6A0;--cashl:#E0FAF4;
-  --bg:#EEF4F8;--card:#fff;
-  --text:#0D1B2A;--text2:#5C7A99;
-  --border:#D4E3F0;--radius:16px;
-  --shadow:0 2px 12px rgba(15,76,117,0.09);
+  --p1:#4f46e5;--p1l:#1e1646;--p1d:#3730a3;
+  --teal:#818cf8;--teall:#1e1a4e;
+  --accent:#34d399;--accentl:#0d2e22;
+  --p2:#f87171;--p2l:#2d1414;
+  --present:#34d399;--presentl:#0d2e22;
+  --absent:#f87171;--absentl:#2d1414;
+  --half:#fbbf24;--halfl:#2d2008;
+  --advance:#fb923c;--advancel:#2d1a08;
+  --petrol:#34d399;--petroll:#0d2e22;
+  --gpay:#818cf8;--gpayl:#1e1a4e;
+  --cash:#34d399;--cashl:#0d2e22;
+  --bg:#0f0a1e;--card:#1a1232;
+  --text:#e2e8f0;--text2:#a5b4fc;
+  --border:#2e2060;--radius:16px;
+  --shadow:0 4px 24px rgba(0,0,0,0.4);
 }
+/* ===== LIGHT THEME ===== */
+body.light-theme{
+  --p1:#4f46e5;--p1l:#ede9fe;--p1d:#3730a3;
+  --teal:#6366f1;--teall:#ede9fe;
+  --accent:#10b981;--accentl:#d1fae5;
+  --p2:#ef4444;--p2l:#fee2e2;
+  --present:#10b981;--presentl:#d1fae5;
+  --absent:#ef4444;--absentl:#fee2e2;
+  --half:#f59e0b;--halfl:#fef3c7;
+  --advance:#f97316;--advancel:#ffedd5;
+  --petrol:#10b981;--petroll:#d1fae5;
+  --gpay:#6366f1;--gpayl:#ede9fe;
+  --cash:#10b981;--cashl:#d1fae5;
+  --bg:#f5f3ff;--card:#ffffff;
+  --text:#1e1b4b;--text2:#6366f1;
+  --border:#ddd6fe;--radius:16px;
+  --shadow:0 2px 16px rgba(79,70,229,0.10);
+}
+body.light-theme .header{background:linear-gradient(135deg,#4338ca 0%,#7c3aed 50%,#4f46e5 100%);}
+body.light-theme .tab-bar{background:#fff;border-bottom-color:#ddd6fe;}
+body.light-theme .tab{color:#a5b4fc;}
+body.light-theme .tab.active{color:#4f46e5;border-bottom-color:#4f46e5;}
+body.light-theme .page{background:#f5f3ff;}
+body.light-theme .modal-box{background:#fff;}
+body.light-theme input,body.light-theme select{background:#fff;color:#1e1b4b;border-color:#ddd6fe;}
+body.light-theme input:focus,body.light-theme select:focus{border-color:#4f46e5;background:#faf5ff;}
+body.light-theme .abtn{background:#fff;border-color:#ddd6fe;color:#4f46e5;}
+body.light-theme .login-box{background:#fff;}
+body.light-theme .linput{background:#f5f3ff;color:#1e1b4b;border-color:#ddd6fe;}
+body.light-theme .linput:focus{background:#fff;border-color:#4f46e5;}
+body.light-theme .login-tabs{background:#ede9fe;}
+body.light-theme .ltab.active{background:#fff;color:#4f46e5;}
+body.light-theme .ltab{color:#7c3aed;}
+body.light-theme #loginScreen,body.light-theme #registerScreen{background:linear-gradient(160deg,#f5f3ff 0%,#ede9fe 60%,#ddd6fe 100%);}
+body.light-theme .adv-box{background:linear-gradient(135deg,#4338ca,#7c3aed);}
+body.light-theme .loan-summary-top{background:linear-gradient(135deg,#4338ca,#7c3aed);}
+body.light-theme .customer-card{background:#f5f3ff;border-color:#ddd6fe;}
+body.light-theme .backup-bar{background:#fff;border-top-color:#ddd6fe;}
+body.light-theme .cal-day.saturday{background:#ede9fe;color:#4f46e5;}
+body.light-theme .bk-import{background:#ede9fe;color:#4f46e5;}
+body.light-theme .bk-clear{background:#fee2e2;color:#ef4444;}
+body.light-theme .empty{color:#7c3aed;}
+body.light-theme .mb-g{background:#ede9fe;color:#4f46e5;}
+body.light-theme .mb-c{background:#d1fae5;color:#059669;}
+
+/* THEME TOGGLE BUTTON */
+.theme-toggle-btn{background:rgba(255,255,255,.18);border:none;color:#fff;font-size:16px;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+.theme-toggle-btn:active{transform:scale(.9);}
+
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{font-family:'Inter','Noto Sans Tamil',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;max-width:430px;margin:0 auto;height:100dvh;}
-.header{background:linear-gradient(135deg,#0F4C75 0%,#1B9AAA 100%);padding:48px 18px 14px;color:#fff;flex-shrink:0;}
+.header{background:linear-gradient(135deg,#1e0a3c 0%,#312e81 50%,#1e1646 100%);padding:48px 18px 14px;color:#fff;flex-shrink:0;}
 .header-top{display:flex;justify-content:space-between;align-items:center;}
 .header h1{font-size:18px;font-weight:800;letter-spacing:-0.3px;}
 .header-sub{font-size:11px;opacity:.7;margin-top:2px;}
 .month-pill{background:rgba(255,255,255,.18);border-radius:20px;padding:4px 12px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px;}
 .month-pill button{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;line-height:1;padding:0 2px;}
-.tab-bar{display:flex;background:#fff;border-bottom:2px solid var(--border);flex-shrink:0;overflow-x:auto;scrollbar-width:none;}
+.tab-bar{display:flex;background:#150d27;border-bottom:2px solid var(--border);flex-shrink:0;overflow-x:auto;scrollbar-width:none;}
 .tab-bar::-webkit-scrollbar{display:none;}
-.tab{flex:1;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 4px 7px;font-size:9px;color:var(--text2);font-weight:600;border-bottom:3px solid transparent;transition:all .2s;gap:2px;white-space:nowrap;flex-shrink:0;min-width:60px;}
+.tab{flex:1;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:9px 4px 7px;font-size:9px;color:#6366f1;font-weight:600;border-bottom:3px solid transparent;transition:all .2s;gap:2px;white-space:nowrap;flex-shrink:0;min-width:60px;}
 .tab .ti{font-size:16px;}
-.tab.active{color:var(--teal);border-bottom-color:var(--teal);}
+.tab.active{color:#818cf8;border-bottom-color:#818cf8;}
 .pages{flex:1;overflow:hidden;position:relative;}
-.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:14px 13px 28px;display:none;-webkit-overflow-scrolling:touch;}
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:14px 13px 80px;display:none;-webkit-overflow-scrolling:touch;background:var(--bg);}
 .page.active{display:block;}
 .card{background:var(--card);border-radius:var(--radius);padding:15px;margin-bottom:12px;box-shadow:var(--shadow);border:1px solid var(--border);}
 .chips{display:grid;gap:8px;margin-bottom:12px;}
@@ -53,15 +102,15 @@ body{font-family:'Inter','Noto Sans Tamil',sans-serif;background:var(--bg);color
 .cal-day{aspect-ratio:1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--text2);transition:all .15s;position:relative;border:2px solid transparent;user-select:none;}
 .cal-day:active{transform:scale(.86);}
 .cal-day.empty{background:transparent;cursor:default;pointer-events:none;}
-.cal-day.saturday{background:#EBF5FF;color:var(--teal);cursor:default;}
+.cal-day.saturday{background:#1e1a4e;color:#818cf8;cursor:default;}
 .cal-day.future{background:#f0f0f0;color:#bbb;cursor:not-allowed;opacity:.45;}
-.cal-day.today{border-color:var(--teal);}
+.cal-day.today{border-color:#818cf8;}
 .cal-day.present{background:var(--present);color:#fff;border-color:var(--present);}
 .cal-day.absent{background:var(--absent);color:#fff;border-color:var(--absent);}
 .cal-day.half{background:var(--half);color:#fff;border-color:var(--half);}
 .cal-day.advance-work{background:var(--advance);color:#fff;border-color:var(--advance);}
 .cal-day.petrol-day::before{content:'⛽';position:absolute;top:0;left:0;font-size:7px;}
-.cal-day.petrol-bonus{background:#0E7490;color:#fff;border-color:#0E7490;}
+.cal-day.petrol-bonus{background:#064e3b;color:#34d399;border-color:#064e3b;}
 .cal-day.petrol-bonus::after{content:'⛽';position:absolute;bottom:1px;right:2px;font-size:7px;color:#fff;}
 .legend{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;}
 .leg{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text2);}
@@ -80,24 +129,24 @@ body{font-family:'Inter','Noto Sans Tamil',sans-serif;background:var(--bg);color
 .sal-amt{font-size:15px;font-weight:800;}
 .ig{margin-bottom:9px;}
 .il{font-size:10px;font-weight:700;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
-input,select{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:11px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;background:#fff;color:var(--text);outline:none;transition:border-color .2s;}
-input:focus,select:focus{border-color:var(--teal);}
+input,select{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:11px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;background:#1a1232;color:var(--text);outline:none;transition:border-color .2s;}
+input:focus,select:focus{border-color:#818cf8;background:#231952;}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .btn{width:100%;padding:12px;border-radius:12px;border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;}
 .btn:active{transform:scale(.97);}
-.btn-primary{background:linear-gradient(135deg,var(--p1),var(--teal));color:#fff;}
+.btn-primary{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;}
 .btn-green{background:linear-gradient(135deg,var(--present),#04b885);color:#fff;}
 .btn-red{background:linear-gradient(135deg,var(--absent),#e04040);color:#fff;}
 .btn-orange{background:linear-gradient(135deg,var(--advance),#ffaa44);color:#fff;}
-.btn-teal{background:linear-gradient(135deg,var(--teal),#147885);color:#fff;}
+.btn-teal{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;}
 .st{font-size:14px;font-weight:700;margin-bottom:11px;display:flex;align-items:center;gap:6px;}
-.empty{text-align:center;padding:20px 12px;color:var(--text2);font-size:13px;}
+.empty{text-align:center;padding:20px 12px;color:#6366f1;font-size:13px;}
 .empty-icon{font-size:34px;margin-bottom:7px;}
 .mb{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;}
 .mb-g{background:var(--gpayl);color:var(--gpay);}
-.mb-c{background:var(--cashl);color:#059669;}
-.adv-box{background:linear-gradient(135deg,#0F4C75,#1B9AAA);border-radius:12px;padding:12px;margin-bottom:10px;color:#fff;}
-.adv-box-title{font-size:12px;font-weight:700;opacity:.85;margin-bottom:3px;}
+.mb-c{background:#0d2e22;color:#34d399;}
+.adv-box{background:linear-gradient(135deg,#1e0a3c,#312e81);border-radius:12px;padding:12px;margin-bottom:10px;color:#fff;}
+.adv-box-title{font-size:12px;font-weight:700;color:#c4b5fd;opacity:1;margin-bottom:3px;}
 .adv-box-text{font-size:12px;opacity:.9;}
 .bar-wrap{display:flex;gap:6px;align-items:flex-end;height:100px;margin:10px 0 6px;}
 .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;}
@@ -106,26 +155,184 @@ input:focus,select:focus{border-color:var(--teal);}
 .bar-lbl{font-size:9px;color:var(--text2);font-weight:600;text-align:center;}
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:opacity .25s;}
 .modal-overlay.show{opacity:1;pointer-events:all;}
-.modal-box{background:#fff;border-radius:24px 24px 0 0;padding:18px 18px 36px;width:100%;max-width:430px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto;}
+.modal-box{background:#1a1232;border-radius:24px 24px 0 0;padding:18px 18px 36px;width:100%;max-width:430px;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);max-height:90vh;overflow-y:auto;}
 .modal-overlay.show .modal-box{transform:translateY(0);}
 .modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 14px;}
 .modal-title{font-size:15px;font-weight:800;margin-bottom:14px;}
-.abtn{background:#fff;border-radius:8px;padding:4px 9px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;line-height:1.4;border:1px solid var(--border);}
-.loan-summary-top{background:linear-gradient(135deg,#0F4C75,#1B9AAA);border-radius:16px;padding:15px;margin-bottom:12px;color:#fff;}
+.abtn{background:#231952;border-radius:8px;padding:4px 9px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;line-height:1.4;border:1px solid var(--border);}
+.loan-summary-top{background:linear-gradient(135deg,#1e0a3c,#312e81);border-radius:16px;padding:15px;margin-bottom:12px;color:#fff;}
 .lst-title{font-size:11px;font-weight:700;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
 .lst-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
-.lst-box{background:rgba(255,255,255,.15);border-radius:10px;padding:9px 6px;text-align:center;}
+.lst-box{background:rgba(99,102,241,.2);border-radius:10px;padding:9px 6px;text-align:center;}
 .lst-val{font-size:14px;font-weight:800;line-height:1;}
 .lst-lbl{font-size:9px;opacity:.7;margin-top:3px;font-weight:600;}
 .lst-bar-bg{height:6px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden;}
 .lst-bar-fill{height:100%;background:#06D6A0;border-radius:4px;transition:width .5s;}
 .lst-bar-txt{font-size:10px;opacity:.65;margin-top:4px;text-align:right;}
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:14px 13px 80px;display:none;-webkit-overflow-scrolling:touch;background:var(--bg);}
+.backup-bar{position:fixed;bottom:0;left:0;right:0;max-width:430px;margin:0 auto;background:#150d27;border-top:1.5px solid var(--border);padding:8px 12px;display:flex;gap:8px;z-index:50;box-shadow:0 -4px 16px rgba(15,76,117,0.08);}
+.backup-btn{flex:1;padding:9px 4px;border-radius:11px;border:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
+.backup-btn:active{transform:scale(.97);}
+.bk-export{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;}
+.bk-import{background:#1e1646;color:#a5b4fc;}
+.bk-clear{background:#2d1414;color:#f87171;}
+
+/* ===== LOGIN SCREEN ===== */
+#loginScreen{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#0f0a1e 0%,#1e0a3c 60%,#312e81 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:20px;}
+.login-box{background:#1a1232;border-radius:24px;padding:32px 24px 28px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.login-logo{text-align:center;margin-bottom:22px;}
+.login-logo-title{font-size:30px;font-weight:900;letter-spacing:2px;text-transform:uppercase;font-style:italic;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.login-logo-sub{font-size:11px;color:#a5b4fc;font-weight:600;margin-top:4px;letter-spacing:1px;text-transform:uppercase;}
+.login-tabs{display:flex;background:#0f0a1e;border-radius:12px;padding:4px;margin-bottom:20px;gap:4px;}
+.ltab{flex:1;text-align:center;padding:9px 4px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;color:#a5b4fc;border:none;background:transparent;font-family:'Inter',sans-serif;}
+.ltab.active{background:#231952;color:#a5b4fc;box-shadow:0 2px 8px rgba(15,76,117,.12);}
+.login-input-wrap{margin-bottom:12px;}
+.login-label{font-size:10px;font-weight:700;color:#a5b4fc;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;display:block;}
+.linput{width:100%;padding:11px 14px;border:1.5px solid #2e2060;border-radius:11px;font-size:14px;font-weight:500;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;background:#231952;color:#e2e8f0;}
+.linput:focus{border-color:#818cf8;}
+.login-btn{width:100%;padding:13px;border-radius:12px;border:none;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:15px;font-weight:800;cursor:pointer;letter-spacing:.3px;font-family:'Inter',sans-serif;margin-top:6px;transition:transform .15s;}
+.login-btn:active{transform:scale(.98);}
+.login-err{color:#FF6B6B;font-size:12px;font-weight:600;text-align:center;margin-top:8px;min-height:16px;}
+.login-link{text-align:center;margin-top:12px;font-size:12px;color:#5C7A99;}
+.login-link a{color:#1B9AAA;font-weight:700;cursor:pointer;text-decoration:none;}
+.role-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.role-admin{background:rgba(255,255,255,.2);color:#fff;}
+.role-user{background:rgba(255,255,255,.2);color:#fff;}
+.logout-btn{background:rgba(255,255,255,.15);border:none;color:rgba(255,255,255,.9);font-size:11px;font-weight:700;cursor:pointer;padding:3px 10px;border-radius:20px;font-family:'Inter',sans-serif;margin-left:4px;}
+/* User read-only */
+body.role-user .btn:not(.view-ok){display:none!important;}
+body.role-user .abtn{display:none!important;}
+body.role-user input,body.role-user select{pointer-events:none;background:#f5f7ff!important;}
+body.role-user .backup-bar{display:none!important;}
+/* Admin panel modal */
+#adminPanelModal .modal-box{max-height:85vh;}
+.customer-card{background:#231952;border:1.5px solid var(--border);border-radius:14px;padding:13px;margin-bottom:10px;}
+.customer-card-name{font-size:14px;font-weight:800;color:#818cf8;}
+.customer-card-info{font-size:12px;color:var(--text2);margin-top:3px;}
+.status-badge{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;margin-left:6px;}
+.status-pending{background:#2d1a08;color:#fb923c;}
+.status-active{background:#0d2e22;color:#34d399;}
+.status-rejected{background:#2d1414;color:#f87171;}
+/* Register form */
+.reg-section{margin-bottom:8px;}
+
 </style>
+<style id="themeInputFix"></style>
 </head>
 <body>
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="loginScreen" style="display:none;">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-title">⚡ VKM TRACKER</div>
+      <div class="login-logo-sub">Work · Loan · Petrol Tracker</div>
+    </div>
+    <div class="login-tabs" id="loginTabBar">
+      <button class="ltab active" id="ltab-admin" onclick="setLoginTab('admin')">🔐 Admin</button>
+      <button class="ltab" id="ltab-user" onclick="setLoginTab('user')">👤 User</button>
+    </div>
+    <!-- Admin Login -->
+    <div id="adminLoginForm">
+      <div class="login-input-wrap">
+        <span class="login-label">Username</span>
+        <input class="linput" type="text" id="adminUser" placeholder="Admin username" autocomplete="off" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="login-input-wrap">
+        <span class="login-label">Password</span>
+        <input class="linput" type="password" id="adminPass" placeholder="Admin password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="login-btn" onclick="doLogin()">LOGIN →</button>
+    </div>
+    <!-- User Login -->
+    <div id="userLoginForm" style="display:none;">
+      <div class="login-input-wrap">
+        <span class="login-label">User ID</span>
+        <input class="linput" type="text" id="custUser" placeholder="Your User ID" autocomplete="off" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="login-input-wrap">
+        <span class="login-label">Password</span>
+        <input class="linput" type="password" id="custPass" placeholder="Your Password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="login-btn" onclick="doLogin()">LOGIN →</button>
+      <div class="login-link" style="margin-top:14px;">புதியவரா? <a onclick="showRegisterForm()">Create Account</a></div>
+    </div>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+</div>
+
+<!-- ===== REGISTER SCREEN ===== -->
+<div id="registerScreen" style="display:none;position:fixed;inset:0;z-index:9998;background:linear-gradient(160deg,#0f0a1e 0%,#1e0a3c 60%,#312e81 100%);align-items:center;justify-content:center;flex-direction:column;padding:20px;overflow-y:auto;">
+  <div class="login-box" style="margin:auto;">
+    <div style="text-align:center;margin-bottom:18px;">
+      <div class="login-logo-title" style="font-size:22px;">📝 Create Account</div>
+      <div class="login-logo-sub">Admin approve ஆனா login பண்ணலாம்</div>
+    </div>
+    <div class="reg-section">
+      <div class="login-input-wrap"><span class="login-label">Full Name *</span><input class="linput" type="text" id="regName" placeholder="உங்கள் பேர்"></div>
+      <div class="login-input-wrap"><span class="login-label">Age *</span><input class="linput" type="number" id="regAge" placeholder="வயசு"></div>
+      <div class="login-input-wrap"><span class="login-label">Place *</span><input class="linput" type="text" id="regPlace" placeholder="ஊர்"></div>
+      <div class="login-input-wrap"><span class="login-label">Mobile Number *</span><input class="linput" type="tel" id="regMobile" placeholder="Mobile number"></div>
+      <div class="login-input-wrap"><span class="login-label">User ID * (case sensitive)</span><input class="linput" type="text" id="regUserId" placeholder="Login-க்கு use ஆகும் ID" autocapitalize="none" spellcheck="false"></div>
+      <div class="login-input-wrap"><span class="login-label">Password * (case sensitive)</span><input class="linput" type="password" id="regPassword" placeholder="Password (any characters)"></div>
+    </div>
+    <button class="login-btn" onclick="submitRegister()">📨 Request Submit பண்ணு</button>
+    <div class="login-err" id="regErr"></div>
+    <div style="text-align:center;margin-top:12px;"><a style="color:#1B9AAA;font-weight:700;cursor:pointer;font-size:12px;" onclick="showLoginScreen()">← Back to Login</a></div>
+  </div>
+</div>
+
+<!-- Admin Panel Modal -->
+<div class="modal-overlay" id="adminPanelModal" onclick="if(event.target===this)closeAdminPanel()">
+  <div class="modal-box">
+    <div class="modal-handle"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <div class="modal-title" style="margin-bottom:0;">👥 User Management</div>
+      <button class="abtn" style="color:var(--teal);border-color:var(--teal);" onclick="openAddCustomer()">+ Add</button>
+    </div>
+    <!-- Pending requests -->
+    <div id="pendingSection">
+      <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">⏳ Pending Requests</div>
+      <div id="pendingList"></div>
+    </div>
+    <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 8px;">✅ Active Users</div>
+    <div id="customerList"></div>
+  </div>
+</div>
+
+<!-- Add/Edit User Modal -->
+<div class="modal-overlay" id="addCustomerModal" onclick="if(event.target===this)closeAddCustomer()">
+  <div class="modal-box">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="addCustomerTitle">➕ New User</div>
+    <input type="hidden" id="editCustomerId">
+    <div class="ig"><div class="il">Full Name *</div><input type="text" id="newCustName" placeholder="பேர்"></div>
+    <div class="r2">
+      <div class="ig"><div class="il">Age</div><input type="number" id="newCustAge" placeholder="வயசு"></div>
+      <div class="ig"><div class="il">Place</div><input type="text" id="newCustPlace" placeholder="ஊர்"></div>
+    </div>
+    <div class="ig"><div class="il">Mobile *</div><input type="tel" id="newCustMobile" placeholder="Mobile number"></div>
+    <div class="ig"><div class="il">User ID * (case sensitive)</div><input type="text" id="newCustUserId" placeholder="Login User ID" autocapitalize="none" spellcheck="false"></div>
+    <div class="ig"><div class="il">Password * (case sensitive)</div><input type="password" id="newCustPassword" placeholder="Password"></div>
+    <button class="btn btn-primary" onclick="saveCustomer()" style="margin-bottom:8px;">✅ Save</button>
+    <button class="btn" style="background:#1a1232;color:#a5b4fc;border:1px solid #2e2060;" onclick="closeAddCustomer()">Cancel</button>
+    <div id="addCustErr" style="color:#f87171;font-size:12px;font-weight:600;text-align:center;margin-top:6px;"></div>
+  </div>
+</div>
+
+
 <div class="header">
   <div class="header-top">
-    <div><h1>💼 Work Tracker</h1><div class="header-sub" id="headerDate"></div></div>
+    <div><div style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+  <div>
+    <h1 style="font-size:20px;font-weight:900;letter-spacing:1px;text-transform:uppercase;font-style:italic;">⚡ VKM TRACKER</h1>
+    <div style="display:flex;align-items:center;gap:4px;margin-top:3px;"><span id="roleBadge"></span></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;">
+    <button onclick="openAdminPanel()" id="adminMgmtBtn" style="display:none;background:rgba(255,255,255,.2);border:none;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">👥 Users</button>
+    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light">🌙</button>
+    <button class="logout-btn" id="logoutBtn" style="display:none;" onclick="doLogout()">Logout</button>
+  </div>
+</div><div style="display:flex;align-items:center;gap:4px;margin-top:3px;"><span id="roleBadge"></span><button id="logoutBtn" style="display:none;">Logout</button></div><div class="header-sub" id="headerDate"></div></div>
     <div class="month-pill">
       <button onclick="changeMonth(-1)">‹</button>
       <span id="monthLabel"></span>
@@ -134,10 +341,10 @@ input:focus,select:focus{border-color:var(--teal);}
   </div>
 </div>
 <div class="tab-bar">
-  <div class="tab active" onclick="switchTab(0)" id="tab0"><span class="ti">📅</span>Job 1</div>
-  <div class="tab" onclick="switchTab(1)" id="tab1"><span class="ti">💰</span>Job 2</div>
-  <div class="tab" onclick="switchTab(2)" id="tab2"><span class="ti">🏦</span>Loan</div>
-  <div class="tab" onclick="switchTab(3)" id="tab3"><span class="ti">📊</span>Analysis</div>
+  <div class="tab active" data-tab="0" id="tab0"><span class="ti">📅</span>Job 1</div>
+  <div class="tab" data-tab="1" id="tab1"><span class="ti">💰</span>Job 2</div>
+  <div class="tab" data-tab="2" id="tab2"><span class="ti">🏦</span>Loan</div>
+  <div class="tab" data-tab="3" id="tab3"><span class="ti">📊</span>Analysis</div>
 </div>
 <div class="pages">
 
@@ -269,6 +476,16 @@ input:focus,select:focus{border-color:var(--teal);}
   <div class="card"><div class="st">💳 GPay vs Cash</div><div id="methodSummary"></div></div>
   <div class="card"><div class="st">📝 Full Summary</div><div id="summaryList"></div></div>
 </div>
+
+  <div class="card" id="adminSettingsCard" style="display:none;">
+    <div class="st">🔐 Admin Settings</div>
+    <div class="r2">
+      <div class="ig"><div class="il">New Username</div><input type="text" id="newAdminUser" placeholder="New admin username" autocapitalize="none"></div>
+      <div class="ig"><div class="il">New Password</div><input type="password" id="newAdminPass" placeholder="New password"></div>
+    </div>
+    <button class="btn btn-primary" onclick="changeAdminPass()">🔑 Update Credentials</button>
+  </div>
+
 </div><!-- /pages -->
 
 <!-- Add/Edit Loan Modal -->
@@ -279,14 +496,14 @@ input:focus,select:focus{border-color:var(--teal);}
     <input type="hidden" id="addLoanEditId" value="">
     <div class="ig"><div class="il">Loan பேர்</div><input type="text" id="newLoanName" placeholder="Bank / நண்பன் / etc..."></div>
     <div class="r2">
-      <div class="ig"><div class="il">Total Amount ₹</div><input type="number" id="newLoanTotal" placeholder="0" oninput="calcLoanEMI()"></div>
-      <div class="ig"><div class="il">Monthly Pay ₹</div><input type="number" id="newLoanMonthly" placeholder="Auto" oninput="calcInterestFromInputs()"></div>
+      <div class="ig"><div class="il">Total Amount ₹</div><input type="number" id="newLoanTotal" placeholder="0"></div>
+      <div class="ig"><div class="il">Monthly Pay ₹</div><input type="number" id="newLoanMonthly" placeholder="உன் EMI amount போடு"></div>
     </div>
     <div class="r2">
-      <div class="ig"><div class="il">Interest % <span style="font-size:9px;color:var(--teal);">(Auto)</span></div><input type="number" id="newLoanInterest" placeholder="Auto-calculate" step="0.01" readonly style="background:var(--p1l);color:var(--p1);font-weight:700;"></div>
-      <div class="ig"><div class="il">Duration (months)</div><input type="number" id="newLoanDuration" placeholder="12" oninput="calcLoanEMI();calcInterestFromInputs()"></div>
+      <div class="ig"><div class="il">Interest % <span style="font-size:9px;color:var(--teal);">(optional)</span></div><input type="number" id="newLoanInterest" placeholder="0" step="0.01"></div>
+      <div class="ig"><div class="il">Duration (months)</div><input type="number" id="newLoanDuration" placeholder="12"></div>
     </div>
-    <div id="loanEMIPreview" style="background:var(--p1l);border-radius:11px;padding:11px;margin-bottom:12px;display:none;">
+    <div id="loanEMIPreview" style="background:#1e1646;border-radius:11px;padding:11px;margin-bottom:12px;display:none;">
       <div style="font-size:11px;font-weight:700;color:var(--p1);margin-bottom:6px;">💡 Auto Calculation</div>
       <div id="loanEMIDetails" style="font-size:12px;color:var(--text);line-height:1.9;"></div>
     </div>
@@ -306,12 +523,12 @@ input:focus,select:focus{border-color:var(--teal);}
         <div style="font-size:11px;color:var(--text2);margin-top:4px;">Specific date மட்டும் — ஒரே தடவை payment</div>
       </div>
       <div id="payDay2ndThurs" style="margin-top:8px;display:none;">
-        <div style="background:var(--teall);border-radius:10px;padding:8px 12px;font-size:12px;color:var(--teal);font-weight:600;">📅 Every month 2nd Thursday automatically calculate ஆகும்</div>
+        <div style="background:#1e1a4e;border-radius:10px;padding:8px 12px;font-size:12px;color:#a5b4fc;font-weight:600;">📅 Every month 2nd Thursday automatically calculate ஆகும்</div>
       </div>
     </div>
     <div class="ig"><div class="il">Loan வாங்கிய Date</div><input type="date" id="newLoanStart"></div>
     <button class="btn btn-primary" onclick="saveNewLoan()" style="margin-bottom:8px;">✅ Save பண்ணு</button>
-    <button class="btn" style="background:var(--bg);color:var(--text2);border:1px solid var(--border);" onclick="closeAddLoan()">Cancel</button>
+    <button class="btn" style="background:#1a1232;color:#a5b4fc;border:1px solid #2e2060;" onclick="closeAddLoan()">Cancel</button>
   </div>
 </div>
 
@@ -324,7 +541,7 @@ input:focus,select:focus{border-color:var(--teal);}
     <div class="ig"><div class="il">Date</div><input type="date" id="editPetrolDate"></div>
     <div class="ig"><div class="il">Amount ₹</div><input type="number" id="editPetrolAmt"></div>
     <button class="btn btn-teal" onclick="saveEditPetrol()" style="margin-bottom:8px;">✅ Save</button>
-    <button class="btn" style="background:var(--bg);color:var(--text2);border:1px solid var(--border);" onclick="closeEditPetrol()">Cancel</button>
+    <button class="btn" style="background:#1a1232;color:#a5b4fc;border:1px solid #2e2060;" onclick="closeEditPetrol()">Cancel</button>
   </div>
 </div>
 <!-- Edit Salary Modal -->
@@ -339,7 +556,7 @@ input:focus,select:focus{border-color:var(--teal);}
       <select id="editAdvMethod"><option value="gpay">📱 GPay</option><option value="cash">💵 Cash</option></select>
     </div>
     <button class="btn btn-orange" onclick="saveEditAdvance()" style="margin-bottom:8px;">✅ Save</button>
-    <button class="btn" style="background:var(--bg);color:var(--text2);border:1px solid var(--border);" onclick="closeEditAdv()">Cancel</button>
+    <button class="btn" style="background:#1a1232;color:#a5b4fc;border:1px solid #2e2060;" onclick="closeEditAdv()">Cancel</button>
   </div>
 </div>
 <!-- Edit Loan Payment Modal -->
@@ -354,11 +571,21 @@ input:focus,select:focus{border-color:var(--teal);}
       <select id="editLoanMethod"><option value="gpay">📱 GPay</option><option value="cash">💵 Cash</option></select>
     </div>
     <button class="btn btn-red" onclick="saveEditLoan()" style="margin-bottom:8px;">✅ Save</button>
-    <button class="btn" style="background:var(--bg);color:var(--text2);border:1px solid var(--border);" onclick="closeEditLoan()">Cancel</button>
+    <button class="btn" style="background:#1a1232;color:#a5b4fc;border:1px solid #2e2060;" onclick="closeEditLoan()">Cancel</button>
   </div>
 </div>
 
+<!-- Backup Bar -->
+<div class="backup-bar">
+  <button class="backup-btn bk-export" onclick="exportData()">📤 Backup</button>
+  <button class="backup-btn bk-import" onclick="document.getElementById('importFile').click()">📥 Restore</button>
+  <button class="backup-btn bk-clear" onclick="clearAllData()">🗑️ Reset</button>
+</div>
+<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+
+
 <script>
+
 const todayFull=new Date();
 const todayStr=todayFull.toISOString().split('T')[0];
 let curYear=todayFull.getFullYear(),curMonth=todayFull.getMonth();
@@ -389,6 +616,10 @@ function switchTab(n){
     document.getElementById('page'+i).classList.toggle('active',i===n);
   });renderAll();
 }
+// Bind tabs via JS — avoids inline onclick issues on GitHub Pages PWA
+document.querySelectorAll('[data-tab]').forEach(el=>{
+  el.addEventListener('click',()=>switchTab(parseInt(el.dataset.tab)));
+});
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 function changeMonth(d){
   curMonth+=d;
@@ -650,27 +881,26 @@ function saveNewLoan(){
   const editId=document.getElementById('addLoanEditId').value;
   const name=document.getElementById('newLoanName').value||'Loan';
   const total=parseFloat(document.getElementById('newLoanTotal').value)||0;
+  const monthly=parseFloat(document.getElementById('newLoanMonthly').value)||0;
   const interest=parseFloat(document.getElementById('newLoanInterest').value)||0;
   const duration=parseInt(document.getElementById('newLoanDuration').value)||0;
   const payDayType=document.getElementById('newLoanPayType').value||'nthday';
   const payDay=parseInt(document.getElementById('newLoanPayDay').value)||1;
   const customDate=document.getElementById('newLoanCustomDate').value||'';
   const startDate=document.getElementById('newLoanStart').value||todayStr;
-  if(!name||!total) return;
-  let monthly=parseFloat(document.getElementById('newLoanMonthly').value)||0;
-  let totalWithInterest=total;
-  if(interest>0&&duration>0){
-    const r=interest/12/100;
-    monthly=Math.round(total*(r*Math.pow(1+r,duration))/(Math.pow(1+r,duration)-1));
-    totalWithInterest=monthly*duration;
-  } else if(duration>0&&!monthly){monthly=Math.round(total/duration);}
-  const obj={name,total,interest,duration,monthly,totalWithInterest:totalWithInterest||total,payDay,payDayType,customDate,startDate};
-  if(editId) loans=loans.map(l=>String(l.id)===String(editId)?{...l,...obj}:l);
-  else loans.push({id:Date.now(),...obj});
+  if(!name||!total||!monthly){alert('Loan பேர், Total Amount, Monthly Pay — மூணும் போடணும்!');return;}
+  const totalWithInterest=duration>0?monthly*duration:total;
+  const obj={name,total,interest,duration,monthly,totalWithInterest,payDay,payDayType,customDate,startDate};
+  if(editId){
+    const idx=loans.findIndex(l=>String(l.id)===String(editId));
+    if(idx>-1) loans[idx]={...loans[idx],...obj};
+    else loans.push({id:Date.now(),...obj});
+  } else {
+    loans.push({id:Date.now(),...obj});
+  }
   save('wt_loans_list',loans);closeAddLoan();renderAll();
 }
 function deleteLoanCard(id){
-  if(!confirm('Delete this loan?')) return;
   loans=loans.filter(l=>String(l.id)!==String(id));
   loanPayments=loanPayments.filter(p=>String(p.loanId)!==String(id));
   save('wt_loans_list',loans);save('wt_loans',loanPayments);renderAll();
@@ -685,9 +915,9 @@ function updateLoanPayDetails(){
   const left=Math.max(totalPay-paid,0);
   document.getElementById('loanAmt').value=loan.monthly||'';
   infoEl.innerHTML=`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px;">
-    <span style="background:var(--absentl);color:var(--absent);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">மிச்சம் ₹${Math.round(left).toLocaleString()}</span>
-    <span style="background:var(--presentl);color:var(--present);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">கட்டியது ₹${Math.round(paid).toLocaleString()}</span>
-    <span style="background:var(--p1l);color:var(--p1);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">Next: ${getNextPayDate(loan)}</span>
+    <span style="background:#2d1414;color:#f87171;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">மிச்சம் ₹${Math.round(left).toLocaleString()}</span>
+    <span style="background:#0d2e22;color:#34d399;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">கட்டியது ₹${Math.round(paid).toLocaleString()}</span>
+    <span style="background:#1e1646;color:#a5b4fc;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;">Next: ${getNextPayDate(loan)}</span>
   </div>`;
 }
 function addLoan(){
@@ -774,19 +1004,19 @@ function renderAll(){
   document.getElementById('salaryDueBox').innerHTML=`
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
       <div class="chip" style="background:var(--presentl);"><div class="chip-val" style="color:var(--present);font-size:13px;">₹${Math.round(totalEarned).toLocaleString()}</div><div class="chip-label" style="color:var(--present);">சம்பாதிச்சது</div></div>
-      <div class="chip" style="background:var(--advancel);"><div class="chip-val" style="color:var(--advance);font-size:13px;">₹${Math.round(totalTaken).toLocaleString()}</div><div class="chip-label" style="color:var(--advance);">வாங்கியது</div></div>
+      <div class="chip" style="background:#2d1a08;"><div class="chip-val" style="color:var(--advance);font-size:13px;">₹${Math.round(totalTaken).toLocaleString()}</div><div class="chip-label" style="color:var(--advance);">வாங்கியது</div></div>
       <div class="chip" style="background:${youOweBoss>0?'var(--absentl)':'var(--presentl)'};"><div class="chip-val" style="color:${youOweBoss>0?'var(--absent)':'var(--present)'};font-size:13px;">₹${Math.round(youOweBoss>0?youOweBoss:bossOwesYou).toLocaleString()}</div><div class="chip-label" style="color:${youOweBoss>0?'var(--absent)':'var(--present)'};">${youOweBoss>0?'தர வேண்டியது':'கிடைக்கும்'}</div></div>
     </div>
-    ${youOweBoss>0?`<div style="background:linear-gradient(135deg,#FF6B6B,#ee4040);border-radius:12px;padding:11px 13px;font-size:13px;color:#fff;font-weight:600;">⚠️ நான் Boss-க்கு <strong>₹${Math.round(youOweBoss).toLocaleString()}</strong> தர வேண்டியது — இன்னும் <strong>${Math.ceil(youOweBoss/(settings.dailySal||600))} நாள்</strong> work பண்ணணும்!</div>`:''}
-    ${bossOwesYou>0?`<div style="background:linear-gradient(135deg,#06D6A0,#04b885);border-radius:12px;padding:11px 13px;font-size:13px;color:#fff;font-weight:600;">✅ Boss உனக்கு <strong>₹${Math.round(bossOwesYou).toLocaleString()}</strong> தர வேண்டியது</div>`:''}`;
+    ${youOweBoss>0?`<div style="background:linear-gradient(135deg,#7f1d1d,#f87171);border-radius:12px;padding:11px 13px;font-size:13px;color:#fff;font-weight:600;">⚠️ நான் Boss-க்கு <strong>₹${Math.round(youOweBoss).toLocaleString()}</strong> தர வேண்டியது — இன்னும் <strong>${Math.ceil(youOweBoss/(settings.dailySal||600))} நாள்</strong> work பண்ணணும்!</div>`:''}
+    ${bossOwesYou>0?`<div style="background:linear-gradient(135deg,#064e3b,#34d399);border-radius:12px;padding:11px 13px;font-size:13px;color:#fff;font-weight:600;">✅ Boss உனக்கு <strong>₹${Math.round(bossOwesYou).toLocaleString()}</strong> தர வேண்டியது</div>`:''}`;
 
   // Salary list
   document.getElementById('advList').innerHTML=advances.length?
     '<div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;">History</div>'+
     [...advances].reverse().map(a=>`
-      <div class="sal-row" style="background:var(--advancel);flex-wrap:wrap;gap:6px;">
+      <div class="sal-row" style="background:#2d1a08;flex-wrap:wrap;gap:6px;">
         <div class="sal-info" style="flex:1;min-width:0;">
-          <div class="sal-dot" style="background:#FFE0C8;">💵</div>
+          <div class="sal-dot" style="background:#3d2208;">💵</div>
           <div><div class="sal-date">${a.date} ${mb(a.method)}</div><div class="sal-desc">${getAdvWorkDays(a)} நாள் work பண்ணணும்</div></div>
         </div>
         <div style="display:flex;align-items:center;gap:5px;">
@@ -799,14 +1029,14 @@ function renderAll(){
 
   // Petrol
   document.getElementById('petrolChips').innerHTML=`
-    <div class="chip" style="background:var(--petroll);"><div class="chip-val" style="color:var(--teal);">₹${Math.round(c.totalPetrol)}</div><div class="chip-label" style="color:var(--teal);">Total Bonus</div></div>
+    <div class="chip" style="background:#0d2e22;"><div class="chip-val" style="color:var(--teal);">₹${Math.round(c.totalPetrol)}</div><div class="chip-label" style="color:var(--teal);">Total Bonus</div></div>
     <div class="chip" style="background:#E8F5E9;"><div class="chip-val" style="color:#059669;">${c.petrolDaysCount}</div><div class="chip-label" style="color:#059669;">Days</div></div>
     <div class="chip" style="background:#FFF8E1;"><div class="chip-val" style="color:#D97706;">₹${c.petrolDaysCount>0?Math.round(c.totalPetrol/c.petrolDaysCount):0}</div><div class="chip-label" style="color:#D97706;">Avg/Day</div></div>`;
   document.getElementById('petrolList').innerHTML=petrolLog.length?
     '<div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;">Petrol Log</div>'+
     [...petrolLog].reverse().map(p=>`
-      <div class="sal-row" style="background:var(--petroll);flex-wrap:wrap;gap:6px;">
-        <div class="sal-info" style="flex:1;min-width:0;"><div class="sal-dot" style="background:#B2F5EA;">⛽</div>
+      <div class="sal-row" style="background:#0d2e22;flex-wrap:wrap;gap:6px;">
+        <div class="sal-info" style="flex:1;min-width:0;"><div class="sal-dot" style="background:#0a2e22;">⛽</div>
           <div><div class="sal-date">${p.date}</div><div class="sal-desc">Petrol bonus — ${getPetrolDays(p.amt)} நாள்</div></div>
         </div>
         <div style="display:flex;align-items:center;gap:5px;">
@@ -863,7 +1093,7 @@ function renderAll(){
     const left=Math.max(totalPay-paid,0);
     const pct=totalPay>0?Math.min(paid/totalPay*100,100):0;
     const monthsLeft=l.monthly>0&&left>0?Math.ceil(left/l.monthly):0;
-    return `<div style="background:var(--bg);border:1.5px solid var(--border);border-radius:14px;padding:13px;margin-bottom:10px;">
+    return `<div style="background:#1a1232;border:1.5px solid #2e2060;border-radius:14px;padding:13px;margin-bottom:10px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
         <div style="font-size:14px;font-weight:800;color:var(--p1);">🏦 ${l.name}</div>
         <div style="display:flex;gap:5px;">
@@ -872,15 +1102,15 @@ function renderAll(){
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;">
-        <div class="chip" style="background:var(--p1l);padding:8px 4px;"><div class="chip-val" style="color:var(--p1);font-size:13px;">₹${Math.round(l.total).toLocaleString()}</div><div class="chip-label">Principal</div></div>
-        <div class="chip" style="background:var(--presentl);padding:8px 4px;"><div class="chip-val" style="color:var(--present);font-size:13px;">₹${Math.round(paid).toLocaleString()}</div><div class="chip-label">கட்டியது</div></div>
-        <div class="chip" style="background:var(--absentl);padding:8px 4px;"><div class="chip-val" style="color:var(--absent);font-size:13px;">₹${Math.round(left).toLocaleString()}</div><div class="chip-label">மிச்சம்</div></div>
+        <div class="chip" style="background:#1e1646;padding:8px 4px;"><div class="chip-val" style="color:var(--p1);font-size:13px;">₹${Math.round(l.total).toLocaleString()}</div><div class="chip-label">Principal</div></div>
+        <div class="chip" style="background:#0d2e22;padding:8px 4px;"><div class="chip-val" style="color:var(--present);font-size:13px;">₹${Math.round(paid).toLocaleString()}</div><div class="chip-label">கட்டியது</div></div>
+        <div class="chip" style="background:#2d1414;padding:8px 4px;"><div class="chip-val" style="color:var(--absent);font-size:13px;">₹${Math.round(left).toLocaleString()}</div><div class="chip-label">மிச்சம்</div></div>
       </div>
-      ${l.interest>0?`<div style="background:var(--p1l);border-radius:9px;padding:7px 10px;margin-bottom:8px;font-size:12px;color:var(--p1);">💡 Interest ${l.interest}% | EMI ₹${Math.round(l.monthly||0).toLocaleString()}/month | Total ₹${Math.round(totalPay).toLocaleString()}</div>`:''}
+      ${l.interest>0?`<div style="background:#1e1646;border-radius:9px;padding:7px 10px;margin-bottom:8px;font-size:12px;color:var(--p1);">💡 Interest ${l.interest}% | EMI ₹${Math.round(l.monthly||0).toLocaleString()}/month | Total ₹${Math.round(totalPay).toLocaleString()}</div>`:''}
       <div style="height:7px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:6px;"><div style="height:100%;background:var(--teal);border-radius:4px;width:${pct.toFixed(1)}%;transition:width .4s;"></div></div>
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;">
         <span style="font-size:11px;color:var(--text2);">${pct.toFixed(1)}% done${monthsLeft?` | ~${monthsLeft} மாசம்`:''}</span>
-        <span style="background:var(--p1l);color:var(--p1);padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700;">📅 Next: ${getNextPayDate(l)}</span>
+        <span style="background:#1e1646;color:#a5b4fc;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:700;">📅 Next: ${getNextPayDate(l)}</span>
       </div>
     </div>`;
   }).join(''):'<div class="empty"><div class="empty-icon">🏦</div>Loan இல்லை — Add பண்ணு!</div>';
@@ -889,9 +1119,9 @@ function renderAll(){
   document.getElementById('loanList').innerHTML=loanPayments.length?
     [...loanPayments].sort((a,b)=>b.date.localeCompare(a.date)).map(p=>{
       const ln=loans.find(l=>String(l.id)===String(p.loanId));
-      return `<div class="sal-row" style="background:var(--absentl);flex-wrap:wrap;gap:6px;">
+      return `<div class="sal-row" style="background:#2d1414;flex-wrap:wrap;gap:6px;">
         <div class="sal-info" style="flex:1;min-width:0;">
-          <div class="sal-dot" style="background:#FFD0D0;">💳</div>
+          <div class="sal-dot" style="background:#3d1414;">💳</div>
           <div><div class="sal-date">${p.date} ${mb(p.method||'gpay')}</div><div class="sal-desc">${ln?ln.name:'Loan'} payment</div></div>
         </div>
         <div style="display:flex;align-items:center;gap:5px;">
@@ -954,11 +1184,340 @@ function renderAll(){
     {label:'Loan கட்டியது',val:'-₹'+Math.round(c.loanPaid).toLocaleString(),color:'var(--half)'},
     {label:'🏆 மொத்தம் கையில்',val:'₹'+Math.round(Math.max(net,0)).toLocaleString(),color:'var(--p1)',bold:true},
   ].map(r=>`
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #2e2060;">
       <span style="font-size:${r.bold?'15':'13'}px;font-weight:${r.bold?800:500};color:var(--text);">${r.label}</span>
       <span style="font-size:14px;font-weight:800;color:${r.color};">${r.val}</span>
     </div>`).join('');
 }
+function exportData(){
+  const data={wt_att:attendance,wt_loans:loanPayments,wt_adv:advances,wt_petrol:petrolLog,wt_p2:p2entries,wt_settings:settings,wt_loans_list:loans,exported:new Date().toISOString()};
+  const json=JSON.stringify(data,null,2);
+  const blob=new Blob([json],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  const d=new Date();
+  a.download='vkmtracker_backup_'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+'.json';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},200);
+  showToast('✅ Backup download ஆகுது!','success');
+}
+function importData(e){
+  const file=e.target.files[0];if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      const data=JSON.parse(ev.target.result);
+      if(data.wt_att){attendance=data.wt_att;save('wt_att',attendance);}
+      if(data.wt_loans){loanPayments=data.wt_loans;save('wt_loans',loanPayments);}
+      if(data.wt_adv){advances=data.wt_adv;save('wt_adv',advances);}
+      if(data.wt_petrol){petrolLog=data.wt_petrol;save('wt_petrol',petrolLog);}
+      if(data.wt_p2){p2entries=data.wt_p2;save('wt_p2',p2entries);}
+      if(data.wt_settings){settings=data.wt_settings;save('wt_settings',settings);document.getElementById('dailySal').value=settings.dailySal||600;}
+      if(data.wt_loans_list){loans=data.wt_loans_list;save('wt_loans_list',loans);}
+      renderAll();showToast('✅ Data restore ஆச்சு!','success');
+    }catch(err){showToast('❌ Valid backup file போடு','error');}
+  };
+  reader.readAsText(file);e.target.value='';
+}
+function clearAllData(){
+  ['wt_att','wt_loans','wt_adv','wt_petrol','wt_p2','wt_settings','wt_loans_list'].forEach(k=>localStorage.removeItem(k));
+  attendance={};loanPayments=[];advances=[];petrolLog=[];p2entries=[];settings={dailySal:600};loans=[];
+  document.getElementById('dailySal').value=600;
+  renderAll();showToast('🗑️ Data clear ஆச்சு','error');
+}
+function showToast(msg,type){
+  let t=document.getElementById('wt-toast');
+  if(!t){t=document.createElement('div');t.id='wt-toast';
+    t.style.cssText='position:fixed;top:80px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:30px;font-size:13px;font-weight:700;z-index:999;transition:opacity .4s;white-space:nowrap;max-width:90vw;text-align:center;pointer-events:none;';
+    document.body.appendChild(t);}
+  t.textContent=msg;t.style.background=type==='success'?'#4f46e5':'#f87171';
+  t.style.color='#fff';t.style.opacity='1';
+  clearTimeout(t._timer);t._timer=setTimeout(()=>{t.style.opacity='0';},2500);
+}
+
+// ===== AUTH & LOGIN SYSTEM =====
+const ADMIN_CREDS_KEY='vkm_admin_creds';
+const CUSTOMERS_KEY='vkm_customers';
+const REQUESTS_KEY='vkm_requests';
+const SESSION_KEY='vkm_session';
+
+function getAdminCreds(){return load(ADMIN_CREDS_KEY,{user:'VKMadmin',pass:'VKM@2024'});}
+function getCustomers(){return load(CUSTOMERS_KEY,[]);}
+function getRequests(){return load(REQUESTS_KEY,[]);}
+
+let currentSession=load(SESSION_KEY,null); // {role:'admin'|'user', userId, name}
+let loginType='admin';
+
+function setLoginTab(t){
+  loginType=t;
+  document.getElementById('ltab-admin').classList.toggle('active',t==='admin');
+  document.getElementById('ltab-user').classList.toggle('active',t==='user');
+  document.getElementById('adminLoginForm').style.display=t==='admin'?'block':'none';
+  document.getElementById('userLoginForm').style.display=t==='user'?'block':'none';
+  document.getElementById('loginErr').textContent='';
+}
+
+function doLogin(){
+  const err=document.getElementById('loginErr');
+  if(loginType==='admin'){
+    const u=document.getElementById('adminUser').value;
+    const p=document.getElementById('adminPass').value;
+    const creds=getAdminCreds();
+    if(u===creds.user && p===creds.pass){
+      currentSession={role:'admin',userId:'admin',name:'Admin'};
+      save(SESSION_KEY,currentSession);
+      hideLoginScreen();
+      applyRoleUI();
+      renderAll();
+    } else {
+      err.textContent='❌ Wrong username or password';
+    }
+  } else {
+    const u=document.getElementById('custUser').value;
+    const p=document.getElementById('custPass').value;
+    if(!u||!p){err.textContent='❌ User ID & Password போடு';return;}
+    const customers=getCustomers();
+    const cust=customers.find(c=>c.userId===u && c.password===p);
+    if(!cust){err.textContent='❌ Wrong User ID or Password';return;}
+    currentSession={role:'user',userId:cust.userId,name:cust.name};
+    save(SESSION_KEY,currentSession);
+    hideLoginScreen();
+    applyRoleUI();
+    renderAll();
+  }
+}
+
+function doLogout(){
+  currentSession=null;
+  localStorage.removeItem(SESSION_KEY);
+  showLoginScreen();
+}
+
+function showLoginScreen(){
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('registerScreen').style.display='none';
+  document.getElementById('adminUser').value='';
+  document.getElementById('adminPass').value='';
+  document.getElementById('custUser').value='';
+  document.getElementById('custPass').value='';
+  document.getElementById('loginErr').textContent='';
+}
+
+function hideLoginScreen(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('registerScreen').style.display='none';
+}
+
+function showRegisterForm(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('registerScreen').style.display='flex';
+  document.getElementById('regErr').textContent='';
+  ['regName','regAge','regPlace','regMobile','regUserId','regPassword'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+}
+
+function submitRegister(){
+  const name=document.getElementById('regName').value.trim();
+  const age=document.getElementById('regAge').value.trim();
+  const place=document.getElementById('regPlace').value.trim();
+  const mobile=document.getElementById('regMobile').value.trim();
+  const userId=document.getElementById('regUserId').value; // case-sensitive, no trim
+  const password=document.getElementById('regPassword').value; // case-sensitive, no trim
+  const err=document.getElementById('regErr');
+  if(!name||!mobile||!userId||!password){err.textContent='❌ * fields எல்லாம் fill பண்ணு';return;}
+  if(userId.length<3){err.textContent='❌ User ID minimum 3 characters வேணும்';return;}
+  if(password.length<4){err.textContent='❌ Password minimum 4 characters வேணும்';return;}
+  const customers=getCustomers();
+  const requests=getRequests();
+  if(customers.find(c=>c.userId===userId)||requests.find(r=>r.userId===userId)){
+    err.textContent='❌ இந்த User ID already use ஆகுது';return;
+  }
+  const req={id:Date.now(),name,age,place,mobile,userId,password,status:'pending',createdAt:new Date().toLocaleDateString('en-IN')};
+  requests.push(req);
+  save(REQUESTS_KEY,requests);
+  err.style.color='#34d399';
+  err.textContent='✅ Request submit ஆச்சு! Admin approve பண்ணா login பண்ணலாம்.';
+  setTimeout(()=>{showLoginScreen();},2500);
+}
+
+function applyRoleUI(){
+  const isAdmin=currentSession&&currentSession.role==='admin';
+  const badge=document.getElementById('roleBadge');
+  const logoutBtn=document.getElementById('logoutBtn');
+  if(badge) badge.innerHTML=isAdmin?
+    '<span class="role-badge role-admin">🔐 Admin</span>':
+    '<span class="role-badge role-user">👤 '+((currentSession&&currentSession.name)||'User')+'</span>';
+  if(logoutBtn) logoutBtn.style.display='inline-block';
+  const adminBtn=document.getElementById('adminMgmtBtn');
+  if(adminBtn) adminBtn.style.display=isAdmin?'inline-block':'none';
+  const adminCard=document.getElementById('adminSettingsCard');
+  if(adminCard) adminCard.style.display=isAdmin?'block':'none';
+  document.body.classList.toggle('role-admin',isAdmin);
+  document.body.classList.toggle('role-user',!isAdmin);
+  const bb=document.querySelector('.backup-bar');
+  if(bb) bb.style.display=isAdmin?'flex':'none';
+}
+
+// ===== USER MANAGEMENT (Admin) =====
+function openAdminPanel(){
+  renderCustomerPanel();
+  document.getElementById('adminPanelModal').classList.add('show');
+}
+function closeAdminPanel(){document.getElementById('adminPanelModal').classList.remove('show');}
+
+function renderCustomerPanel(){
+  const requests=getRequests().filter(r=>r.status==='pending');
+  const customers=getCustomers();
+  // Pending
+  const pendEl=document.getElementById('pendingList');
+  if(requests.length){
+    pendEl.innerHTML=requests.map(r=>`
+      <div class="customer-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div class="customer-card-name">${r.name} <span class="status-badge status-pending">Pending</span></div>
+            <div class="customer-card-info">📱 ${r.mobile} | 📍 ${r.place||'—'} | Age: ${r.age||'—'}</div>
+            <div class="customer-card-info" style="margin-top:2px;">ID: <strong>${r.userId}</strong> | Requested: ${r.createdAt}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button class="btn btn-green" style="padding:8px;font-size:12px;" onclick="approveRequest('${r.id}')">✅ Accept</button>
+          <button class="btn btn-red" style="padding:8px;font-size:12px;" onclick="rejectRequest('${r.id}')">❌ Reject</button>
+        </div>
+      </div>`).join('');
+    document.getElementById('pendingSection').style.display='block';
+  } else {
+    pendEl.innerHTML='<div style="font-size:12px;color:var(--text2);padding:8px 0 4px;">Pending requests இல்லை</div>';
+  }
+  // Active users
+  document.getElementById('customerList').innerHTML=customers.length?customers.map(c=>`
+    <div class="customer-card">
+      <div style="display:flex;justify-content:space-between;align-items:start;">
+        <div>
+          <div class="customer-card-name">${c.name} <span class="status-badge status-active">Active</span></div>
+          <div class="customer-card-info">📱 ${c.mobile||'—'} | 📍 ${c.place||'—'} | Age: ${c.age||'—'}</div>
+          <div class="customer-card-info" style="margin-top:2px;">ID: <strong>${c.userId}</strong></div>
+        </div>
+        <div style="display:flex;gap:5px;">
+          <button class="abtn" style="color:var(--teal);border-color:var(--teal);" onclick="openEditCustomer('${c.id}')">✏️</button>
+          <button class="abtn" style="color:var(--absent);border-color:var(--absent);" onclick="deleteCustomer('${c.id}')">🗑️</button>
+        </div>
+      </div>
+    </div>`).join('')
+    :'<div class="empty"><div class="empty-icon">👥</div>User இல்லை</div>';
+}
+
+function approveRequest(id){
+  let requests=getRequests();
+  const req=requests.find(r=>String(r.id)===String(id));
+  if(!req) return;
+  let customers=getCustomers();
+  customers.push({id:Date.now(),name:req.name,age:req.age,place:req.place,mobile:req.mobile,userId:req.userId,password:req.password,createdAt:req.createdAt});
+  requests=requests.filter(r=>String(r.id)!==String(id));
+  save(CUSTOMERS_KEY,customers);
+  save(REQUESTS_KEY,requests);
+  renderCustomerPanel();showToast('✅ '+req.name+' approved!','success');
+}
+function rejectRequest(id){
+  let requests=getRequests();
+  requests=requests.filter(r=>String(r.id)!==String(id));
+  save(REQUESTS_KEY,requests);
+  renderCustomerPanel();showToast('🗑️ Request rejected','error');
+}
+function deleteCustomer(id){
+  let customers=getCustomers();
+  customers=customers.filter(c=>String(c.id)!==String(id));
+  save(CUSTOMERS_KEY,customers);
+  renderCustomerPanel();showToast('🗑️ User removed','error');
+}
+function openAddCustomer(){
+  document.getElementById('editCustomerId').value='';
+  document.getElementById('addCustomerTitle').textContent='➕ New User';
+  ['newCustName','newCustAge','newCustPlace','newCustMobile','newCustUserId','newCustPassword'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('addCustErr').textContent='';
+  document.getElementById('addCustomerModal').classList.add('show');
+}
+function openEditCustomer(id){
+  const customers=getCustomers();
+  const c=customers.find(c=>String(c.id)===String(id));
+  if(!c) return;
+  document.getElementById('editCustomerId').value=id;
+  document.getElementById('addCustomerTitle').textContent='✏️ Edit User';
+  document.getElementById('newCustName').value=c.name||'';
+  document.getElementById('newCustAge').value=c.age||'';
+  document.getElementById('newCustPlace').value=c.place||'';
+  document.getElementById('newCustMobile').value=c.mobile||'';
+  document.getElementById('newCustUserId').value=c.userId||'';
+  document.getElementById('newCustPassword').value=c.password||'';
+  document.getElementById('addCustErr').textContent='';
+  document.getElementById('addCustomerModal').classList.add('show');
+}
+function closeAddCustomer(){document.getElementById('addCustomerModal').classList.remove('show');}
+function saveCustomer(){
+  const editId=document.getElementById('editCustomerId').value;
+  const name=document.getElementById('newCustName').value.trim();
+  const age=document.getElementById('newCustAge').value.trim();
+  const place=document.getElementById('newCustPlace').value.trim();
+  const mobile=document.getElementById('newCustMobile').value.trim();
+  const userId=document.getElementById('newCustUserId').value;
+  const password=document.getElementById('newCustPassword').value;
+  const errEl=document.getElementById('addCustErr');
+  if(!name||!mobile||!userId||!password){errEl.textContent='❌ * fields fill பண்ணு';return;}
+  let customers=getCustomers();
+  if(!editId){
+    if(customers.find(c=>c.userId===userId)){errEl.textContent='❌ User ID already exists';return;}
+    customers.push({id:Date.now(),name,age,place,mobile,userId,password,createdAt:new Date().toLocaleDateString('en-IN')});
+  } else {
+    const idx=customers.findIndex(c=>String(c.id)===String(editId));
+    if(idx>-1) customers[idx]={...customers[idx],name,age,place,mobile,userId,password};
+  }
+  save(CUSTOMERS_KEY,customers);
+  closeAddCustomer();
+  renderCustomerPanel();
+  showToast(editId?'✅ User updated!':'✅ User added!','success');
+}
+
+// Admin change password
+function changeAdminPass(){
+  const nu=document.getElementById('newAdminUser').value;
+  const np=document.getElementById('newAdminPass').value;
+  if(!nu||!np){showToast('❌ Fill both fields','error');return;}
+  save(ADMIN_CREDS_KEY,{user:nu,pass:np});
+  showToast('✅ Admin credentials updated!','success');
+}
+
+// ===== THEME TOGGLE =====
+const THEME_KEY='vkm_theme';
+function applyTheme(theme){
+  document.body.classList.toggle('light-theme', theme==='light');
+  const btn=document.getElementById('themeToggleBtn');
+  if(btn) btn.textContent=theme==='light'?'☀️':'🌙';
+  // Fix role-user input bg for current theme
+  const styleEl=document.getElementById('themeInputFix');
+  if(styleEl) styleEl.textContent=theme==='light'?
+    'body.role-user input,body.role-user select{background:#f5f3ff!important;}':
+    'body.role-user input,body.role-user select{background:#1a1232!important;}';
+}
+function toggleTheme(){
+  const isLight=document.body.classList.contains('light-theme');
+  const next=isLight?'dark':'light';
+  save(THEME_KEY,next);
+  applyTheme(next);
+}
+
+// INIT
+const savedTheme=load(THEME_KEY,'dark');
+applyTheme(savedTheme);
+if(currentSession){
+  document.getElementById('loginScreen').style.display='none';
+  applyRoleUI();
+} else {
+  document.getElementById('loginScreen').style.display='flex';
+}
+
 renderAll();
 </script>
 </body>
