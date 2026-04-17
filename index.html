@@ -167,23 +167,46 @@ body.role-customer .backup-bar{display:none!important;}
 /* Register form */
 .reg-section{margin-bottom:8px;}
 
-/* ===== FUTURE ACHIEVEMENT TRACKER STYLES ===== */
-.fat-pg{display:none;}.fat-pg.fat-show{display:block;}
-.fat-nav{flex:1;padding:10px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-size:10px;color:#6b8a7e;font-weight:500;}
-.fat-nav.active{color:#0d6e4c;}
-.fat-dot{width:14px;height:14px;border-radius:50%;background:#2e2060;border:2px solid #4f46e5;transition:all .2s;}
-.fat-dot.filled{background:#818cf8;border-color:#818cf8;}
-.fat-key{width:72px;height:56px;border-radius:14px;border:1.5px solid var(--border);background:var(--card);font-size:22px;font-weight:700;cursor:pointer;color:var(--text);font-family:Inter,sans-serif;transition:all .15s;}
-.fat-key:active{transform:scale(.92);background:var(--bg);}
+/* ===== FUTURE ACHIEVEMENT TRACKER CSS ===== */
+/* Scoped with fat- prefix to avoid conflicts */
+#fatOverlay{position:fixed;inset:0;z-index:99999;display:none;flex-direction:column;background:#0f0a1e;}
+#fatPinScreen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;background:linear-gradient(160deg,#0a1f14 0%,#0d2e22 60%,#1a4a32 100%);}
+#fatApp{display:none;flex-direction:column;height:100%;overflow:hidden;}
+.fat-header{background:linear-gradient(135deg,#0d6e4c,#1a9e6e);color:#fff;padding:48px 18px 14px;flex-shrink:0;}
+.fat-tabs-bar{display:flex;background:#fff;border-bottom:1px solid #daeee6;overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
+.fat-tabs-bar::-webkit-scrollbar{display:none;}
+.fat-tab{padding:11px 16px;font-size:13px;font-weight:500;color:#6b8a7e;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;flex-shrink:0;}
+.fat-tab.active{color:#0d6e4c;border-bottom-color:#0d6e4c;}
+.fat-pages{flex:1;overflow:hidden;position:relative;}
+.fat-page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:14px 13px 80px;display:none;background:#f6faf8;}
+.fat-page.fat-show{display:block;}
+.fat-bottom-nav{background:#fff;border-top:1px solid #daeee6;display:flex;flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0px);}
+.fat-nav-btn{flex:1;padding:10px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-size:10px;color:#6b8a7e;font-weight:500;}
+.fat-nav-btn.active{color:#0d6e4c;}
+/* PIN keypad */
+.fat-pin-dot{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.25);transition:all .2s;}
+.fat-pin-dot.fp{background:#06D6A0;border-color:#06D6A0;box-shadow:0 0 8px rgba(6,214,160,.5);}
+.fat-pin-key{width:72px;height:56px;border-radius:14px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);font-size:22px;font-weight:700;cursor:pointer;color:#fff;font-family:Inter,sans-serif;transition:all .15s;}
+.fat-pin-key:active{transform:scale(.92);background:rgba(255,255,255,.18);}
+/* Tracker components - prefixed to avoid clash with main app */
+.fat-stat-pill{background:rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;flex:1;text-align:center;}
+.fat-stat-pill span{display:block;font-size:19px;font-weight:600;}
+.fat-big-bar{height:5px;background:rgba(255,255,255,.2);border-radius:5px;margin-top:12px;overflow:hidden;}
 .fat-sec-card{background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);margin-bottom:12px;overflow:hidden;border:1px solid #daeee6;}
-.fat-task-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid #daeee6;}
 .fat-chk{width:22px;height:22px;border-radius:6px;border:2px solid #daeee6;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .2s;}
 .fat-chk.on{background:#1a9e6e;border-color:#1a9e6e;}
 .fat-chk.on::after{content:'✓';color:#fff;font-size:13px;font-weight:600;}
 .fat-task-txt{font-size:14px;flex:1;cursor:pointer;line-height:1.4;color:#1a2e26;}
 .fat-task-txt.done{color:#6b8a7e;text-decoration:line-through;}
-.fat-tt-block{background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);margin-bottom:10px;border:1px solid #daeee6;overflow:hidden;}
-
+.fat-glass{width:42px;height:42px;border-radius:10px;border:2px solid #daeee6;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:all .15s;}
+.fat-glass.on{background:#e8f1fb;border-color:#2c6fad;}
+.fat-glass:active{transform:scale(.9);}
+.fat-streak-card{background:linear-gradient(135deg,#0d6e4c,#1a6e5a);border-radius:16px;padding:16px;margin-bottom:12px;color:#fff;display:flex;align-items:center;gap:14px;}
+.fat-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:none;align-items:flex-end;}
+.fat-modal-bg.open{display:flex;}
+.fat-modal{background:#1a1232;border-radius:20px 20px 0 0;padding:20px 18px 44px;width:100%;animation:slideUp .25s ease;max-height:85vh;overflow-y:auto;}
+/* Pin change modal */
+#fatPinChgModal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
 </style>
 </head>
 <body>
@@ -225,6 +248,9 @@ body.role-customer .backup-bar{display:none!important;}
     </div>
     <div class="login-err" id="loginErr"></div>
   </div>
+  <!-- Future Achievement Tracker button -->
+  <button onclick="fatOpenPin()" style="margin-top:20px;background:linear-gradient(135deg,#0d6e4c,#1a9e6e);border:none;color:#fff;padding:13px 32px;border-radius:16px;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;letter-spacing:.3px;box-shadow:0 4px 20px rgba(13,110,76,.35);">🌟 Future Achievement Tracker</button>
+  <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:8px;text-align:center;">Enter PIN to access</div>
 </div>
 
 <!-- ===== REGISTER SCREEN ===== -->
@@ -311,7 +337,6 @@ body.role-customer .backup-bar{display:none!important;}
   <div class="tab" data-tab="1" id="tab1"><span class="ti">💰</span>Job 2</div>
   <div class="tab" data-tab="2" id="tab2"><span class="ti">🏦</span>Loan</div>
   <div class="tab" data-tab="3" id="tab3"><span class="ti">📊</span>Analysis</div>
-  <div class="tab" data-tab="4" id="tab4" style="display:none;"><span class="ti">🌟</span>Future</div>
 </div>
 <div class="pages">
 
@@ -453,123 +478,6 @@ body.role-customer .backup-bar{display:none!important;}
     <button class="btn btn-primary" onclick="changeAdminPass()">🔑 Update Credentials</button>
   </div>
 
-<!-- PAGE 4: FUTURE ACHIEVEMENT TRACKER -->
-<div class="page" id="page4">
-  <!-- PIN LOCK SCREEN -->
-  <div id="fatPinScreen" style="position:absolute;inset:0;background:var(--bg);z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;">
-    <div style="font-size:40px;margin-bottom:12px;">🌟</div>
-    <div style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:4px;">Future Achievement Tracker</div>
-    <div style="font-size:13px;color:var(--text2);margin-bottom:28px;">Enter 4-digit PIN to continue</div>
-    <div id="fatPinDots" style="display:flex;gap:12px;margin-bottom:24px;">
-      <div class="fat-dot"></div><div class="fat-dot"></div><div class="fat-dot"></div><div class="fat-dot"></div>
-    </div>
-    <div id="fatPinErr" style="font-size:12px;color:#f87171;min-height:16px;margin-bottom:16px;font-weight:600;"></div>
-    <div style="display:grid;grid-template-columns:repeat(3,72px);gap:10px;">
-      <button class="fat-key" onclick="fatPinKey('1')">1</button>
-      <button class="fat-key" onclick="fatPinKey('2')">2</button>
-      <button class="fat-key" onclick="fatPinKey('3')">3</button>
-      <button class="fat-key" onclick="fatPinKey('4')">4</button>
-      <button class="fat-key" onclick="fatPinKey('5')">5</button>
-      <button class="fat-key" onclick="fatPinKey('6')">6</button>
-      <button class="fat-key" onclick="fatPinKey('7')">7</button>
-      <button class="fat-key" onclick="fatPinKey('8')">8</button>
-      <button class="fat-key" onclick="fatPinKey('9')">9</button>
-      <button class="fat-key" onclick="fatPinKey('clear')" style="background:rgba(248,113,113,.15);color:#f87171;">✕</button>
-      <button class="fat-key" onclick="fatPinKey('0')">0</button>
-      <button class="fat-key" onclick="fatPinKey('back')" style="font-size:18px;">⌫</button>
-    </div>
-    <div style="margin-top:20px;font-size:11px;color:var(--text2);" id="fatPinSetMsg"></div>
-  </div>
-
-  <!-- TRACKER CONTENT (hidden until PIN ok) -->
-  <div id="fatContent" style="display:none;">
-    <!-- FAT HEADER -->
-    <div style="background:linear-gradient(135deg,#0d6e4c,#1a9e6e);color:#fff;padding:16px 16px 12px;position:sticky;top:0;z-index:40;">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <div>
-          <div style="font-size:16px;font-weight:700;">🌟 Future Achievement Tracker</div>
-          <div style="font-size:11px;opacity:.7;margin-top:2px;" id="fatHdrDate"></div>
-        </div>
-        <div style="display:flex;gap:6px;align-items:center;">
-          <button onclick="fatChangePIN()" style="background:rgba(255,255,255,.2);border:none;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">🔑 PIN</button>
-          <button onclick="fatLock()" style="background:rgba(255,255,255,.2);border:none;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">🔒 Lock</button>
-        </div>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:10px;">
-        <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;flex:1;text-align:center;"><span style="display:block;font-size:18px;font-weight:700;" id="fatHDone">0</span>Done</div>
-        <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;flex:1;text-align:center;"><span style="display:block;font-size:18px;font-weight:700;" id="fatHTotal">0</span>Total</div>
-        <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;flex:1;text-align:center;"><span style="display:block;font-size:18px;font-weight:700;" id="fatHPct">0%</span>Score</div>
-      </div>
-      <div style="height:4px;background:rgba(255,255,255,.2);border-radius:4px;margin-top:10px;overflow:hidden;"><div id="fatBigBar" style="height:100%;background:#7ef5c0;border-radius:4px;transition:width .4s;width:0%"></div></div>
-    </div>
-
-    <!-- FAT TABS -->
-    <div id="fatTabBar" style="display:flex;background:#fff;border-bottom:1px solid #daeee6;overflow-x:auto;scrollbar-width:none;position:sticky;top:130px;z-index:39;"></div>
-
-    <!-- FAT PAGES -->
-    <div id="fatPgToday" class="fat-pg fat-show" style="padding:14px;"></div>
-    <div id="fatPgTimetable" class="fat-pg" style="padding:14px;"></div>
-    <div id="fatPgProgress" class="fat-pg" style="padding:14px;">
-      <div style="background:linear-gradient(135deg,#0d6e4c,#1a6e5a);border-radius:16px;padding:16px;margin-bottom:12px;color:#fff;display:flex;align-items:center;gap:14px;">
-        <div style="font-size:38px;">🔥</div>
-        <div><div style="font-size:40px;font-weight:700;font-family:monospace;line-height:1;" id="fatStreak">0</div><div style="font-size:13px;opacity:.75;margin-top:2px;">Day streak!</div></div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(13,110,76,.08);border:1px solid #daeee6;margin-bottom:12px;">
-        <div style="font-size:11px;font-weight:600;color:#6b8a7e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">This week</div>
-        <div id="fatWeekGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;"></div>
-      </div>
-      <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(13,110,76,.08);border:1px solid #daeee6;">
-        <div style="font-size:11px;font-weight:600;color:#6b8a7e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Section Breakdown</div>
-        <div id="fatSecBreak"></div>
-      </div>
-    </div>
-    <div id="fatPgSettings" class="fat-pg" style="padding:14px;"></div>
-
-    <!-- FAT BOTTOM NAV -->
-    <div style="position:sticky;bottom:0;background:#fff;border-top:1px solid #daeee6;display:flex;z-index:40;padding-bottom:env(safe-area-inset-bottom,0px);">
-      <div class="fat-nav active" id="fnb0" onclick="fatGotoPage('Today',0)"><div style="font-size:18px;">✅</div>Today</div>
-      <div class="fat-nav" id="fnb1" onclick="fatGotoPage('Timetable',1)"><div style="font-size:18px;">🗓️</div>Schedule</div>
-      <div class="fat-nav" id="fnb2" onclick="fatGotoPage('Progress',2)"><div style="font-size:18px;">📊</div>Progress</div>
-      <div class="fat-nav" id="fnb3" onclick="fatGotoPage('Settings',3)"><div style="font-size:18px;">⚙️</div>Manage</div>
-    </div>
-  </div>
-
-  <!-- FAT SECTION MODAL -->
-  <div id="fatModalBg" style="position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:none;align-items:flex-end;" onclick="if(event.target===this)fatCloseModal()">
-    <div style="background:#1a1232;border-radius:20px 20px 0 0;padding:20px 18px 44px;width:100%;animation:slideUp .25s ease;max-height:85vh;overflow-y:auto;">
-      <div style="font-size:17px;font-weight:600;margin-bottom:16px;color:#e2e8f0;" id="fatModalTitle">Add Section</div>
-      <label style="font-size:13px;color:#a5b4fc;font-weight:500;margin-bottom:5px;display:block;">Section name</label>
-      <input id="fatMName" style="width:100%;border:1.5px solid #2e2060;border-radius:10px;padding:11px 13px;font-size:15px;font-family:Inter,sans-serif;color:#e2e8f0;background:#231952;margin-bottom:13px;outline:none;" placeholder="e.g. Meditation">
-      <label style="font-size:13px;color:#a5b4fc;font-weight:500;margin-bottom:5px;display:block;">Tab name</label>
-      <input id="fatMTab" style="width:100%;border:1.5px solid #2e2060;border-radius:10px;padding:11px 13px;font-size:15px;font-family:Inter,sans-serif;color:#e2e8f0;background:#231952;margin-bottom:13px;outline:none;" placeholder="e.g. Morning">
-      <label style="font-size:13px;color:#a5b4fc;font-weight:500;margin-bottom:5px;display:block;">Icon</label>
-      <div id="fatEmojiGrid" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;"></div>
-      <label style="font-size:13px;color:#a5b4fc;font-weight:500;margin-bottom:5px;display:block;">Color</label>
-      <div id="fatColorGrid" style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;"></div>
-      <div style="display:flex;gap:8px;">
-        <button onclick="fatCloseModal()" style="flex:1;padding:12px;border:1.5px solid #2e2060;border-radius:12px;font-size:15px;font-weight:500;background:none;color:#a5b4fc;cursor:pointer;font-family:Inter,sans-serif;">Cancel</button>
-        <button onclick="fatConfirmModal()" id="fatMConfirm" style="flex:2;padding:12px;background:linear-gradient(135deg,#0d6e4c,#1a9e6e);border:none;border-radius:12px;font-size:15px;font-weight:600;color:#fff;cursor:pointer;font-family:Inter,sans-serif;">Add</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FAT PIN CHANGE MODAL -->
-  <div id="fatPinChangeModal" style="position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;display:none;align-items:center;justify-content:center;padding:20px;">
-    <div style="background:#1a1232;border-radius:20px;padding:24px;width:100%;max-width:320px;">
-      <div style="font-size:16px;font-weight:700;color:#e2e8f0;margin-bottom:16px;">🔑 Change PIN</div>
-      <label style="font-size:12px;color:#a5b4fc;display:block;margin-bottom:4px;">Current PIN</label>
-      <input type="password" id="fatOldPin" maxlength="4" inputmode="numeric" pattern="[0-9]*" style="width:100%;padding:10px;border:1.5px solid #2e2060;border-radius:10px;font-size:18px;letter-spacing:8px;background:#231952;color:#e2e8f0;outline:none;margin-bottom:10px;text-align:center;">
-      <label style="font-size:12px;color:#a5b4fc;display:block;margin-bottom:4px;">New PIN (4 digits)</label>
-      <input type="password" id="fatNewPin" maxlength="4" inputmode="numeric" pattern="[0-9]*" style="width:100%;padding:10px;border:1.5px solid #2e2060;border-radius:10px;font-size:18px;letter-spacing:8px;background:#231952;color:#e2e8f0;outline:none;margin-bottom:10px;text-align:center;">
-      <div id="fatPinChangeErr" style="color:#f87171;font-size:12px;min-height:14px;margin-bottom:10px;"></div>
-      <div style="display:flex;gap:8px;">
-        <button onclick="document.getElementById('fatPinChangeModal').style.display='none'" style="flex:1;padding:11px;border:1px solid #2e2060;border-radius:10px;background:none;color:#a5b4fc;font-family:Inter,sans-serif;cursor:pointer;">Cancel</button>
-        <button onclick="fatSavePIN()" style="flex:2;padding:11px;background:linear-gradient(135deg,#0d6e4c,#1a9e6e);border:none;border-radius:10px;color:#fff;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;">Save PIN</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 </div><!-- /pages -->
 
 <!-- Add/Edit Loan Modal -->
@@ -695,12 +603,10 @@ document.getElementById('p2date').value=todayStr;
 document.getElementById('headerDate').textContent=todayFull.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 function saveSettings(){settings.dailySal=parseFloat(document.getElementById('dailySal').value)||0;save('wt_settings',settings);}
 function switchTab(n){
-  [0,1,2,3,4].forEach(i=>{
+  [0,1,2,3].forEach(i=>{
     document.getElementById('tab'+i).classList.toggle('active',i===n);
     document.getElementById('page'+i).classList.toggle('active',i===n);
-  });
-  if(n===4) fatOnOpen();
-  renderAll();
+  });renderAll();
 }
 // Bind tabs via JS — avoids inline onclick issues on GitHub Pages PWA
 document.querySelectorAll('[data-tab]').forEach(el=>{
@@ -1276,14 +1182,7 @@ function renderAll(){
     </div>`).join('');
 }
 function exportData(){
-  const fatBackup={
-    fat_sections:localStorage.getItem('v3_sections'),
-    fat_tasks:localStorage.getItem('v3_tasks'),
-    fat_avoid:localStorage.getItem('v3_avoid'),
-    fat_streaks:localStorage.getItem('v3_streaks'),
-    fat_pin:localStorage.getItem('fat_pin'),
-  };
-  const data={wt_att:attendance,wt_loans:loanPayments,wt_adv:advances,wt_petrol:petrolLog,wt_p2:p2entries,wt_settings:settings,wt_loans_list:loans,...fatBackup,exported:new Date().toISOString()};
+  const data={wt_att:attendance,wt_loans:loanPayments,wt_adv:advances,wt_petrol:petrolLog,wt_p2:p2entries,wt_settings:settings,wt_loans_list:loans,exported:new Date().toISOString()};
   const json=JSON.stringify(data,null,2);
   const blob=new Blob([json],{type:'application/json'});
   const url=URL.createObjectURL(blob);
@@ -1291,7 +1190,8 @@ function exportData(){
   a.href=url;
   const d=new Date();
   a.download='vkmtracker_backup_'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+'.json';
-  document.body.appendChild(a);a.click();
+  document.body.appendChild(a);
+  a.click();
   setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},200);
   showToast('✅ Backup download ஆகுது!','success');
 }
@@ -1308,14 +1208,7 @@ function importData(e){
       if(data.wt_p2){p2entries=data.wt_p2;save('wt_p2',p2entries);}
       if(data.wt_settings){settings=data.wt_settings;save('wt_settings',settings);document.getElementById('dailySal').value=settings.dailySal||600;}
       if(data.wt_loans_list){loans=data.wt_loans_list;save('wt_loans_list',loans);}
-      // Restore FAT data
-      if(data.fat_sections) localStorage.setItem('v3_sections',data.fat_sections);
-      if(data.fat_tasks) localStorage.setItem('v3_tasks',data.fat_tasks);
-      if(data.fat_avoid) localStorage.setItem('v3_avoid',data.fat_avoid);
-      if(data.fat_streaks) localStorage.setItem('v3_streaks',data.fat_streaks);
-      if(data.fat_pin) localStorage.setItem('fat_pin',data.fat_pin);
-      fatReloadData();
-      renderAll();showToast('✅ Data restore ஆச்சு! (Both trackers)','success');
+      renderAll();showToast('✅ Data restore ஆச்சு!','success');
     }catch(err){showToast('❌ Valid backup file போடு','error');}
   };
   reader.readAsText(file);e.target.value='';
@@ -1458,8 +1351,6 @@ function applyRoleUI(){
   document.body.classList.toggle('role-customer',!isAdmin);
   const bb=document.querySelector('.backup-bar');
   if(bb) bb.style.display=isAdmin?'flex':'none';
-  const fatTab=document.getElementById('tab4');
-  if(fatTab) fatTab.style.display=isAdmin?'flex':'none';
 }
 
 // ===== CUSTOMER MANAGEMENT (Admin) =====
@@ -1599,18 +1490,133 @@ if(currentSession){
 }
 
 renderAll();
+</script>
+<!-- ===== FUTURE ACHIEVEMENT TRACKER — FULL EMBED ===== -->
+<div id="fatOverlay">
 
-// ===== FUTURE ACHIEVEMENT TRACKER (FAT) JS =====
+  <!-- PIN SCREEN -->
+  <div id="fatPinScreen">
+    <div style="font-size:44px;margin-bottom:10px;">🌟</div>
+    <div style="font-size:20px;font-weight:800;color:#fff;letter-spacing:.3px;">Future Achievement Tracker</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.45);margin-top:6px;margin-bottom:28px;">Enter your 4-digit PIN</div>
+    <div style="display:flex;gap:14px;margin-bottom:8px;">
+      <div class="fat-pin-dot" id="fpd0"></div><div class="fat-pin-dot" id="fpd1"></div>
+      <div class="fat-pin-dot" id="fpd2"></div><div class="fat-pin-dot" id="fpd3"></div>
+    </div>
+    <div id="fatPinErr" style="font-size:12px;color:#f87171;font-weight:600;min-height:18px;margin-bottom:16px;text-align:center;"></div>
+    <div style="display:grid;grid-template-columns:repeat(3,72px);gap:10px;margin-bottom:20px;">
+      <button class="fat-pin-key" onclick="fatKey('1')">1</button>
+      <button class="fat-pin-key" onclick="fatKey('2')">2</button>
+      <button class="fat-pin-key" onclick="fatKey('3')">3</button>
+      <button class="fat-pin-key" onclick="fatKey('4')">4</button>
+      <button class="fat-pin-key" onclick="fatKey('5')">5</button>
+      <button class="fat-pin-key" onclick="fatKey('6')">6</button>
+      <button class="fat-pin-key" onclick="fatKey('7')">7</button>
+      <button class="fat-pin-key" onclick="fatKey('8')">8</button>
+      <button class="fat-pin-key" onclick="fatKey('9')">9</button>
+      <button class="fat-pin-key" onclick="fatKey('clr')" style="background:rgba(248,113,113,.15);color:#f87171;">✕</button>
+      <button class="fat-pin-key" onclick="fatKey('0')">0</button>
+      <button class="fat-pin-key" onclick="fatKey('bk')" style="font-size:20px;">⌫</button>
+    </div>
+    <button onclick="fatClose()" style="background:rgba(255,255,255,.1);border:none;color:rgba(255,255,255,.6);font-size:13px;font-weight:600;padding:8px 22px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">← Back</button>
+    <div id="fatFirstMsg" style="font-size:11px;color:rgba(255,255,255,.3);margin-top:12px;text-align:center;"></div>
+  </div>
+
+  <!-- TRACKER APP -->
+  <div id="fatApp">
+    <div class="fat-header">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:18px;font-weight:700;">🌟 Future Achievement Tracker</div>
+          <div style="font-size:11px;opacity:.65;margin-top:2px;" id="fatHDate"></div>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <button onclick="fatShowPinChg()" style="background:rgba(255,255,255,.18);border:none;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">🔑 PIN</button>
+          <button onclick="fatLock()" style="background:rgba(255,255,255,.18);border:none;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">🔒 Lock</button>
+          <button onclick="fatClose()" style="background:rgba(255,255,255,.18);border:none;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">✕</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:10px;">
+        <div class="fat-stat-pill"><span id="fatHDone">0</span>Done</div>
+        <div class="fat-stat-pill"><span id="fatHTotal">0</span>Total</div>
+        <div class="fat-stat-pill"><span id="fatHPct">0%</span>Score</div>
+      </div>
+      <div class="fat-big-bar"><div id="fatBigFill" style="height:100%;background:#7ef5c0;border-radius:5px;transition:width .4s;width:0%"></div></div>
+    </div>
+    <div class="fat-tabs-bar" id="fatTabsBar"></div>
+    <div class="fat-pages">
+      <div class="fat-page fat-show" id="fatP0"><div id="fatTodayContent" style="padding:14px;"></div></div>
+      <div class="fat-page" id="fatP1"><div id="fatTTContent" style="padding:14px;"></div></div>
+      <div class="fat-page" id="fatP2">
+        <div style="padding:14px;">
+          <div class="fat-streak-card">
+            <div style="font-size:38px;">🔥</div>
+            <div><div style="font-size:40px;font-weight:700;font-family:monospace;line-height:1;" id="fatStreakNum">0</div><div style="font-size:13px;opacity:.75;margin-top:2px;">Day streak!</div></div>
+          </div>
+          <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(13,110,76,.08);border:1px solid #daeee6;margin-bottom:12px;">
+            <div style="font-size:11px;font-weight:600;color:#6b8a7e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">This week</div>
+            <div id="fatWeekGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;"></div>
+          </div>
+          <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(13,110,76,.08);border:1px solid #daeee6;">
+            <div style="font-size:11px;font-weight:600;color:#6b8a7e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Section breakdown</div>
+            <div id="fatSecBreak"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fat-page" id="fatP3"><div id="fatSettingsContent" style="padding:14px;"></div></div>
+    </div>
+    <div class="fat-bottom-nav">
+      <div class="fat-nav-btn active" id="fnb0" onclick="fatGoto(0)"><div style="font-size:18px;">✅</div>Today</div>
+      <div class="fat-nav-btn" id="fnb1" onclick="fatGoto(1)"><div style="font-size:18px;">🗓️</div>Schedule</div>
+      <div class="fat-nav-btn" id="fnb2" onclick="fatGoto(2)"><div style="font-size:18px;">📊</div>Progress</div>
+      <div class="fat-nav-btn" id="fnb3" onclick="fatGoto(3)"><div style="font-size:18px;">⚙️</div>Manage</div>
+    </div>
+  </div>
+
+  <!-- Section Modal -->
+  <div class="fat-modal-bg" id="fatModalBg" onclick="if(event.target===this)fatCloseModal()">
+    <div class="fat-modal">
+      <div style="font-size:17px;font-weight:600;margin-bottom:16px;color:#e2e8f0;" id="fatModalTitle">Add Section</div>
+      <label style="font-size:13px;color:#a5b4fc;font-weight:500;margin-bottom:5px;display:block;">Section name</label>
+      <input id="fatMName" style="width:100%;border:1.5px solid #2e2060;border-radius:10px;padding:11px 13px;font-size:15px;font-family:Inter,sans-serif;color:#e2e8f0;background:#231952;margin-bottom:13px;outline:none;" placeholder="e.g. Meditation">
+      <label style="font-size:13px;color:#a5b4fc;font-weight:500;margin-bottom:5px;display:block;">Tab name</label>
+      <input id="fatMTab" style="width:100%;border:1.5px solid #2e2060;border-radius:10px;padding:11px 13px;font-size:15px;font-family:Inter,sans-serif;color:#e2e8f0;background:#231952;margin-bottom:13px;outline:none;" placeholder="e.g. Morning">
+      <label style="font-size:13px;color:#a5b4fc;font-weight:500;margin-bottom:5px;display:block;">Icon</label>
+      <div id="fatEmojiGrid" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;"></div>
+      <label style="font-size:13px;color:#a5b4fc;font-weight:500;margin-bottom:5px;display:block;">Color</label>
+      <div id="fatColorGrid" style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;"></div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="fatCloseModal()" style="flex:1;padding:12px;border:1.5px solid #2e2060;border-radius:12px;font-size:15px;font-weight:500;background:none;color:#a5b4fc;cursor:pointer;font-family:Inter,sans-serif;">Cancel</button>
+        <button onclick="fatConfirmModal()" id="fatMConfirm" style="flex:2;padding:12px;background:linear-gradient(135deg,#0d6e4c,#1a9e6e);border:none;border-radius:12px;font-size:15px;font-weight:600;color:#fff;cursor:pointer;font-family:Inter,sans-serif;">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIN Change Modal -->
+  <div id="fatPinChgModal" style="position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#1a1232;border-radius:20px;padding:24px;width:100%;max-width:320px;">
+      <div style="font-size:16px;font-weight:700;color:#e2e8f0;margin-bottom:16px;">🔑 Change PIN</div>
+      <label style="font-size:12px;color:#a5b4fc;display:block;margin-bottom:4px;">Current PIN</label>
+      <input type="password" id="fatOldPin" maxlength="4" inputmode="numeric" style="width:100%;padding:10px;border:1.5px solid #2e2060;border-radius:10px;font-size:20px;letter-spacing:8px;background:#231952;color:#e2e8f0;outline:none;margin-bottom:10px;text-align:center;">
+      <label style="font-size:12px;color:#a5b4fc;display:block;margin-bottom:4px;">New PIN (4 digits)</label>
+      <input type="password" id="fatNewPin" maxlength="4" inputmode="numeric" style="width:100%;padding:10px;border:1.5px solid #2e2060;border-radius:10px;font-size:20px;letter-spacing:8px;background:#231952;color:#e2e8f0;outline:none;margin-bottom:6px;text-align:center;">
+      <div id="fatPinChgErr" style="color:#f87171;font-size:12px;min-height:14px;margin-bottom:10px;"></div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="document.getElementById('fatPinChgModal').style.display='none'" style="flex:1;padding:11px;border:1px solid #2e2060;border-radius:10px;background:none;color:#a5b4fc;font-family:Inter,sans-serif;cursor:pointer;">Cancel</button>
+        <button onclick="fatSavePin()" style="flex:2;padding:11px;background:linear-gradient(135deg,#0d6e4c,#1a9e6e);border:none;border-radius:10px;color:#fff;font-weight:700;font-family:Inter,sans-serif;cursor:pointer;">Save PIN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// =================== FUTURE ACHIEVEMENT TRACKER JS ===================
 const FAT_PIN_KEY='fat_pin';
-const FAT_DEFAULT_PIN='1234';
-const FAT_EMOJIS=['🌅','🍌','💧','🥗','🏃','💪','🧘','🌿','✨','🌙','☕','🧴','🥦','🍎','🧠','📖','🎯','🛌','🚴','🏋️','💻','🔐','📱','🗣️','🌞'];
-const FAT_COLORS=['#0d6e4c','#2c6fad','#6b47c8','#c2476e','#e8930a','#e05c3a','#3b6d11','#854f0b','#1a6e8a','#7a3e9d'];
+const FAT_DEF_PIN='1234';
+const F_EMOJIS=['🌅','🍌','💧','🥗','🏃','💪','🧘','🌿','✨','🌙','☕','🧴','🥦','🍎','🧠','📖','🎯','🛌','🚴','🏋️','💻','🔐','📱','🗣️','🌞'];
+const F_COLORS=['#0d6e4c','#2c6fad','#6b47c8','#c2476e','#e8930a','#e05c3a','#3b6d11','#854f0b','#1a6e8a','#7a3e9d'];
 
-function fatGs(k,d){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch(e){return d;}}
-function fatSs(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
-function fatTodayKey(){return new Date().toDateString();}
-
-const FAT_DEF_SECTIONS=[
+const F_DEF_SEC=[
   {id:'morning_food',name:'Morning Food',icon:'🍌',color:'#e8930a',tab:'Morning'},
   {id:'skin',name:'Skin Care',icon:'✨',color:'#c2476e',tab:'Morning'},
   {id:'hair',name:'Hair Care',icon:'🌿',color:'#0f6e56',tab:'Morning'},
@@ -1624,311 +1630,287 @@ const FAT_DEF_SECTIONS=[
   {id:'nofap',name:'NoFap & Discipline',icon:'🧠',color:'#6b47c8',tab:'Night'},
   {id:'daily',name:'Daily Essentials',icon:'💧',color:'#0d6e4c',tab:'Essentials'},
 ];
-const FAT_DEF_TASKS={
+const F_DEF_TASKS={
   morning_food:['Milk','1 banana','5–10 badam / walnut / pumpkin seeds','1 glass warm water','Carrot / beetroot / amla juice — no sugar'],
   skin:['Face wash','Moisturizer','Sunscreen (15–20 min before going out)','Sunscreen reapply every 2–3 hrs'],
   hair:['Warm coconut oil massage (2x/week, 1 hr before bath)','Shampoo (2–3x per week)'],
   exercise:['Walk — 20 min','Push-ups — 10 x 3','Squats — 20 x 3','Plank — 30 sec x 3','Lunges — 10 each x 3','Mountain climbers — 20 x 3'],
-  library:['Library reach — 9:00 AM','English writing — 20 min','TryHackMe / Cyber study — 30 min','Leave library by 10:00 AM'],
-  english:['BBC Learning English — 20 min','Speak 5 sentences aloud in English','Write 5 English sentences (diary)','Practice with Claude — 1 topic'],
+  library:['Library reach — 9:00 AM','English writing — 20 min (diary / topic)','TryHackMe / Cyber study — 30 min','Leave library by 10:00 AM'],
+  english:['BBC Learning English — 20 min (YouTube)','Speak 5 sentences aloud in English','Write 5 English sentences (diary)','Practice with Claude — 1 topic'],
   cyber:['TryHackMe — 1 room or lesson','Burp Suite / tool practice','Note down 1 new concept learned','Watch 1 cyber security video'],
-  job:['Job work — 10 AM to 8 PM','Tea break (avoid sugar / cool drinks)','Lunch 3 PM — rice + dal + greens','Free time → TryHackMe / English'],
+  job:['Job work — 10 AM to 8 PM','Tea break (avoid sugar / cool drinks)','Lunch 3 PM — rice + dal + greens','Job time — use free time for TryHackMe / English'],
   lunch:['Rice + dal — 1 bowl','Keerai (greens) — 1 bowl','Veggies','No cool drinks — plain water only'],
-  night:['Reach home by 8:30 PM','Face wash + moisturizer','Dinner — soya/paneer + chapati','English BBC / YouTube — 20 min','Sleep by 10:30 PM'],
-  nofap:['✅ No PMO today — streak alive','Kegel exercise — 10 x 3 sets','If urge comes — 10 push-ups immediately','Cold water face wash if urge is strong'],
+  night:['Reach home by 8:30 PM','Face wash + moisturizer','Dinner — soya (40–50g) or paneer (100g) + chapati','English BBC / YouTube — 20 min','Sleep by 10:30 PM — 7–8 hrs'],
+  nofap:['✅ No PMO today — streak alive','Kegel exercise — 10 x 3 sets','If urge comes — 10 push-ups immediately','Cold water face wash if urge is strong','Night fall is normal — no shame, keep going'],
   daily:['Drink 3 liters of water','7–8 hours sleep','No sugar, no junk food','Social media — only allowed slots'],
 };
-const FAT_DEF_AVOID=['Sugar','Bakery items','Chips / junk food','Cool drinks'];
-const FAT_TT_WEEKDAY=[
-  {time:'4:30 AM',color:'#e8930a',label:'Wake Up',items:['Wake up — no snooze!','Brush + freshen up','1 glass warm water']},
-  {time:'4:45 AM',color:'#993c1d',label:'Exercise',items:['Walk 20 min','Push-ups 10x3, Squats 20x3','Plank 30sec x3, Lunges, Mountain climbers']},
-  {time:'5:15 AM',color:'#0f6e56',label:'Morning Routine',items:['Milk + banana + badam/walnut','Carrot/beetroot/amla juice','Face wash + moisturizer + sunscreen']},
-  {time:'6:00 AM',color:'#2c6fad',label:'English Practice',items:['Write 5 English sentences','Read BBC Learning English','Speak 5 sentences aloud']},
-  {time:'6:30 AM',color:'#6b47c8',label:'Cyber / TryHackMe',items:['TryHackMe — 1 lesson/room','Note down 1 new concept']},
-  {time:'9:00 AM',color:'#185fa5',label:'Library',items:['English writing — 20 min','TryHackMe or cyber study — 30 min']},
-  {time:'10:00 AM',color:'#3b6d11',label:'Job Time',items:['Work when work comes','Free time → TryHackMe / English','Lunch at 3 PM']},
-  {time:'8:30 PM',color:'#185fa5',label:'Night Routine',items:['Face wash + moisturizer','Dinner','BBC Learning English — 20 min']},
-  {time:'10:00 PM',color:'#0d6e4c',label:'Social Media Slot',items:['Max 30 min ONLY','Phone down by 10:30 PM']},
-  {time:'10:30 PM',color:'#1a2e26',label:'Sleep',items:['Sleep by 10:30 PM sharp','Tomorrow 4:30 AM wake-up ready']},
+const F_DEF_AVOID=['Sugar','Bakery items','Chips / junk food','Cool drinks','Social media (outside allowed time)'];
+const F_TT_WD=[
+  {time:'4:30 AM',color:'#e8930a',label:'Wake Up',sub:'Morning start',items:['Wake up — no snooze da!','Brush + freshen up','1 glass warm water']},
+  {time:'4:45 AM',color:'#993c1d',label:'Exercise',sub:'20–30 min workout',items:['Walk 20 min','Push-ups 10x3, Squats 20x3','Plank 30sec x3, Lunges, Mountain climbers','Kegel exercise — 10x3']},
+  {time:'5:15 AM',color:'#0f6e56',label:'Morning Routine',sub:'Food + skin + hair',items:['Milk + banana + badam/walnut','Carrot/beetroot/amla juice — no sugar','Face wash + moisturizer + sunscreen']},
+  {time:'6:00 AM',color:'#2c6fad',label:'English Practice',sub:'20 min daily',items:['Write 5 English sentences (diary)','Read BBC Learning English','Speak 5 sentences aloud']},
+  {time:'6:30 AM',color:'#6b47c8',label:'Cyber / TryHackMe',sub:'30 min self-study',items:['TryHackMe — 1 lesson/room','Note down 1 new concept','Burp Suite / tool practice']},
+  {time:'9:00 AM',color:'#185fa5',label:'Library',sub:'9 AM – 10 AM',items:['English writing — 20 min','TryHackMe or cyber study — 30 min']},
+  {time:'10:00 AM',color:'#3b6d11',label:'Job Time',sub:'10 AM – 8 PM',items:['Work when work comes','Free time → TryHackMe / English with Claude','Lunch at 3 PM — rice + dal + greens']},
+  {time:'8:30 PM',color:'#185fa5',label:'Night Routine',sub:'Wind down',items:['Face wash + moisturizer','Dinner — soya/paneer + chapati','BBC Learning English — 20 min']},
+  {time:'10:00 PM',color:'#0d6e4c',label:'Social Media Slot',sub:'Max 30 min ONLY',items:['Check messages, scroll — max 30 min','Phone down by 10:30 PM']},
+  {time:'10:30 PM',color:'#1a2e26',label:'Sleep',sub:'7–8 hours target',items:['Sleep by 10:30 PM sharp','Tomorrow 4:30 AM wake-up ready']},
 ];
-const FAT_TT_SATURDAY=[
-  {time:'4:30 AM',color:'#e8930a',label:'Wake Up',items:['Wake up 4:30 AM','Warm water + freshen up']},
-  {time:'4:45 AM',color:'#993c1d',label:'Exercise',items:['Full morning exercise routine']},
-  {time:'6:00 AM',color:'#2c6fad',label:'English + Cyber',items:['English writing + speaking — 30 min','TryHackMe — 1 hr focused']},
-  {time:'10:00 AM',color:'#0d6e4c',label:'Systech Class',items:['Cyber security & networking class','Attend fully — no phone during class','Ask doubts in English!']},
-  {time:'8:00 PM',color:'#185fa5',label:'Night Routine',items:['Face wash + moisturizer','Dinner','Revise today\'s Systech notes — 20 min']},
+const F_TT_SAT=[
+  {time:'4:30 AM',color:'#e8930a',label:'Wake Up',sub:'Same discipline',items:['Wake up 4:30 AM — same as weekdays','Warm water + freshen up']},
+  {time:'4:45 AM',color:'#993c1d',label:'Exercise',sub:'Full workout',items:['Full morning exercise routine','Walk + push-ups + squats + plank']},
+  {time:'6:00 AM',color:'#2c6fad',label:'English + Cyber',sub:'2 hrs deep study',items:['English writing + speaking — 30 min','TryHackMe — 1 hr focused','Note concepts, revise week\'s learning']},
+  {time:'10:00 AM',color:'#0d6e4c',label:'Systech Class',sub:'10 AM – 5:30 PM',items:['Cyber security & networking class','Attend fully — no phone during class','Ask doubts in English (practice!)','Note everything']},
+  {time:'8:00 PM',color:'#185fa5',label:'Night Routine',sub:'Review + sleep',items:['Face wash + moisturizer','Dinner — soya/paneer + chapati','Revise today\'s Systech notes — 20 min','Sleep by 10:30 PM']},
 ];
 
-let fatSections=fatGs('v3_sections',FAT_DEF_SECTIONS);
-let fatTasks=fatGs('v3_tasks',FAT_DEF_TASKS);
-let fatState=fatGs('v3_state_'+fatTodayKey(),{});
-let fatAvoid=fatGs('v3_avoid',FAT_DEF_AVOID);
-let fatWater=fatGs('v3_water_'+fatTodayKey(),0);
-let fatActiveTab=fatSections[0]?.tab||'Morning';
-let fatPinBuffer='';
-let fatUnlocked=false;
-let fatModalMode='add';
-let fatEditSecId=null;
-let fatMSelEmoji=FAT_EMOJIS[0];
-let fatMSelColor=FAT_COLORS[0];
+function fGs(k,d){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch(e){return d;}}
+function fSs(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function fTodayKey(){return new Date().toDateString();}
+function fLighten(hex){try{const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);const m=c=>Math.round(c+(255-c)*.85);return `rgb(${m(r)},${m(g)},${m(b)})`;}catch(e){return '#f0faf6';}}
+function fUniqueTabs(){const seen=new Set(),out=[];fSections.forEach(s=>{if(!seen.has(s.tab)){seen.add(s.tab);out.push(s.tab);}});return out;}
 
-function fatReloadData(){
-  fatSections=fatGs('v3_sections',FAT_DEF_SECTIONS);
-  fatTasks=fatGs('v3_tasks',FAT_DEF_TASKS);
-  fatState=fatGs('v3_state_'+fatTodayKey(),{});
-  fatAvoid=fatGs('v3_avoid',FAT_DEF_AVOID);
-  fatWater=fatGs('v3_water_'+fatTodayKey(),0);
-}
+let fSections=fGs('v3_sections',F_DEF_SEC);
+let fTasks=fGs('v3_tasks',F_DEF_TASKS);
+let fState=fGs('v3_state_'+fTodayKey(),{});
+let fWater=fGs('v3_water_'+fTodayKey(),0);
+let fAvoid=fGs('v3_avoid',F_DEF_AVOID);
+let fActiveTab=fSections[0]?.tab||'Morning';
+let fPinBuf='';
+let fUnlocked=false;
+let fModalMode='add';
+let fEditSecId=null;
+let fMEmoji=F_EMOJIS[0];
+let fMColor=F_COLORS[0];
 
-function fatOnOpen(){
-  if(!fatUnlocked){
-    document.getElementById('fatPinScreen').style.display='flex';
-    document.getElementById('fatContent').style.display='none';
-    fatPinBuffer='';
-    fatUpdateDots();
-    const savedPin=localStorage.getItem(FAT_PIN_KEY);
-    document.getElementById('fatPinSetMsg').textContent=savedPin?'':'First time! Default PIN: 1234 (change it later)';
-    document.getElementById('fatPinErr').textContent='';
-  } else {
-    fatRenderAll();
-  }
-}
-
-function fatPinKey(k){
-  if(k==='clear'){fatPinBuffer='';fatUpdateDots();document.getElementById('fatPinErr').textContent='';return;}
-  if(k==='back'){fatPinBuffer=fatPinBuffer.slice(0,-1);fatUpdateDots();return;}
-  if(fatPinBuffer.length>=4) return;
-  fatPinBuffer+=k;
-  fatUpdateDots();
-  if(fatPinBuffer.length===4){
-    const correctPin=localStorage.getItem(FAT_PIN_KEY)||FAT_DEFAULT_PIN;
-    if(fatPinBuffer===correctPin){
-      fatUnlocked=true;
-      document.getElementById('fatPinScreen').style.display='none';
-      document.getElementById('fatContent').style.display='block';
-      document.getElementById('fatHdrDate').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
-      fatRenderAll();
-    } else {
-      document.getElementById('fatPinErr').textContent='❌ Wrong PIN! Try again';
-      fatPinBuffer='';
-      fatUpdateDots();
-    }
-  }
-}
-
-function fatUpdateDots(){
-  const dots=document.querySelectorAll('.fat-dot');
-  dots.forEach((d,i)=>{d.classList.toggle('filled',i<fatPinBuffer.length);});
-}
-
-function fatLock(){
-  fatUnlocked=false;
-  fatPinBuffer='';
-  document.getElementById('fatPinScreen').style.display='flex';
-  document.getElementById('fatContent').style.display='none';
-  fatUpdateDots();
+// --- PIN SYSTEM ---
+function fatOpenPin(){
+  fPinBuf='';fUpdDots();
   document.getElementById('fatPinErr').textContent='';
+  const hasPin=localStorage.getItem(FAT_PIN_KEY);
+  document.getElementById('fatFirstMsg').textContent=hasPin?'':'First time? Default PIN is 1234';
+  document.getElementById('fatOverlay').style.display='flex';
+  document.getElementById('fatPinScreen').style.display='flex';
+  document.getElementById('fatApp').style.display='none';
 }
-
-function fatChangePIN(){
+function fatClose(){
+  document.getElementById('fatOverlay').style.display='none';
+}
+function fatLock(){
+  fUnlocked=false;fPinBuf='';fUpdDots();
+  document.getElementById('fatPinScreen').style.display='flex';
+  document.getElementById('fatApp').style.display='none';
+}
+function fatKey(k){
+  if(k==='clr'){fPinBuf='';fUpdDots();document.getElementById('fatPinErr').textContent='';return;}
+  if(k==='bk'){fPinBuf=fPinBuf.slice(0,-1);fUpdDots();return;}
+  if(fPinBuf.length>=4)return;
+  fPinBuf+=k;fUpdDots();
+  if(fPinBuf.length===4)setTimeout(fCheckPin,120);
+}
+function fUpdDots(){
+  for(let i=0;i<4;i++) document.getElementById('fpd'+i).classList.toggle('fp',i<fPinBuf.length);
+}
+function fCheckPin(){
+  const correct=localStorage.getItem(FAT_PIN_KEY)||FAT_DEF_PIN;
+  if(fPinBuf===correct){
+    fUnlocked=true;
+    document.getElementById('fatPinScreen').style.display='none';
+    document.getElementById('fatApp').style.display='flex';
+    document.getElementById('fatApp').style.flexDirection='column';
+    document.getElementById('fatApp').style.height='100%';
+    document.getElementById('fatHDate').textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'});
+    fSections=fGs('v3_sections',F_DEF_SEC);
+    fTasks=fGs('v3_tasks',F_DEF_TASKS);
+    fState=fGs('v3_state_'+fTodayKey(),{});
+    fWater=fGs('v3_water_'+fTodayKey(),0);
+    fAvoid=fGs('v3_avoid',F_DEF_AVOID);
+    fRenderAll();
+  } else {
+    document.getElementById('fatPinErr').textContent='❌ Wrong PIN! Try again.';
+    const dots=document.querySelectorAll('.fat-pin-dot');
+    dots.forEach(d=>{d.style.background='#f87171';d.style.borderColor='#f87171';});
+    setTimeout(()=>{dots.forEach(d=>{d.style.background='';d.style.borderColor='';});},600);
+    fPinBuf='';fUpdDots();
+  }
+}
+function fatShowPinChg(){
   document.getElementById('fatOldPin').value='';
   document.getElementById('fatNewPin').value='';
-  document.getElementById('fatPinChangeErr').textContent='';
-  document.getElementById('fatPinChangeModal').style.display='flex';
+  document.getElementById('fatPinChgErr').textContent='';
+  document.getElementById('fatPinChgModal').style.display='flex';
 }
-function fatSavePIN(){
-  const oldPin=document.getElementById('fatOldPin').value;
-  const newPin=document.getElementById('fatNewPin').value;
-  const currentPin=localStorage.getItem(FAT_PIN_KEY)||FAT_DEFAULT_PIN;
-  const err=document.getElementById('fatPinChangeErr');
-  if(oldPin!==currentPin){err.textContent='❌ Current PIN wrong';return;}
-  if(!/^\d{4}$/.test(newPin)){err.textContent='❌ New PIN must be exactly 4 digits';return;}
-  localStorage.setItem(FAT_PIN_KEY,newPin);
-  document.getElementById('fatPinChangeModal').style.display='none';
+function fatSavePin(){
+  const op=document.getElementById('fatOldPin').value;
+  const np=document.getElementById('fatNewPin').value;
+  const cur=localStorage.getItem(FAT_PIN_KEY)||FAT_DEF_PIN;
+  const e=document.getElementById('fatPinChgErr');
+  if(op!==cur){e.textContent='❌ Current PIN wrong';return;}
+  if(!/^\d{4}$/.test(np)){e.textContent='❌ Must be exactly 4 digits';return;}
+  localStorage.setItem(FAT_PIN_KEY,np);
+  document.getElementById('fatPinChgModal').style.display='none';
   showToast('✅ PIN updated!','success');
 }
 
-function fatLighten(hex){
-  try{const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);const m=c=>Math.round(c+(255-c)*.85);return `rgb(${m(r)},${m(g)},${m(b)})`;}catch(e){return '#f0faf6';}
-}
-function fatUniqueTabs(){const seen=new Set(),out=[];fatSections.forEach(s=>{if(!seen.has(s.tab)){seen.add(s.tab);out.push(s.tab);}});return out;}
-
-function fatUpdateHeader(){
+// --- HEADER ---
+function fUpdateHeader(){
   let done=0,total=0;
-  fatSections.forEach(s=>{(fatTasks[s.id]||[]).forEach((_,i)=>{total++;if(fatState[s.id+'_'+i])done++;});});
+  fSections.forEach(s=>{(fTasks[s.id]||[]).forEach((_,i)=>{total++;if(fState[s.id+'_'+i])done++;});});
   const pct=total?Math.round(done/total*100):0;
   document.getElementById('fatHDone').textContent=done;
   document.getElementById('fatHTotal').textContent=total;
   document.getElementById('fatHPct').textContent=pct+'%';
-  document.getElementById('fatBigBar').style.width=pct+'%';
+  document.getElementById('fatBigFill').style.width=pct+'%';
 }
 
-function fatRenderTabs(){
-  const tabs=fatUniqueTabs();
-  if(!tabs.includes(fatActiveTab)) fatActiveTab=tabs[0]||'';
-  document.getElementById('fatTabBar').innerHTML=tabs.map(t=>
-    `<div style="padding:11px 16px;font-size:13px;font-weight:500;color:${t===fatActiveTab?'#0d6e4c':'#6b8a7e'};cursor:pointer;white-space:nowrap;border-bottom:2px solid ${t===fatActiveTab?'#0d6e4c':'transparent'};transition:all .2s;flex-shrink:0;" onclick="fatSwitchTab('${t}')">${t}</div>`
+// --- TABS ---
+function fRenderTabs(){
+  const tabs=fUniqueTabs();
+  if(!tabs.includes(fActiveTab))fActiveTab=tabs[0]||'';
+  document.getElementById('fatTabsBar').innerHTML=tabs.map(t=>
+    `<div class="fat-tab ${t===fActiveTab?'active':''}" onclick="fSwitchTab('${t}')">${t}</div>`
   ).join('');
 }
-function fatSwitchTab(t){fatActiveTab=t;fatRenderTabs();fatRenderToday();}
+function fSwitchTab(t){fActiveTab=t;fRenderTabs();fRenderToday();}
 
-function fatRenderToday(){
-  const secList=fatSections.filter(s=>s.tab===fatActiveTab);
+// --- TODAY ---
+function fRenderToday(){
+  const secList=fSections.filter(s=>s.tab===fActiveTab);
   let html='';
-  if(fatActiveTab==='Essentials') html+=fatBuildWater();
+  if(fActiveTab==='Essentials') html+=fBuildWater();
   secList.forEach(sec=>{
-    const t=fatTasks[sec.id]||[];
-    const done=t.filter((_,i)=>fatState[sec.id+'_'+i]).length;
+    const t=fTasks[sec.id]||[];
+    const done=t.filter((_,i)=>fState[sec.id+'_'+i]).length;
     const pct=t.length?Math.round(done/t.length*100):0;
-    const li=fatLighten(sec.color);
+    const li=fLighten(sec.color);
     html+=`<div class="fat-sec-card">
       <div style="padding:13px 14px 8px;display:flex;align-items:center;justify-content:space-between;">
         <div style="display:flex;align-items:center;gap:8px;">
           <div style="width:28px;height:28px;border-radius:7px;background:${li};display:flex;align-items:center;justify-content:center;font-size:15px;">${sec.icon}</div>
-          <span style="font-size:15px;font-weight:600;">${sec.name}</span>
+          <span style="font-size:15px;font-weight:600;color:#1a2e26;">${sec.name}</span>
         </div>
         <div style="display:flex;align-items:center;gap:6px;">
           <span style="font-size:12px;font-weight:500;padding:3px 9px;border-radius:12px;background:${li};color:${sec.color};font-family:monospace;">${done}/${t.length}</span>
-          <button onclick="fatOpenEditSec('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#6b8a7e;">✏️</button>
+          <button onclick="fOpenEditSec('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#6b8a7e;">✏️</button>
         </div>
       </div>
       <div style="height:3px;background:#daeee6;margin:0 14px 8px;border-radius:3px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:${sec.color};border-radius:3px;transition:width .3s;"></div></div>`;
     t.forEach((task,i)=>{
-      const key=sec.id+'_'+i;const on=!!fatState[key];
-      html+=`<div class="fat-task-row">
-        <div class="fat-chk ${on?'on':''}" onclick="fatToggle('${key}','${sec.id}')"></div>
-        <div class="fat-task-txt ${on?'done':''}" onclick="fatToggle('${key}','${sec.id}')">${task}</div>
+      const key=sec.id+'_'+i;const on=!!fState[key];
+      html+=`<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid #daeee6;">
+        <div class="fat-chk ${on?'on':''}" onclick="fToggle('${key}','${sec.id}')"></div>
+        <div class="fat-task-txt ${on?'done':''}" onclick="fToggle('${key}','${sec.id}')">${task}</div>
         <div style="display:flex;gap:4px;flex-shrink:0;">
-          <button onclick="fatEditTask('${sec.id}',${i})" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#6b8a7e;">✏️</button>
-          <button onclick="fatDeleteTask('${sec.id}',${i})" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#c0392b;">🗑️</button>
+          <button onclick="fEditTask('${sec.id}',${i})" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#6b8a7e;">✏️</button>
+          <button onclick="fDelTask('${sec.id}',${i})" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#c0392b;">🗑️</button>
         </div>
       </div>`;
     });
     html+=`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid #daeee6;">
-      <input style="flex:1;border:none;outline:none;font-family:Inter,sans-serif;font-size:14px;color:#1a2e26;background:none;padding:0;" id="fatai_${sec.id}" placeholder="+ Add task..." onkeydown="if(event.key==='Enter')fatAddTaskInline('${sec.id}')">
-      <button onclick="fatAddTaskInline('${sec.id}')" style="width:28px;height:28px;border-radius:7px;background:#0d6e4c;border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
+      <input style="flex:1;border:none;outline:none;font-family:Inter,sans-serif;font-size:14px;color:#1a2e26;background:none;padding:0;" id="fai_${sec.id}" placeholder="+ Add task..." onkeydown="if(event.key==='Enter')fAddInline('${sec.id}')">
+      <button onclick="fAddInline('${sec.id}')" style="width:28px;height:28px;border-radius:7px;background:#0d6e4c;border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
     </div></div>`;
   });
-  if(fatActiveTab==='Essentials') html+=fatBuildAvoid();
-  document.getElementById('fatPgToday').innerHTML=html;
+  if(fActiveTab==='Essentials') html+=fBuildAvoid();
+  document.getElementById('fatTodayContent').innerHTML=html;
 }
 
-function fatBuildWater(){
+function fBuildWater(){
   let h=`<div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);margin-bottom:12px;border:1px solid #daeee6;padding:14px;">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-      <div style="font-size:15px;font-weight:600;">💧 Water Tracker</div>
-      <button onclick="fatResetWater()" style="font-size:12px;color:#6b8a7e;background:#f6faf8;border:1px solid #daeee6;border-radius:8px;padding:4px 10px;cursor:pointer;">Reset</button>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:7px;justify-content:center;">`;
-  for(let i=0;i<12;i++) h+=`<div onclick="fatTapGlass(${i})" style="width:42px;height:42px;border-radius:10px;border:2px solid ${i<fatWater?'#2c6fad':'#daeee6'};background:${i<fatWater?'#e8f1fb':'transparent'};display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;">💧</div>`;
-  h+=`</div><div style="text-align:center;margin-top:8px;font-size:13px;color:#6b8a7e;"><b style="color:#2c6fad;">${fatWater}</b> / 12 glasses ≈ <b style="color:#2c6fad;">${(fatWater*0.25).toFixed(1)}L</b></div></div>`;
+      <div style="font-size:15px;font-weight:600;color:#1a2e26;">💧 Water Tracker</div>
+      <button onclick="fResetWater()" style="font-size:12px;color:#6b8a7e;background:#f6faf8;border:1px solid #daeee6;border-radius:8px;padding:4px 10px;cursor:pointer;">Reset</button>
+    </div><div style="display:flex;flex-wrap:wrap;gap:7px;justify-content:center;">`;
+  for(let i=0;i<12;i++) h+=`<div class="fat-glass ${i<fWater?'on':''}" onclick="fTapGlass(${i})">💧</div>`;
+  h+=`</div><div style="text-align:center;margin-top:8px;font-size:13px;color:#6b8a7e;"><b style="color:#2c6fad;">${fWater}</b> / 12 glasses ≈ <b style="color:#2c6fad;">${(fWater*0.25).toFixed(1)}L</b></div></div>`;
   return h;
 }
-function fatBuildAvoid(){
+function fBuildAvoid(){
   let h=`<div style="background:#fdeee9;border:1px solid #f5c4b3;border-radius:16px;padding:14px;margin-bottom:12px;">
     <div style="font-size:14px;font-weight:600;color:#e05c3a;margin-bottom:10px;">🚫 Avoid these</div>
     <div style="display:flex;flex-wrap:wrap;gap:6px;">`;
-  fatAvoid.forEach((a,i)=>h+=`<div style="background:#fff;border:1px solid #f5c4b3;border-radius:20px;padding:4px 12px;font-size:13px;color:#e05c3a;font-weight:500;display:flex;align-items:center;gap:5px;">${a}<button onclick="fatDelAvoid(${i})" style="cursor:pointer;font-size:11px;opacity:.6;border:none;background:none;color:#e05c3a;padding:0;">✕</button></div>`);
+  fAvoid.forEach((a,i)=>h+=`<div style="background:#fff;border:1px solid #f5c4b3;border-radius:20px;padding:4px 12px;font-size:13px;color:#e05c3a;font-weight:500;display:flex;align-items:center;gap:5px;">${a}<button onclick="fDelAvoid(${i})" style="cursor:pointer;font-size:11px;opacity:.6;border:none;background:none;color:#e05c3a;padding:0;">✕</button></div>`);
   h+=`</div><div style="display:flex;gap:6px;margin-top:10px;">
-    <input id="fatAvoidInput" style="flex:1;border:1px solid #f5c4b3;border-radius:10px;padding:7px 10px;font-size:13px;font-family:Inter,sans-serif;outline:none;background:#fff;color:#1a2e26;" placeholder="Add item..." onkeydown="if(event.key==='Enter')fatAddAvoid()">
-    <button onclick="fatAddAvoid()" style="background:#e05c3a;color:#fff;border:none;border-radius:10px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif;font-weight:500;">Add</button>
+    <input id="fAvoidInp" style="flex:1;border:1px solid #f5c4b3;border-radius:10px;padding:7px 10px;font-size:13px;font-family:Inter,sans-serif;outline:none;background:#fff;color:#1a2e26;" placeholder="Add item..." onkeydown="if(event.key==='Enter')fAddAvoid()">
+    <button onclick="fAddAvoid()" style="background:#e05c3a;color:#fff;border:none;border-radius:10px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif;font-weight:500;">Add</button>
   </div></div>`;
   return h;
 }
 
-function fatToggle(key,secId){
-  fatState[key]=!fatState[key];fatSs('v3_state_'+fatTodayKey(),fatState);
-  fatUpdateHeader();fatRenderToday();fatCheckStreak();
-}
-function fatAddTaskInline(secId){
-  const inp=document.getElementById('fatai_'+secId);const val=inp?inp.value.trim():'';if(!val)return;
-  if(!fatTasks[secId])fatTasks[secId]=[];fatTasks[secId].push(val);fatSs('v3_tasks',fatTasks);fatRenderToday();fatUpdateHeader();
-}
-function fatEditTask(secId,idx){
-  const cur=(fatTasks[secId]||[])[idx]||'';const nv=prompt('Edit task:',cur);
-  if(nv===null)return;const tr=nv.trim();if(!tr)return;fatTasks[secId][idx]=tr;fatSs('v3_tasks',fatTasks);fatRenderToday();
-}
-function fatDeleteTask(secId,idx){
-  if(!confirm('Delete this task?'))return;
-  const ns={...fatState};const t=fatTasks[secId];
-  for(let i=idx;i<t.length-1;i++) ns[secId+'_'+i]=ns[secId+'_'+(i+1)];
-  delete ns[secId+'_'+(t.length-1)];fatState=ns;fatSs('v3_state_'+fatTodayKey(),fatState);
-  fatTasks[secId].splice(idx,1);fatSs('v3_tasks',fatTasks);fatRenderToday();fatUpdateHeader();
-}
-function fatTapGlass(i){fatWater=(i<fatWater)?i:i+1;fatSs('v3_water_'+fatTodayKey(),fatWater);fatRenderToday();}
-function fatResetWater(){fatWater=0;fatSs('v3_water_'+fatTodayKey(),fatWater);fatRenderToday();}
-function fatAddAvoid(){
-  const inp=document.getElementById('fatAvoidInput');const val=inp?inp.value.trim():'';if(!val)return;
-  fatAvoid.push(val);fatSs('v3_avoid',fatAvoid);fatRenderToday();
-}
-function fatDelAvoid(i){fatAvoid.splice(i,1);fatSs('v3_avoid',fatAvoid);fatRenderToday();}
+function fToggle(key,secId){fState[key]=!fState[key];fSs('v3_state_'+fTodayKey(),fState);fUpdateHeader();fRenderToday();fCheckStreak();}
+function fAddInline(secId){const inp=document.getElementById('fai_'+secId);const val=inp?inp.value.trim():'';if(!val)return;if(!fTasks[secId])fTasks[secId]=[];fTasks[secId].push(val);fSs('v3_tasks',fTasks);fRenderToday();fUpdateHeader();}
+function fEditTask(secId,idx){const cur=(fTasks[secId]||[])[idx]||'';const nv=prompt('Edit task:',cur);if(nv===null)return;const tr=nv.trim();if(!tr)return;fTasks[secId][idx]=tr;fSs('v3_tasks',fTasks);fRenderToday();}
+function fDelTask(secId,idx){if(!confirm('Delete?'))return;const ns={...fState};const t=fTasks[secId];for(let i=idx;i<t.length-1;i++)ns[secId+'_'+i]=ns[secId+'_'+(i+1)];delete ns[secId+'_'+(t.length-1)];fState=ns;fSs('v3_state_'+fTodayKey(),fState);fTasks[secId].splice(idx,1);fSs('v3_tasks',fTasks);fRenderToday();fUpdateHeader();}
+function fTapGlass(i){fWater=(i<fWater)?i:i+1;fSs('v3_water_'+fTodayKey(),fWater);fRenderToday();}
+function fResetWater(){fWater=0;fSs('v3_water_'+fTodayKey(),fWater);fRenderToday();}
+function fAddAvoid(){const inp=document.getElementById('fAvoidInp');const val=inp?inp.value.trim():'';if(!val)return;fAvoid.push(val);fSs('v3_avoid',fAvoid);fRenderToday();}
+function fDelAvoid(i){fAvoid.splice(i,1);fSs('v3_avoid',fAvoid);fRenderToday();}
+function fCheckStreak(){let done=0,total=0;fSections.forEach(s=>{(fTasks[s.id]||[]).forEach((_,i)=>{total++;if(fState[s.id+'_'+i])done++;});});if(total>0&&done===total){const st=fGs('v3_streaks',[]);const td=fTodayKey();if(!st.includes(td)){st.push(td);fSs('v3_streaks',st);}}}
 
-function fatCheckStreak(){
-  let done=0,total=0;fatSections.forEach(s=>{(fatTasks[s.id]||[]).forEach((_,i)=>{total++;if(fatState[s.id+'_'+i])done++;});});
-  if(total>0&&done===total){const streaks=fatGs('v3_streaks',[]);const today=fatTodayKey();if(!streaks.includes(today)){streaks.push(today);fatSs('v3_streaks',streaks);}}
-}
-
-function fatRenderTimetable(){
-  const dow=new Date().getDay();const isSat=dow===6;
-  const data=isSat?FAT_TT_SATURDAY:FAT_TT_WEEKDAY;
+// --- TIMETABLE ---
+function fRenderTT(){
+  const dow=new Date().getDay();const isSat=dow===6;const isSun=dow===0;
+  const data=isSat?F_TT_SAT:F_TT_WD;
+  const label=isSat?'🏫 Saturday — Systech Day':isSun?'📅 Sunday — Self Study Day':'💼 Weekday Schedule';
   let html=`<div style="padding-top:14px;">
-    <div style="display:inline-flex;align-items:center;gap:6px;background:#0d6e4c;color:#fff;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;margin-bottom:14px;">${isSat?'🏫 Saturday — Systech Day':'💼 Weekday Schedule'}</div>
-    <div style="background:#fef3dc;border:1px solid #fac775;border-radius:12px;padding:10px 14px;margin-bottom:10px;font-size:13px;color:#854f0b;font-weight:500;">⚠️ Social media: only 10:00–10:30 PM!</div>`;
+    <div style="display:inline-flex;align-items:center;gap:6px;background:#0d6e4c;color:#fff;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;margin-bottom:14px;">${label}</div>
+    <div style="background:#fef3dc;border:1px solid #fac775;border-radius:12px;padding:10px 14px;margin-bottom:10px;font-size:13px;color:#854f0b;font-weight:500;">⚠️ Social media: only 10:00–10:30 PM. Outside this — no scrolling da!</div>`;
   data.forEach(block=>{
-    html+=`<div class="fat-tt-block">
+    html+=`<div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);margin-bottom:10px;border:1px solid #daeee6;overflow:hidden;">
       <div style="padding:11px 14px;display:flex;align-items:center;gap:10px;">
         <div style="font-size:12px;font-weight:500;color:#fff;padding:3px 10px;border-radius:10px;white-space:nowrap;flex-shrink:0;background:${block.color};">${block.time}</div>
-        <div style="font-size:14px;font-weight:600;">${block.label}</div>
-      </div>
-      <div style="padding:0 14px 10px;">`;
-    block.items.forEach(item=>{html+=`<div style="font-size:13px;color:#6b8a7e;padding:3px 0;border-top:1px solid #daeee6;display:flex;align-items:flex-start;gap:7px;"><div style="width:5px;height:5px;border-radius:50%;background:#1a9e6e;flex-shrink:0;margin-top:6px;"></div><span>${item}</span></div>`;});
+        <div><div style="font-size:14px;font-weight:600;color:#1a2e26;">${block.label}</div><div style="font-size:12px;color:#6b8a7e;margin-top:1px;">${block.sub}</div></div>
+      </div><div style="padding:0 14px 10px;">`;
+    block.items.forEach(item=>html+=`<div style="font-size:13px;color:#6b8a7e;padding:3px 0;border-top:1px solid #daeee6;display:flex;align-items:flex-start;gap:7px;"><div style="width:5px;height:5px;border-radius:50%;background:#1a9e6e;flex-shrink:0;margin-top:6px;"></div><span>${item}</span></div>`);
     html+=`</div></div>`;
   });
   html+=`</div>`;
-  document.getElementById('fatPgTimetable').innerHTML=html;
+  document.getElementById('fatTTContent').innerHTML=html;
 }
 
-function fatRenderProgress(){
+// --- PROGRESS ---
+function fRenderProgress(){
   const now=new Date(),dn=['Su','Mo','Tu','We','Th','Fr','Sa'];let wh='';
   for(let i=6;i>=0;i--){
     const d=new Date(now);d.setDate(d.getDate()-i);const key=d.toDateString();
-    const hasData=fatGs('v3_state_'+key,null)!==null;
-    const cls=i===0?'today':hasData?'has':'none';
-    const bg=i===0?'#0d6e4c':hasData?'#d4f5e9':'#f6faf8';
-    const clr=i===0?'#fff':hasData?'#0d6e4c':'#6b8a7e';
+    const has=fGs('v3_state_'+key,null)!==null;
+    const bg=i===0?'#0d6e4c':has?'#d4f5e9':'#f6faf8';
+    const tc=i===0?'#fff':has?'#0d6e4c':'#6b8a7e';
     wh+=`<div style="aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1px;background:${bg};">
-      <div style="font-size:9px;font-weight:600;color:${i===0?'rgba(255,255,255,.7)':clr};text-transform:uppercase;">${dn[d.getDay()]}</div>
-      <div style="font-size:13px;font-weight:600;color:${clr};font-family:monospace;">${d.getDate()}</div>
+      <div style="font-size:9px;font-weight:600;color:${i===0?'rgba(255,255,255,.7)':tc};text-transform:uppercase;">${dn[d.getDay()]}</div>
+      <div style="font-size:13px;font-weight:600;color:${tc};font-family:monospace;">${d.getDate()}</div>
     </div>`;
   }
   document.getElementById('fatWeekGrid').innerHTML=wh;
-  const streaks=fatGs('v3_streaks',[]);let streak=0;
+  const streaks=fGs('v3_streaks',[]);let streak=0;
   for(let i=0;i<365;i++){const d=new Date();d.setDate(d.getDate()-i);if(streaks.includes(d.toDateString()))streak++;else if(i>0)break;}
-  document.getElementById('fatStreak').textContent=streak;
+  document.getElementById('fatStreakNum').textContent=streak;
   let bh='';
-  fatSections.forEach(sec=>{const t=fatTasks[sec.id]||[];const done=t.filter((_,i)=>fatState[sec.id+'_'+i]).length;const pct=t.length?Math.round(done/t.length*100):0;bh+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><div style="font-size:13px;font-weight:500;min-width:100px;">${sec.icon} ${sec.name}</div><div style="flex:1;height:7px;background:#daeee6;border-radius:5px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:${sec.color};border-radius:5px;"></div></div><div style="font-size:12px;color:#6b8a7e;min-width:34px;text-align:right;">${pct}%</div></div>`;});
+  fSections.forEach(sec=>{const t=fTasks[sec.id]||[];const done=t.filter((_,i)=>fState[sec.id+'_'+i]).length;const pct=t.length?Math.round(done/t.length*100):0;bh+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><div style="font-size:13px;font-weight:500;min-width:110px;color:#1a2e26;">${sec.icon} ${sec.name}</div><div style="flex:1;height:7px;background:#daeee6;border-radius:5px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:${sec.color};border-radius:5px;transition:width .4s;"></div></div><div style="font-size:12px;color:#6b8a7e;min-width:34px;text-align:right;font-family:monospace;">${pct}%</div></div>`;});
   document.getElementById('fatSecBreak').innerHTML=bh;
 }
 
-function fatRenderSettings(){
-  const h=fatSections.map(sec=>`
+// --- SETTINGS ---
+function fRenderSettings(){
+  const h=fSections.map(sec=>`
     <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid #daeee6;">
       <div style="display:flex;align-items:center;gap:10px;">
         <span style="font-size:20px;">${sec.icon}</span>
-        <div><div style="font-size:15px;font-weight:500;">${sec.name}</div><div style="font-size:12px;color:#6b8a7e;">${(fatTasks[sec.id]||[]).length} tasks · ${sec.tab}</div></div>
+        <div><div style="font-size:15px;font-weight:500;color:#1a2e26;">${sec.name}</div><div style="font-size:12px;color:#6b8a7e;">${(fTasks[sec.id]||[]).length} tasks · ${sec.tab}</div></div>
       </div>
-      <div style="display:flex;gap:6px;align-items:center;">
-        <button onclick="fatOpenEditSec('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#6b8a7e;">✏️</button>
-        <button onclick="fatDeleteSection('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#c0392b;">🗑️</button>
+      <div style="display:flex;gap:6px;">
+        <button onclick="fOpenEditSec('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#6b8a7e;">✏️</button>
+        <button onclick="fDelSection('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#c0392b;">🗑️</button>
       </div>
     </div>`).join('');
-  document.getElementById('fatPgSettings').innerHTML=`
+  document.getElementById('fatSettingsContent').innerHTML=`
     <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);margin-bottom:12px;border:1px solid #daeee6;overflow:hidden;">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid #daeee6;cursor:pointer;" onclick="fatOpenAddSection()">
-        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">➕</span><div><div style="font-size:15px;font-weight:500;">Add new section</div><div style="font-size:12px;color:#6b8a7e;">Custom category</div></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid #daeee6;cursor:pointer;" onclick="fOpenAddSec()">
+        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">➕</span><div><div style="font-size:15px;font-weight:500;color:#1a2e26;">Add new section</div><div style="font-size:12px;color:#6b8a7e;">Custom category create pannunga</div></div></div>
         <span style="color:#6b8a7e;">›</span>
       </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;" onclick="fatConfirmReset()">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;" onclick="if(confirm('Reset today ticks?')){fState={};fSs('v3_state_'+fTodayKey(),fState);fUpdateHeader();fRenderToday();}">
         <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">🗑️</span><div><div style="font-size:15px;font-weight:500;color:#c0392b;">Reset today</div><div style="font-size:12px;color:#6b8a7e;">Clear all ticks</div></div></div>
         <span style="color:#6b8a7e;">›</span>
       </div>
@@ -1937,60 +1919,50 @@ function fatRenderSettings(){
     <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);border:1px solid #daeee6;overflow:hidden;">${h||'<div style="padding:16px;color:#6b8a7e;font-size:14px;">Sections illai.</div>'}</div>`;
 }
 
-function fatConfirmReset(){if(confirm('Reset today ticks?')){fatState={};fatSs('v3_state_'+fatTodayKey(),fatState);fatUpdateHeader();fatRenderToday();}}
-
-function fatGotoPage(name,idx){
-  ['Today','Timetable','Progress','Settings'].forEach((p,i)=>{
-    document.getElementById('fatPg'+p).className='fat-pg'+(i===idx?' fat-show':'');
-    document.getElementById('fnb'+i).className='fat-nav'+(i===idx?' active':'');
-  });
-  if(name==='Timetable') fatRenderTimetable();
-  if(name==='Progress') fatRenderProgress();
-  if(name==='Settings') fatRenderSettings();
-}
-
-function fatRenderAll(){
-  fatRenderTabs();fatRenderToday();fatUpdateHeader();
-}
-
-// FAT Section Modal
-function fatOpenEditSec(id){
-  const sec=fatSections.find(s=>s.id===id);if(!sec)return;
-  fatModalMode='editSec';fatEditSecId=id;fatMSelEmoji=sec.icon;fatMSelColor=sec.color;
+// --- SECTION MODAL ---
+function fOpenEditSec(id){
+  const sec=fSections.find(s=>s.id===id);if(!sec)return;
+  fModalMode='edit';fEditSecId=id;fMEmoji=sec.icon;fMColor=sec.color;
   document.getElementById('fatModalTitle').textContent='Edit Section';
   document.getElementById('fatMName').value=sec.name;
   document.getElementById('fatMTab').value=sec.tab;
   document.getElementById('fatMConfirm').textContent='Save';
-  fatBuildModalGrids();document.getElementById('fatModalBg').style.display='flex';
+  fBuildModal();document.getElementById('fatModalBg').classList.add('open');
 }
-function fatOpenAddSection(){
-  fatModalMode='add';fatEditSecId=null;fatMSelEmoji=FAT_EMOJIS[0];fatMSelColor=FAT_COLORS[0];
+function fOpenAddSec(){
+  fModalMode='add';fEditSecId=null;fMEmoji=F_EMOJIS[0];fMColor=F_COLORS[0];
   document.getElementById('fatModalTitle').textContent='New Section';
   document.getElementById('fatMName').value='';document.getElementById('fatMTab').value='';
   document.getElementById('fatMConfirm').textContent='Add';
-  fatBuildModalGrids();document.getElementById('fatModalBg').style.display='flex';
+  fBuildModal();document.getElementById('fatModalBg').classList.add('open');
 }
-function fatBuildModalGrids(){
-  document.getElementById('fatEmojiGrid').innerHTML=FAT_EMOJIS.map(e=>`<div onclick="fatSelEmoji('${e}')" style="width:38px;height:38px;border-radius:8px;border:1.5px solid ${e===fatMSelEmoji?'#1a9e6e':'#2e2060'};background:${e===fatMSelEmoji?'#0d2e22':'transparent'};display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;">${e}</div>`).join('');
-  document.getElementById('fatColorGrid').innerHTML=FAT_COLORS.map(c=>`<div onclick="fatSelColor('${c}')" style="width:30px;height:30px;border-radius:50%;cursor:pointer;background:${c};border:3px solid ${c===fatMSelColor?'#e2e8f0':'transparent'};"></div>`).join('');
+function fBuildModal(){
+  document.getElementById('fatEmojiGrid').innerHTML=F_EMOJIS.map(e=>`<div onclick="fSelE('${e}')" style="width:38px;height:38px;border-radius:8px;border:1.5px solid ${e===fMEmoji?'#1a9e6e':'#2e2060'};background:${e===fMEmoji?'rgba(26,158,110,.2)':'transparent'};display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;">${e}</div>`).join('');
+  document.getElementById('fatColorGrid').innerHTML=F_COLORS.map(c=>`<div onclick="fSelC('${c}')" style="width:30px;height:30px;border-radius:50%;cursor:pointer;background:${c};border:3px solid ${c===fMColor?'#e2e8f0':'transparent'};"></div>`).join('');
 }
-function fatSelEmoji(e){fatMSelEmoji=e;fatBuildModalGrids();}
-function fatSelColor(c){fatMSelColor=c;fatBuildModalGrids();}
+function fSelE(e){fMEmoji=e;fBuildModal();}
+function fSelC(c){fMColor=c;fBuildModal();}
 function fatConfirmModal(){
   const name=document.getElementById('fatMName').value.trim();const tab=document.getElementById('fatMTab').value.trim()||name;if(!name)return;
-  if(fatModalMode==='add'){const id='sec_'+Date.now();fatSections.push({id,name,icon:fatMSelEmoji,color:fatMSelColor,tab});if(!fatTasks[id])fatTasks[id]=[];fatSs('v3_sections',fatSections);fatSs('v3_tasks',fatTasks);fatActiveTab=tab;}
-  else{const sec=fatSections.find(s=>s.id===fatEditSecId);if(sec){sec.name=name;sec.icon=fatMSelEmoji;sec.color=fatMSelColor;sec.tab=tab;}fatSs('v3_sections',fatSections);}
-  fatCloseModal();fatRenderTabs();fatRenderToday();fatUpdateHeader();fatRenderSettings();
+  if(fModalMode==='add'){const id='sec_'+Date.now();fSections.push({id,name,icon:fMEmoji,color:fMColor,tab});if(!fTasks[id])fTasks[id]=[];fSs('v3_sections',fSections);fSs('v3_tasks',fTasks);fActiveTab=tab;}
+  else{const sec=fSections.find(s=>s.id===fEditSecId);if(sec){sec.name=name;sec.icon=fMEmoji;sec.color=fMColor;sec.tab=tab;}fSs('v3_sections',fSections);}
+  fatCloseModal();fRenderTabs();fRenderToday();fUpdateHeader();fRenderSettings();
 }
-function fatDeleteSection(id){
-  if(!confirm('Delete this section?'))return;
-  fatSections=fatSections.filter(s=>s.id!==id);delete fatTasks[id];
-  fatSs('v3_sections',fatSections);fatSs('v3_tasks',fatTasks);
-  const tabs=fatUniqueTabs();if(!tabs.includes(fatActiveTab))fatActiveTab=tabs[0]||'';
-  fatRenderTabs();fatRenderToday();fatUpdateHeader();fatRenderSettings();
-}
-function fatCloseModal(){document.getElementById('fatModalBg').style.display='none';}
+function fDelSection(id){if(!confirm('Delete this section?'))return;fSections=fSections.filter(s=>s.id!==id);delete fTasks[id];fSs('v3_sections',fSections);fSs('v3_tasks',fTasks);const tabs=fUniqueTabs();if(!tabs.includes(fActiveTab))fActiveTab=tabs[0]||'';fRenderTabs();fRenderToday();fUpdateHeader();fRenderSettings();}
+function fatCloseModal(){document.getElementById('fatModalBg').classList.remove('open');}
 
+// --- NAVIGATION ---
+function fatGoto(idx){
+  for(let i=0;i<4;i++){
+    document.getElementById('fatP'+i).className='fat-page'+(i===idx?' fat-show':'');
+    document.getElementById('fnb'+i).className='fat-nav-btn'+(i===idx?' active':'');
+  }
+  if(idx===1)fRenderTT();
+  if(idx===2)fRenderProgress();
+  if(idx===3)fRenderSettings();
+}
+
+function fRenderAll(){fRenderTabs();fRenderToday();fUpdateHeader();}
 </script>
 </body>
 </html>
