@@ -173,6 +173,145 @@ body.role-customer .backup-bar{display:none!important;}
 #fatPinScreen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;background:linear-gradient(160deg,#0a1f14 0%,#0d2e22 60%,#1a4a32 100%);}
 #fatApp{display:none;flex-direction:column;height:100%;overflow:hidden;}
 .fat-header{background:linear-gradient(135deg,#0d6e4c,#1a9e6e);color:#fff;padding:48px 18px 14px;flex-shrink:0;}
+.fat-tabs-bar{display:flex;background:#150d27;border-bottom:1px solid #2e2060;overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
+.fat-tabs-bar::-webkit-scrollbar{display:none;}
+.fat-tab{padding:11px 16px;font-size:13px;font-weight:500;color:#6366f1;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;flex-shrink:0;}
+.fat-tab.active{color:#818cf8;border-bottom-color:#818cf8;}
+.fat-pages{flex:1;overflow:hidden;position:relative;}
+.fat-page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:14px 13px 80px;display:none;background:#0f0a1e;}
+.fat-page.fat-show{display:block;}
+.fat-bottom-nav{background:#150d27;border-top:1px solid #2e2060;display:flex;flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0px);}
+.fat-nav-btn{flex:1;padding:10px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-size:10px;color:#6366f1;font-weight:500;}
+.fat-nav-btn.active{color:#818cf8;}
+/* PIN keypad */
+.fat-pin-dot{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.25);transition:all .2s;}
+.fat-pin-dot.fp{background:#06D6A0;border-color:#06D6A0;box-shadow:0 0 8px rgba(6,214,160,.5);}
+.fat-pin-key{width:72px;height:56px;border-radius:14px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);font-size:22px;font-weight:700;cursor:pointer;color:#fff;font-family:Inter,sans-serif;transition:all .15s;}
+.fat-pin-key:active{transform:scale(.92);background:rgba(255,255,255,.18);}
+/* Tracker components - prefixed to avoid clash with main app */
+.fat-stat-pill{background:rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;flex:1;text-align:center;}
+.fat-stat-pill span{display:block;font-size:19px;font-weight:600;}
+.fat-big-bar{height:5px;background:rgba(255,255,255,.2);border-radius:5px;margin-top:12px;overflow:hidden;}
+.fat-sec-card{background:#1a1232;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.3);margin-bottom:12px;overflow:hidden;border:1px solid #2e2060;}
+.fat-chk{width:22px;height:22px;border-radius:6px;border:2px solid #2e2060;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .2s;}
+.fat-chk.on{background:#1a9e6e;border-color:#1a9e6e;}
+.fat-chk.on::after{content:'✓';color:#fff;font-size:13px;font-weight:600;}
+.fat-task-txt{font-size:14px;flex:1;cursor:pointer;line-height:1.4;color:#e2e8f0;}
+.fat-task-txt.done{color:#4a5568;text-decoration:line-through;}
+.fat-glass{width:42px;height:42px;border-radius:10px;border:2px solid #2e2060;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:all .15s;}
+.fat-glass.on{background:#1e1a4e;border-color:#818cf8;}
+.fat-glass:active{transform:scale(.9);}
+.fat-streak-card{background:linear-gradient(135deg,#1a0533,#2d1b69);border-radius:16px;padding:16px;margin-bottom:12px;color:#fff;display:flex;align-items:center;gap:14px;}
+.fat-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:none;align-items:flex-end;}
+.fat-modal-bg.open{display:flex;}
+.fat-modal{background:#1a1232;border-radius:20px 20px 0 0;padding:20px 18px 44px;width:100%;animation:slideUp .25s ease;max-height:85vh;overflow-y:auto;}
+/* Pin change modal */
+#fatPinChgModal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
+</style>
+</head>
+<body>
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="loginScreen" style="display:none;">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-title">⚡ VKM TRACKER</div>
+      <div class="login-logo-sub">Work · Loan · Petrol Tracker</div>
+    </div>
+    <div class="login-tabs" id="loginTabBar">
+      <button class="ltab active" id="ltab-admin" onclick="setLoginTab('admin')">🔐 Admin</button>
+      <button class="ltab" id="ltab-customer" onclick="setLoginTab('customer')">👤 Customer</button>
+    </div>
+    <!-- Admin Login -->
+    <div id="adminLoginForm">
+      <div class="login-input-wrap">
+        <span class="login-label">Username</span>
+        <input class="linput" type="text" id="adminUser" placeholder="Admin username" autocomplete="off" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="login-input-wrap">
+        <span class="login-label">Password</span>
+        <input class="linput" type="password" id="adminPass" placeholder="Admin password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="login-btn" onclick="doLogin()">LOGIN →</button>
+    </div>
+    <!-- Customer Login -->
+    <div id="customerLoginForm" style="display:none;">
+      <div class="login-input-wrap">
+        <span class="login-label">User ID</span>
+        <input class="linput" type="text" id="custUser" placeholder="Your User ID" autocomplete="off" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="login-input-wrap">
+        <span class="login-label">Password</span>
+        <input class="linput" type="password" id="custPass" placeholder="Your Password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="login-btn" onclick="doLogin()">LOGIN →</button>
+      <div class="login-link" style="margin-top:14px;">புதியவரா? <a onclick="showRegisterForm()">Create Account</a></div>
+    </div>
+    <div class="login-err" id="loginErr"></div>
+  </div>
+  <!-- Future Achievement Tracker button -->
+  <button onclick="fatOpenPin()" style="margin-top:20px;background:linear-gradient(135deg,#0d6e4c,#1a9e6e);border:none;color:#fff;padding:13px 3.abtn{background:#231952;border-radius:8px;padding:4px 9px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;line-height:1.4;border:1px solid var(--border);}
+.loan-summary-top{background:linear-gradient(135deg,#1e0a3c,#312e81);border-radius:16px;padding:15px;margin-bottom:12px;color:#fff;}
+.lst-title{font-size:11px;font-weight:700;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
+.lst-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
+.lst-box{background:rgba(99,102,241,.2);border-radius:10px;padding:9px 6px;text-align:center;}
+.lst-val{font-size:14px;font-weight:800;line-height:1;}
+.lst-lbl{font-size:9px;opacity:.7;margin-top:3px;font-weight:600;}
+.lst-bar-bg{height:6px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden;}
+.lst-bar-fill{height:100%;background:#06D6A0;border-radius:4px;transition:width .5s;}
+.lst-bar-txt{font-size:10px;opacity:.65;margin-top:4px;text-align:right;}
+.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:14px 13px 80px;display:none;-webkit-overflow-scrolling:touch;background:var(--bg);}
+.backup-bar{position:fixed;bottom:0;left:0;right:0;max-width:430px;margin:0 auto;background:#150d27;border-top:1.5px solid var(--border);padding:8px 12px;display:flex;gap:8px;z-index:50;box-shadow:0 -4px 16px rgba(15,76,117,0.08);}
+.backup-btn{flex:1;padding:9px 4px;border-radius:11px;border:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
+.backup-btn:active{transform:scale(.97);}
+.bk-export{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;}
+.bk-import{background:#1e1646;color:#a5b4fc;}
+.bk-clear{background:#2d1414;color:#f87171;}
+
+/* ===== LOGIN SCREEN ===== */
+#loginScreen{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#0f0a1e 0%,#1e0a3c 60%,#312e81 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:20px;}
+.login-box{background:#1a1232;border-radius:24px;padding:32px 24px 28px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+.login-logo{text-align:center;margin-bottom:22px;}
+.login-logo-title{font-size:30px;font-weight:900;letter-spacing:2px;text-transform:uppercase;font-style:italic;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.login-logo-sub{font-size:11px;color:#a5b4fc;font-weight:600;margin-top:4px;letter-spacing:1px;text-transform:uppercase;}
+.login-tabs{display:flex;background:#0f0a1e;border-radius:12px;padding:4px;margin-bottom:20px;gap:4px;}
+.ltab{flex:1;text-align:center;padding:9px 4px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;color:#a5b4fc;border:none;background:transparent;font-family:'Inter',sans-serif;}
+.ltab.active{background:#231952;color:#a5b4fc;box-shadow:0 2px 8px rgba(15,76,117,.12);}
+.login-input-wrap{margin-bottom:12px;}
+.login-label{font-size:10px;font-weight:700;color:#a5b4fc;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;display:block;}
+.linput{width:100%;padding:11px 14px;border:1.5px solid #2e2060;border-radius:11px;font-size:14px;font-weight:500;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;background:#231952;color:#e2e8f0;}
+.linput:focus{border-color:#818cf8;}
+.login-btn{width:100%;padding:13px;border-radius:12px;border:none;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:15px;font-weight:800;cursor:pointer;letter-spacing:.3px;font-family:'Inter',sans-serif;margin-top:6px;transition:transform .15s;}
+.login-btn:active{transform:scale(.98);}
+.login-err{color:#FF6B6B;font-size:12px;font-weight:600;text-align:center;margin-top:8px;min-height:16px;}
+.login-link{text-align:center;margin-top:12px;font-size:12px;color:#5C7A99;}
+.login-link a{color:#1B9AAA;font-weight:700;cursor:pointer;text-decoration:none;}
+.role-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
+.role-admin{background:rgba(255,255,255,.2);color:#fff;}
+.role-customer{background:rgba(255,255,255,.2);color:#fff;}
+.logout-btn{background:rgba(255,255,255,.15);border:none;color:rgba(255,255,255,.9);font-size:11px;font-weight:700;cursor:pointer;padding:3px 10px;border-radius:20px;font-family:'Inter',sans-serif;margin-left:4px;}
+/* Customer read-only */
+body.role-customer .btn:not(.view-ok){display:none!important;}
+body.role-customer .abtn{display:none!important;}
+body.role-customer input,body.role-customer select{pointer-events:none;background:#f5f7ff!important;}
+body.role-customer .backup-bar{display:none!important;}
+/* Admin panel modal */
+#adminPanelModal .modal-box{max-height:85vh;}
+.customer-card{background:#231952;border:1.5px solid var(--border);border-radius:14px;padding:13px;margin-bottom:10px;}
+.customer-card-name{font-size:14px;font-weight:800;color:#818cf8;}
+.customer-card-info{font-size:12px;color:var(--text2);margin-top:3px;}
+.status-badge{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;margin-left:6px;}
+.status-pending{background:#2d1a08;color:#fb923c;}
+.status-active{background:#0d2e22;color:#34d399;}
+.status-rejected{background:#2d1414;color:#f87171;}
+/* Register form */
+.reg-section{margin-bottom:8px;}
+
+/* ===== FUTURE ACHIEVEMENT TRACKER CSS ===== */
+/* Scoped with fat- prefix to avoid conflicts */
+#fatOverlay{position:fixed;inset:0;z-index:99999;display:none;flex-direction:column;background:#0f0a1e;}
+#fatPinScreen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;background:linear-gradient(160deg,#0a1f14 0%,#0d2e22 60%,#1a4a32 100%);}
+#fatApp{display:none;flex-direction:column;height:100%;overflow:hidden;}
+.fat-header{background:linear-gradient(135deg,#0d6e4c,#1a9e6e);color:#fff;padding:48px 18px 14px;flex-shrink:0;}
 .fat-tabs-bar{display:flex;background:#fff;border-bottom:1px solid #daeee6;overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
 .fat-tabs-bar::-webkit-scrollbar{display:none;}
 .fat-tab{padding:11px 16px;font-size:13px;font-weight:500;color:#6b8a7e;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;flex-shrink:0;}
