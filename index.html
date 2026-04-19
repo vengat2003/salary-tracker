@@ -249,145 +249,6 @@ body.role-customer .backup-bar{display:none!important;}
     <div class="login-err" id="loginErr"></div>
   </div>
   <!-- Future Achievement Tracker button -->
-  <button onclick="fatOpenPin()" style="margin-top:20px;background:linear-gradient(135deg,#0d6e4c,#1a9e6e);border:none;color:#fff;padding:13px 3.abtn{background:#231952;border-radius:8px;padding:4px 9px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;line-height:1.4;border:1px solid var(--border);}
-.loan-summary-top{background:linear-gradient(135deg,#1e0a3c,#312e81);border-radius:16px;padding:15px;margin-bottom:12px;color:#fff;}
-.lst-title{font-size:11px;font-weight:700;opacity:.7;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
-.lst-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
-.lst-box{background:rgba(99,102,241,.2);border-radius:10px;padding:9px 6px;text-align:center;}
-.lst-val{font-size:14px;font-weight:800;line-height:1;}
-.lst-lbl{font-size:9px;opacity:.7;margin-top:3px;font-weight:600;}
-.lst-bar-bg{height:6px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden;}
-.lst-bar-fill{height:100%;background:#06D6A0;border-radius:4px;transition:width .5s;}
-.lst-bar-txt{font-size:10px;opacity:.65;margin-top:4px;text-align:right;}
-.page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:14px 13px 80px;display:none;-webkit-overflow-scrolling:touch;background:var(--bg);}
-.backup-bar{position:fixed;bottom:0;left:0;right:0;max-width:430px;margin:0 auto;background:#150d27;border-top:1.5px solid var(--border);padding:8px 12px;display:flex;gap:8px;z-index:50;box-shadow:0 -4px 16px rgba(15,76,117,0.08);}
-.backup-btn{flex:1;padding:9px 4px;border-radius:11px;border:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
-.backup-btn:active{transform:scale(.97);}
-.bk-export{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;}
-.bk-import{background:#1e1646;color:#a5b4fc;}
-.bk-clear{background:#2d1414;color:#f87171;}
-
-/* ===== LOGIN SCREEN ===== */
-#loginScreen{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#0f0a1e 0%,#1e0a3c 60%,#312e81 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:20px;}
-.login-box{background:#1a1232;border-radius:24px;padding:32px 24px 28px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.3);}
-.login-logo{text-align:center;margin-bottom:22px;}
-.login-logo-title{font-size:30px;font-weight:900;letter-spacing:2px;text-transform:uppercase;font-style:italic;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.login-logo-sub{font-size:11px;color:#a5b4fc;font-weight:600;margin-top:4px;letter-spacing:1px;text-transform:uppercase;}
-.login-tabs{display:flex;background:#0f0a1e;border-radius:12px;padding:4px;margin-bottom:20px;gap:4px;}
-.ltab{flex:1;text-align:center;padding:9px 4px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;color:#a5b4fc;border:none;background:transparent;font-family:'Inter',sans-serif;}
-.ltab.active{background:#231952;color:#a5b4fc;box-shadow:0 2px 8px rgba(15,76,117,.12);}
-.login-input-wrap{margin-bottom:12px;}
-.login-label{font-size:10px;font-weight:700;color:#a5b4fc;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;display:block;}
-.linput{width:100%;padding:11px 14px;border:1.5px solid #2e2060;border-radius:11px;font-size:14px;font-weight:500;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;background:#231952;color:#e2e8f0;}
-.linput:focus{border-color:#818cf8;}
-.login-btn{width:100%;padding:13px;border-radius:12px;border:none;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:15px;font-weight:800;cursor:pointer;letter-spacing:.3px;font-family:'Inter',sans-serif;margin-top:6px;transition:transform .15s;}
-.login-btn:active{transform:scale(.98);}
-.login-err{color:#FF6B6B;font-size:12px;font-weight:600;text-align:center;margin-top:8px;min-height:16px;}
-.login-link{text-align:center;margin-top:12px;font-size:12px;color:#5C7A99;}
-.login-link a{color:#1B9AAA;font-weight:700;cursor:pointer;text-decoration:none;}
-.role-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;}
-.role-admin{background:rgba(255,255,255,.2);color:#fff;}
-.role-customer{background:rgba(255,255,255,.2);color:#fff;}
-.logout-btn{background:rgba(255,255,255,.15);border:none;color:rgba(255,255,255,.9);font-size:11px;font-weight:700;cursor:pointer;padding:3px 10px;border-radius:20px;font-family:'Inter',sans-serif;margin-left:4px;}
-/* Customer read-only */
-body.role-customer .btn:not(.view-ok){display:none!important;}
-body.role-customer .abtn{display:none!important;}
-body.role-customer input,body.role-customer select{pointer-events:none;background:#f5f7ff!important;}
-body.role-customer .backup-bar{display:none!important;}
-/* Admin panel modal */
-#adminPanelModal .modal-box{max-height:85vh;}
-.customer-card{background:#231952;border:1.5px solid var(--border);border-radius:14px;padding:13px;margin-bottom:10px;}
-.customer-card-name{font-size:14px;font-weight:800;color:#818cf8;}
-.customer-card-info{font-size:12px;color:var(--text2);margin-top:3px;}
-.status-badge{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;margin-left:6px;}
-.status-pending{background:#2d1a08;color:#fb923c;}
-.status-active{background:#0d2e22;color:#34d399;}
-.status-rejected{background:#2d1414;color:#f87171;}
-/* Register form */
-.reg-section{margin-bottom:8px;}
-
-/* ===== FUTURE ACHIEVEMENT TRACKER CSS ===== */
-/* Scoped with fat- prefix to avoid conflicts */
-#fatOverlay{position:fixed;inset:0;z-index:99999;display:none;flex-direction:column;background:#0f0a1e;}
-#fatPinScreen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;background:linear-gradient(160deg,#0a1f14 0%,#0d2e22 60%,#1a4a32 100%);}
-#fatApp{display:none;flex-direction:column;height:100%;overflow:hidden;}
-.fat-header{background:linear-gradient(135deg,#0d6e4c,#1a9e6e);color:#fff;padding:48px 18px 14px;flex-shrink:0;}
-.fat-tabs-bar{display:flex;background:#fff;border-bottom:1px solid #daeee6;overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
-.fat-tabs-bar::-webkit-scrollbar{display:none;}
-.fat-tab{padding:11px 16px;font-size:13px;font-weight:500;color:#6b8a7e;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;flex-shrink:0;}
-.fat-tab.active{color:#0d6e4c;border-bottom-color:#0d6e4c;}
-.fat-pages{flex:1;overflow:hidden;position:relative;}
-.fat-page{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding:14px 13px 80px;display:none;background:#f6faf8;}
-.fat-page.fat-show{display:block;}
-.fat-bottom-nav{background:#fff;border-top:1px solid #daeee6;display:flex;flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0px);}
-.fat-nav-btn{flex:1;padding:10px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;font-size:10px;color:#6b8a7e;font-weight:500;}
-.fat-nav-btn.active{color:#0d6e4c;}
-/* PIN keypad */
-.fat-pin-dot{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.25);transition:all .2s;}
-.fat-pin-dot.fp{background:#06D6A0;border-color:#06D6A0;box-shadow:0 0 8px rgba(6,214,160,.5);}
-.fat-pin-key{width:72px;height:56px;border-radius:14px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);font-size:22px;font-weight:700;cursor:pointer;color:#fff;font-family:Inter,sans-serif;transition:all .15s;}
-.fat-pin-key:active{transform:scale(.92);background:rgba(255,255,255,.18);}
-/* Tracker components - prefixed to avoid clash with main app */
-.fat-stat-pill{background:rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;flex:1;text-align:center;}
-.fat-stat-pill span{display:block;font-size:19px;font-weight:600;}
-.fat-big-bar{height:5px;background:rgba(255,255,255,.2);border-radius:5px;margin-top:12px;overflow:hidden;}
-.fat-sec-card{background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);margin-bottom:12px;overflow:hidden;border:1px solid #daeee6;}
-.fat-chk{width:22px;height:22px;border-radius:6px;border:2px solid #daeee6;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .2s;}
-.fat-chk.on{background:#1a9e6e;border-color:#1a9e6e;}
-.fat-chk.on::after{content:'✓';color:#fff;font-size:13px;font-weight:600;}
-.fat-task-txt{font-size:14px;flex:1;cursor:pointer;line-height:1.4;color:#1a2e26;}
-.fat-task-txt.done{color:#6b8a7e;text-decoration:line-through;}
-.fat-glass{width:42px;height:42px;border-radius:10px;border:2px solid #daeee6;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:all .15s;}
-.fat-glass.on{background:#e8f1fb;border-color:#2c6fad;}
-.fat-glass:active{transform:scale(.9);}
-.fat-streak-card{background:linear-gradient(135deg,#0d6e4c,#1a6e5a);border-radius:16px;padding:16px;margin-bottom:12px;color:#fff;display:flex;align-items:center;gap:14px;}
-.fat-modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;display:none;align-items:flex-end;}
-.fat-modal-bg.open{display:flex;}
-.fat-modal{background:#1a1232;border-radius:20px 20px 0 0;padding:20px 18px 44px;width:100%;animation:slideUp .25s ease;max-height:85vh;overflow-y:auto;}
-/* Pin change modal */
-#fatPinChgModal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
-</style>
-</head>
-<body>
-<!-- ===== LOGIN SCREEN ===== -->
-<div id="loginScreen" style="display:none;">
-  <div class="login-box">
-    <div class="login-logo">
-      <div class="login-logo-title">⚡ VKM TRACKER</div>
-      <div class="login-logo-sub">Work · Loan · Petrol Tracker</div>
-    </div>
-    <div class="login-tabs" id="loginTabBar">
-      <button class="ltab active" id="ltab-admin" onclick="setLoginTab('admin')">🔐 Admin</button>
-      <button class="ltab" id="ltab-customer" onclick="setLoginTab('customer')">👤 Customer</button>
-    </div>
-    <!-- Admin Login -->
-    <div id="adminLoginForm">
-      <div class="login-input-wrap">
-        <span class="login-label">Username</span>
-        <input class="linput" type="text" id="adminUser" placeholder="Admin username" autocomplete="off" autocapitalize="none" spellcheck="false">
-      </div>
-      <div class="login-input-wrap">
-        <span class="login-label">Password</span>
-        <input class="linput" type="password" id="adminPass" placeholder="Admin password" onkeydown="if(event.key==='Enter')doLogin()">
-      </div>
-      <button class="login-btn" onclick="doLogin()">LOGIN →</button>
-    </div>
-    <!-- Customer Login -->
-    <div id="customerLoginForm" style="display:none;">
-      <div class="login-input-wrap">
-        <span class="login-label">User ID</span>
-        <input class="linput" type="text" id="custUser" placeholder="Your User ID" autocomplete="off" autocapitalize="none" spellcheck="false">
-      </div>
-      <div class="login-input-wrap">
-        <span class="login-label">Password</span>
-        <input class="linput" type="password" id="custPass" placeholder="Your Password" onkeydown="if(event.key==='Enter')doLogin()">
-      </div>
-      <button class="login-btn" onclick="doLogin()">LOGIN →</button>
-      <div class="login-link" style="margin-top:14px;">புதியவரா? <a onclick="showRegisterForm()">Create Account</a></div>
-    </div>
-    <div class="login-err" id="loginErr"></div>
-  </div>
-  <!-- Future Achievement Tracker button -->
   <button onclick="fatOpenPin()" style="margin-top:20px;background:linear-gradient(135deg,#0d6e4c,#1a9e6e);border:none;color:#fff;padding:13px 32px;border-radius:16px;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;letter-spacing:.3px;box-shadow:0 4px 20px rgba(13,110,76,.35);">🌟 Future Achievement Tracker</button>
   <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:8px;text-align:center;">Enter PIN to access</div>
 </div>
@@ -494,10 +355,8 @@ body.role-customer .backup-bar{display:none!important;}
       <div class="leg"><div class="leg-dot" style="background:var(--present)"></div>Present</div>
       <div class="leg"><div class="leg-dot" style="background:var(--absent)"></div>Absent</div>
       <div class="leg"><div class="leg-dot" style="background:var(--half)"></div>Half</div>
-      <div class="leg"><div class="leg-dot" style="background:var(--advance)"></div>Salary days</div>
-      <div class="leg"><div class="leg-dot" style="background:#0E7490"></div>Petrol days</div>
-      <div class="leg"><div class="leg-dot" style="background:#EBF5FF"></div>Saturday</div>
-      <div class="leg">⛽ Petrol entry</div>
+      <div class="leg"><div class="leg-dot" style="background:#1e1a4e"></div>Saturday (Auto)</div>
+      <div class="leg">⛽ Petrol days</div>
     </div>
     <p style="font-size:11px;color:var(--text2);margin-top:8px;">Tap = Present → Absent → Half → Clear</p>
   </div>
@@ -609,11 +468,14 @@ body.role-customer .backup-bar{display:none!important;}
 </div>
 
   <div class="card" id="adminSettingsCard" style="display:none;">
-    <div class="st">🔐 Admin Settings</div>
+    <div class="st">🔐 Admin Credentials</div>
+    <p style="font-size:12px;color:var(--text2);margin-bottom:12px;">Admin username & password change pannunga</p>
+    <div class="ig"><div class="il">Current Password (verify)</div><input type="password" id="adminCurrentPass" placeholder="Current password"></div>
     <div class="r2">
-      <div class="ig"><div class="il">New Username</div><input type="text" id="newAdminUser" placeholder="New admin username" autocapitalize="none"></div>
+      <div class="ig"><div class="il">New Username</div><input type="text" id="newAdminUser" placeholder="New username" autocapitalize="none"></div>
       <div class="ig"><div class="il">New Password</div><input type="password" id="newAdminPass" placeholder="New password"></div>
     </div>
+    <div id="adminPassErr" style="color:#f87171;font-size:12px;min-height:14px;margin-bottom:8px;font-weight:600;"></div>
     <button class="btn btn-primary" onclick="changeAdminPass()">🔑 Update Credentials</button>
   </div>
 
@@ -806,20 +668,18 @@ function renderCal(){
   for(let d=1;d<=dim;d++){
     const key=curYear+'-'+String(curMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
     const isFuture=key>todayStr;const st=attendance[key]||'';
-    const isAdv=advDays.has(key);const isPetrol=petrolDaySet.has(key);
+    const isPetrol=petrolDaySet.has(key);
     const isPetrolBonus=petrolBonusSet.has(key);
     const isToday=key===todayStr;const isSat=isSaturday(key);
     const el=document.createElement('div');let cls='cal-day';
     if(isFuture){cls+=' future';if(isSat) cls+=' saturday';}
+    else if(isSat){cls+=' saturday';} // Saturday always auto-leave, no cycling
     else if(st){cls+=' '+st;}
-    else if(isAdv){cls+=' advance-work';}
     else if(isPetrolBonus){cls+=' petrol-bonus';}
-    else if(isSat){cls+=' saturday';}
     if(isToday) cls+=' today';
-    if(isPetrol&&!isFuture) cls+=' petrol-day';
+    if(isPetrol&&!isFuture&&!isSat) cls+=' petrol-day';
     el.className=cls;el.textContent=d;
     if(!isFuture&&!isSat) el.addEventListener('click',()=>cycleDay(key));
-    else if(!isFuture&&isSat&&st) el.addEventListener('click',()=>cycleDay(key));
     grid.appendChild(el);
   }
   const infoBox=document.getElementById('advInfoBox');
@@ -1158,25 +1018,51 @@ function renderAll(){
       </div>`).join('')
     :'<div class="empty"><div class="empty-icon">💵</div>இன்னும் salary வாங்கல</div>';
 
-  // Petrol
+  // PETROL — Calendar grid format
   document.getElementById('petrolChips').innerHTML=`
     <div class="chip" style="background:#0d2e22;"><div class="chip-val" style="color:var(--teal);">₹${Math.round(c.totalPetrol)}</div><div class="chip-label" style="color:var(--teal);">Total Bonus</div></div>
-    <div class="chip" style="background:#E8F5E9;"><div class="chip-val" style="color:#059669;">${c.petrolDaysCount}</div><div class="chip-label" style="color:#059669;">Days</div></div>
-    <div class="chip" style="background:#FFF8E1;"><div class="chip-val" style="color:#D97706;">₹${c.petrolDaysCount>0?Math.round(c.totalPetrol/c.petrolDaysCount):0}</div><div class="chip-label" style="color:#D97706;">Avg/Day</div></div>`;
-  document.getElementById('petrolList').innerHTML=petrolLog.length?
-    '<div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;">Petrol Log</div>'+
-    [...petrolLog].reverse().map(p=>`
+    <div class="chip" style="background:#0d2e22;"><div class="chip-val" style="color:#34d399;">${c.petrolDaysCount}</div><div class="chip-label" style="color:#34d399;">Work Days</div></div>
+    <div class="chip" style="background:#0d2e22;"><div class="chip-val" style="color:#fbbf24;">₹${c.petrolDaysCount>0?Math.round(c.totalPetrol/c.petrolDaysCount):0}</div><div class="chip-label" style="color:#fbbf24;">Avg/Day</div></div>`;
+  // Petrol calendar
+  const petrolCalPrefix=curYear+'-'+String(curMonth+1).padStart(2,'0')+'-';
+  const petrolCalFirst=new Date(curYear,curMonth,1).getDay();
+  const petrolCalDim=new Date(curYear,curMonth+1,0).getDate();
+  const petrolCalDaySet=new Set(petrolLog.map(p=>p.date));
+  const petrolBonusCalSet=getPetrolBonusDaySet();
+  let petrolCalHtml=`<div style="margin-bottom:8px;">
+    <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.3px;">⛽ Petrol Bonus Calendar</div>
+    <div style="font-size:11px;color:var(--text2);margin-bottom:8px;">🟢 = Bonus day (work day only, no Saturday) | 🔵 = Petrol added</div>
+    <div class="cal-grid">`;
+  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach((d,i)=>{petrolCalHtml+=`<div class="cal-dow" style="${i===6?'color:var(--teal);':''}">${d}</div>`;});
+  for(let i=0;i<petrolCalFirst;i++) petrolCalHtml+=`<div class="cal-day empty"></div>`;
+  for(let d=1;d<=petrolCalDim;d++){
+    const key=petrolCalPrefix+String(d).padStart(2,'0');
+    const isSat=isSaturday(key);
+    const isPetrolEntry=petrolCalDaySet.has(key);
+    const isPetrolBonusDay=petrolBonusCalSet.has(key);
+    const isToday=key===todayStr;
+    let style='';
+    if(isSat) style='background:#1e1a4e;color:#818cf8;';
+    else if(isPetrolBonusDay) style='background:#064e3b;color:#34d399;border-color:#34d399;';
+    else style='background:var(--bg);color:var(--text2);';
+    if(isToday) style+='border:2px solid #818cf8;';
+    petrolCalHtml+=`<div class="cal-day" style="${style};position:relative;">${d}${isPetrolEntry&&!isSat?'<span style="position:absolute;top:0;left:0;font-size:7px;">⛽</span>':''}</div>`;
+  }
+  petrolCalHtml+=`</div></div>`;
+  // Petrol log entries
+  petrolCalHtml+=`<div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;">Petrol Log</div>`+
+    (petrolLog.length?[...petrolLog].reverse().map(p=>`
       <div class="sal-row" style="background:#0d2e22;flex-wrap:wrap;gap:6px;">
         <div class="sal-info" style="flex:1;min-width:0;"><div class="sal-dot" style="background:#0a2e22;">⛽</div>
-          <div><div class="sal-date">${p.date}</div><div class="sal-desc">Petrol bonus — ${getPetrolDays(p.amt)} நாள்</div></div>
+          <div><div class="sal-date">${p.date}</div><div class="sal-desc">Petrol bonus — ${getPetrolDays(p.amt)} work நாள் (Sat தவிர)</div></div>
         </div>
         <div style="display:flex;align-items:center;gap:5px;">
           <div class="sal-amt" style="color:var(--teal);">₹${p.amt}</div>
           <button onclick="editPetrol('${p.id}')" class="abtn">✏️</button>
           <button onclick="deletePetrol('${p.id}')" class="abtn" style="color:var(--absent);">🗑️</button>
         </div>
-      </div>`).join('')
-    :'<div class="empty"><div class="empty-icon">⛽</div>Petrol entry இல்லை</div>';
+      </div>`).join(''):'<div class="empty"><div class="empty-icon">⛽</div>Petrol entry இல்லை</div>');
+  document.getElementById('petrolList').innerHTML=petrolCalHtml;
 
   // LOAN SUMMARY inline top
   const totalLoanWithInt=loans.reduce((a,l)=>a+(l.totalWithInterest||l.total),0);
@@ -1194,15 +1080,46 @@ function renderAll(){
     const totalPay=l.totalWithInterest||l.total;
     const left=Math.max(totalPay-paid,0);
     const pct=totalPay>0?Math.min(paid/totalPay*100,100):0;
-    return `<div style="background:rgba(255,255,255,.12);border-radius:10px;padding:9px 11px;">
+    const monthsLeft=l.monthly>0&&left>0?Math.ceil(left/l.monthly):0;
+    // Monthly breakdown — group payments by month
+    const monthlyMap={};
+    loanPayments.filter(p=>String(p.loanId)===String(l.id)).forEach(p=>{
+      const mk=p.date.slice(0,7); // YYYY-MM
+      monthlyMap[mk]=(monthlyMap[mk]||0)+p.amt;
+    });
+    const monthlyRows=Object.entries(monthlyMap).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,3).map(([mk,amt])=>{
+      const [yr,mo]=mk.split('-');
+      const label=new Date(yr,parseInt(mo)-1,1).toLocaleDateString('en-IN',{month:'short',year:'numeric'});
+      const needed=l.monthly||0;
+      const diff=amt-needed;
+      return `<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:3px 0;border-top:1px solid rgba(255,255,255,.1);">
+        <span style="opacity:.75;">${label}</span>
+        <span style="font-weight:700;color:${diff>=0?'#34d399':'#f87171'};">₹${Math.round(amt).toLocaleString()} ${needed>0?`(${diff>=0?'+':''}${Math.round(diff).toLocaleString()})`:''}</span>
+      </div>`;
+    }).join('');
+    return `<div style="background:rgba(255,255,255,.08);border-radius:10px;padding:9px 11px;border:1px solid rgba(255,255,255,.12);">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
-        <div style="font-size:12px;font-weight:700;">🏦 ${l.name}</div>
+        <div style="font-size:13px;font-weight:700;">🏦 ${l.name}</div>
         <div style="font-size:11px;opacity:.8;">₹${Math.round(left).toLocaleString()} மிச்சம்</div>
       </div>
-      <div style="height:5px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:6px;">
+        <div style="text-align:center;background:rgba(255,255,255,.08);border-radius:7px;padding:5px 2px;">
+          <div style="font-size:12px;font-weight:700;color:#f87171;">₹${Math.round(l.monthly||0).toLocaleString()}</div>
+          <div style="font-size:9px;opacity:.6;">Monthly Due</div>
+        </div>
+        <div style="text-align:center;background:rgba(255,255,255,.08);border-radius:7px;padding:5px 2px;">
+          <div style="font-size:12px;font-weight:700;color:#34d399;">₹${Math.round(paid/Math.max(Object.keys(monthlyMap).length,1)).toLocaleString()}</div>
+          <div style="font-size:9px;opacity:.6;">Avg Paid/mo</div>
+        </div>
+        <div style="text-align:center;background:rgba(255,255,255,.08);border-radius:7px;padding:5px 2px;">
+          <div style="font-size:12px;font-weight:700;color:#fbbf24;">${monthsLeft}</div>
+          <div style="font-size:9px;opacity:.6;">மாசம் மிச்சம்</div>
+        </div>
+      </div>
+      <div style="height:5px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden;margin-bottom:5px;">
         <div style="height:100%;background:#06D6A0;border-radius:4px;width:${pct.toFixed(1)}%;"></div>
       </div>
-      <div style="font-size:10px;opacity:.65;margin-top:3px;">${pct.toFixed(1)}% done | Next: ${getNextPayDate(l)}</div>
+      ${monthlyRows?`<div style="font-size:10px;font-weight:700;opacity:.5;margin-top:5px;text-transform:uppercase;letter-spacing:.3px;">Recent months</div>${monthlyRows}`:''}
     </div>`;
   }).join('');
 
@@ -1613,10 +1530,19 @@ function saveCustomer(){
 
 // Admin change password
 function changeAdminPass(){
+  const cur=document.getElementById('adminCurrentPass').value;
   const nu=document.getElementById('newAdminUser').value;
   const np=document.getElementById('newAdminPass').value;
-  if(!nu||!np){showToast('❌ Fill both fields','error');return;}
+  const errEl=document.getElementById('adminPassErr');
+  const creds=getAdminCreds();
+  if(cur!==creds.pass){errEl.textContent='❌ Current password தப்பு!';return;}
+  if(!nu||!np){errEl.textContent='❌ New username & password போடு';return;}
+  if(np.length<4){errEl.textContent='❌ Password minimum 4 characters வேணும்';return;}
   save(ADMIN_CREDS_KEY,{user:nu,pass:np});
+  errEl.style.color='#34d399';errEl.textContent='✅ Credentials updated!';
+  document.getElementById('adminCurrentPass').value='';
+  document.getElementById('newAdminUser').value='';
+  document.getElementById('newAdminPass').value='';
   showToast('✅ Admin credentials updated!','success');
 }
 
@@ -1663,48 +1589,48 @@ renderAll();
 
   <!-- TRACKER APP -->
   <div id="fatApp">
-    <div class="fat-header">
+    <div class="fat-header" style="background:linear-gradient(135deg,#1a0533 0%,#2d1b69 40%,#0d4f3c 100%);">
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <div>
-          <div style="font-size:18px;font-weight:700;">🌟 Future Achievement Tracker</div>
-          <div style="font-size:11px;opacity:.65;margin-top:2px;" id="fatHDate"></div>
+          <div style="font-size:16px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;">⚡ FUTURE ACHIEVEMENT</div>
+          <div style="font-size:11px;opacity:.6;margin-top:2px;letter-spacing:.3px;" id="fatHDate"></div>
         </div>
         <div style="display:flex;gap:6px;">
-          <button onclick="fatShowPinChg()" style="background:rgba(255,255,255,.18);border:none;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">🔑 PIN</button>
-          <button onclick="fatLock()" style="background:rgba(255,255,255,.18);border:none;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">🔒 Lock</button>
-          <button onclick="fatClose()" style="background:rgba(255,255,255,.18);border:none;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">✕</button>
+          <button onclick="fatShowPinChg()" style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">🔑 PIN</button>
+          <button onclick="fatLock()" style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">🔒</button>
+          <button onclick="fatClose()" style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:Inter,sans-serif;">✕</button>
         </div>
       </div>
       <div style="display:flex;gap:8px;margin-top:10px;">
-        <div class="fat-stat-pill"><span id="fatHDone">0</span>Done</div>
-        <div class="fat-stat-pill"><span id="fatHTotal">0</span>Total</div>
-        <div class="fat-stat-pill"><span id="fatHPct">0%</span>Score</div>
+        <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;flex:1;text-align:center;"><span style="display:block;font-size:18px;font-weight:800;" id="fatHDone">0</span>Done</div>
+        <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;flex:1;text-align:center;"><span style="display:block;font-size:18px;font-weight:800;" id="fatHTotal">0</span>Total</div>
+        <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:500;flex:1;text-align:center;"><span style="display:block;font-size:18px;font-weight:800;" id="fatHPct">0%</span>Score</div>
       </div>
-      <div class="fat-big-bar"><div id="fatBigFill" style="height:100%;background:#7ef5c0;border-radius:5px;transition:width .4s;width:0%"></div></div>
+      <div style="height:4px;background:rgba(255,255,255,.15);border-radius:4px;margin-top:10px;overflow:hidden;"><div id="fatBigFill" style="height:100%;background:linear-gradient(90deg,#06D6A0,#818cf8);border-radius:4px;transition:width .4s;width:0%"></div></div>
     </div>
     <div class="fat-tabs-bar" id="fatTabsBar"></div>
-    <div class="fat-pages">
-      <div class="fat-page fat-show" id="fatP0"><div id="fatTodayContent" style="padding:14px;"></div></div>
-      <div class="fat-page" id="fatP1"><div id="fatTTContent" style="padding:14px;"></div></div>
-      <div class="fat-page" id="fatP2">
+    <div class="fat-pages" style="background:#0f0a1e;">
+      <div class="fat-page fat-show" id="fatP0" style="background:#0f0a1e;"><div id="fatTodayContent" style="padding:14px;"></div></div>
+      <div class="fat-page" id="fatP1" style="background:#0f0a1e;"><div id="fatTTContent" style="padding:14px;"></div></div>
+      <div class="fat-page" id="fatP2" style="background:#0f0a1e;">
         <div style="padding:14px;">
-          <div class="fat-streak-card">
+          <div style="background:linear-gradient(135deg,#1a0533,#2d1b69);border-radius:16px;padding:16px;margin-bottom:12px;color:#fff;display:flex;align-items:center;gap:14px;">
             <div style="font-size:38px;">🔥</div>
-            <div><div style="font-size:40px;font-weight:700;font-family:monospace;line-height:1;" id="fatStreakNum">0</div><div style="font-size:13px;opacity:.75;margin-top:2px;">Day streak!</div></div>
+            <div><div style="font-size:40px;font-weight:800;font-family:monospace;line-height:1;color:#06D6A0;" id="fatStreakNum">0</div><div style="font-size:13px;opacity:.7;margin-top:2px;">Day streak — keep going!</div></div>
           </div>
-          <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(13,110,76,.08);border:1px solid #daeee6;margin-bottom:12px;">
-            <div style="font-size:11px;font-weight:600;color:#6b8a7e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">This week</div>
+          <div style="background:#1a1232;border-radius:16px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.3);border:1px solid #2e2060;margin-bottom:12px;">
+            <div style="font-size:11px;font-weight:600;color:#a5b4fc;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">This week</div>
             <div id="fatWeekGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;"></div>
           </div>
-          <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(13,110,76,.08);border:1px solid #daeee6;">
-            <div style="font-size:11px;font-weight:600;color:#6b8a7e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Section breakdown</div>
+          <div style="background:#1a1232;border-radius:16px;padding:14px;box-shadow:0 4px 20px rgba(0,0,0,.3);border:1px solid #2e2060;">
+            <div style="font-size:11px;font-weight:600;color:#a5b4fc;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Section breakdown</div>
             <div id="fatSecBreak"></div>
           </div>
         </div>
       </div>
-      <div class="fat-page" id="fatP3"><div id="fatSettingsContent" style="padding:14px;"></div></div>
+      <div class="fat-page" id="fatP3" style="background:#0f0a1e;"><div id="fatSettingsContent" style="padding:14px;"></div></div>
     </div>
-    <div class="fat-bottom-nav">
+    <div style="background:#150d27;border-top:1px solid #2e2060;display:flex;flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0px);">
       <div class="fat-nav-btn active" id="fnb0" onclick="fatGoto(0)"><div style="font-size:18px;">✅</div>Today</div>
       <div class="fat-nav-btn" id="fnb1" onclick="fatGoto(1)"><div style="font-size:18px;">🗓️</div>Schedule</div>
       <div class="fat-nav-btn" id="fnb2" onclick="fatGoto(2)"><div style="font-size:18px;">📊</div>Progress</div>
@@ -1766,7 +1692,7 @@ const F_DEF_SEC=[
   {id:'job',name:'Job Time',icon:'💻',color:'#3b6d11',tab:'Job'},
   {id:'lunch',name:'Lunch',icon:'🥗',color:'#3b6d11',tab:'Job'},
   {id:'night',name:'Night Routine',icon:'🌙',color:'#185fa5',tab:'Night'},
-  {id:'nofap',name:'NoFap & Discipline',icon:'🧠',color:'#6b47c8',tab:'Night'},
+  {id:'nofap',name:'NoFap Calendar',icon:'🧠',color:'#6b47c8',tab:'Night'},
   {id:'daily',name:'Daily Essentials',icon:'💧',color:'#0d6e4c',tab:'Essentials'},
 ];
 const F_DEF_TASKS={
@@ -1780,7 +1706,7 @@ const F_DEF_TASKS={
   job:['Job work — 10 AM to 8 PM','Tea break (avoid sugar / cool drinks)','Lunch 3 PM — rice + dal + greens','Job time — use free time for TryHackMe / English'],
   lunch:['Rice + dal — 1 bowl','Keerai (greens) — 1 bowl','Veggies','No cool drinks — plain water only'],
   night:['Reach home by 8:30 PM','Face wash + moisturizer','Dinner — soya (40–50g) or paneer (100g) + chapati','English BBC / YouTube — 20 min','Sleep by 10:30 PM — 7–8 hrs'],
-  nofap:['✅ No PMO today — streak alive','Kegel exercise — 10 x 3 sets','If urge comes — 10 push-ups immediately','Cold water face wash if urge is strong','Night fall is normal — no shame, keep going'],
+  nofap:['Kegel exercise — 10 x 3 sets','If urge comes — 10 push-ups immediately','Cold water face wash if urge is strong','Night fall is normal — no shame, keep going'],
   daily:['Drink 3 liters of water','7–8 hours sleep','No sugar, no junk food','Social media — only allowed slots'],
 };
 const F_DEF_AVOID=['Sugar','Bakery items','Chips / junk food','Cool drinks','Social media (outside allowed time)'];
@@ -1895,7 +1821,16 @@ function fatSavePin(){
 // --- HEADER ---
 function fUpdateHeader(){
   let done=0,total=0;
-  fSections.forEach(s=>{(fTasks[s.id]||[]).forEach((_,i)=>{total++;if(fState[s.id+'_'+i])done++;});});
+  fSections.forEach(s=>{
+    if(s.id==='nofap') return; // nofap uses its own calendar storage
+    (fTasks[s.id]||[]).forEach((_,i)=>{total++;if(fState[s.id+'_'+i])done++;});
+  });
+  // Add nofap today tick
+  const todayNofap='nofap_'+fTodayKey().replace(/\s/g,'-');
+  // Use ISO date for nofap
+  const todayIso=new Date().toISOString().split('T')[0];
+  total++;
+  if(localStorage.getItem('nofap_'+todayIso)==='1') done++;
   const pct=total?Math.round(done/total*100):0;
   document.getElementById('fatHDone').textContent=done;
   document.getElementById('fatHTotal').textContent=total;
@@ -1919,6 +1854,11 @@ function fRenderToday(){
   let html='';
   if(fActiveTab==='Essentials') html+=fBuildWater();
   secList.forEach(sec=>{
+    // Special render for nofap section — calendar format
+    if(sec.id==='nofap'){
+      html+=fBuildNofapCalendar();
+      return;
+    }
     const t=fTasks[sec.id]||[];
     const done=t.filter((_,i)=>fState[sec.id+'_'+i]).length;
     const pct=t.length?Math.round(done/t.length*100):0;
@@ -1927,27 +1867,27 @@ function fRenderToday(){
       <div style="padding:13px 14px 8px;display:flex;align-items:center;justify-content:space-between;">
         <div style="display:flex;align-items:center;gap:8px;">
           <div style="width:28px;height:28px;border-radius:7px;background:${li};display:flex;align-items:center;justify-content:center;font-size:15px;">${sec.icon}</div>
-          <span style="font-size:15px;font-weight:600;color:#1a2e26;">${sec.name}</span>
+          <span style="font-size:15px;font-weight:600;color:#e2e8f0;">${sec.name}</span>
         </div>
         <div style="display:flex;align-items:center;gap:6px;">
           <span style="font-size:12px;font-weight:500;padding:3px 9px;border-radius:12px;background:${li};color:${sec.color};font-family:monospace;">${done}/${t.length}</span>
-          <button onclick="fOpenEditSec('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#6b8a7e;">✏️</button>
+          <button onclick="fOpenEditSec('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#a5b4fc;">✏️</button>
         </div>
       </div>
       <div style="height:3px;background:#daeee6;margin:0 14px 8px;border-radius:3px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:${sec.color};border-radius:3px;transition:width .3s;"></div></div>`;
     t.forEach((task,i)=>{
       const key=sec.id+'_'+i;const on=!!fState[key];
-      html+=`<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid #daeee6;">
+      html+=`<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px solid #2e2060;">
         <div class="fat-chk ${on?'on':''}" onclick="fToggle('${key}','${sec.id}')"></div>
         <div class="fat-task-txt ${on?'done':''}" onclick="fToggle('${key}','${sec.id}')">${task}</div>
         <div style="display:flex;gap:4px;flex-shrink:0;">
-          <button onclick="fEditTask('${sec.id}',${i})" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#6b8a7e;">✏️</button>
+          <button onclick="fEditTask('${sec.id}',${i})" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#a5b4fc;">✏️</button>
           <button onclick="fDelTask('${sec.id}',${i})" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#c0392b;">🗑️</button>
         </div>
       </div>`;
     });
-    html+=`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid #daeee6;">
-      <input style="flex:1;border:none;outline:none;font-family:Inter,sans-serif;font-size:14px;color:#1a2e26;background:none;padding:0;" id="fai_${sec.id}" placeholder="+ Add task..." onkeydown="if(event.key==='Enter')fAddInline('${sec.id}')">
+    html+=`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid #2e2060;">
+      <input style="flex:1;border:none;outline:none;font-family:Inter,sans-serif;font-size:14px;color:#e2e8f0;background:none;padding:0;" id="fai_${sec.id}" placeholder="+ Add task..." onkeydown="if(event.key==='Enter')fAddInline('${sec.id}')">
       <button onclick="fAddInline('${sec.id}')" style="width:28px;height:28px;border-radius:7px;background:#0d6e4c;border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">+</button>
     </div></div>`;
   });
@@ -1955,24 +1895,159 @@ function fRenderToday(){
   document.getElementById('fatTodayContent').innerHTML=html;
 }
 
+const NOFAP_QUOTES=[
+  "🔥 உன் brain-ஐ reboot பண்றே — dopamine control உன் கையில!",
+  "⚡ Every urge you resist makes you stronger than yesterday.",
+  "💪 PMO உன்னை drain பண்ணுது — today you chose power!",
+  "🧠 Your mind is clearing. Focus is returning. Keep going!",
+  "🌟 Real men build themselves. You're doing it — day by day.",
+  "🚀 Confidence grows when you keep your word to yourself.",
+  "🏆 Today's victory is tomorrow's foundation. Stack the wins!",
+  "🔐 Self-control is the ultimate superpower. You have it.",
+  "💎 Energy saved today = energy for your goals tomorrow.",
+  "🌅 New day, new strength. Your streak is your armor.",
+  "⚔️ The urge is the test. Passing it is the reward.",
+  "🧘 Clarity comes to those who don't give in. Stay clear.",
+  "🎯 Your brain is healing. Neurons are rewiring. Trust it.",
+  "🔥 Discipline is choosing your future over your comfort.",
+  "💡 Every 'NO' to PMO is a 'YES' to your dreams.",
+  "🌊 Urges are waves — they come and go. You are the shore.",
+  "⚡ The man who controls himself controls his destiny.",
+  "🏋️ Mental strength > physical strength. Build both today.",
+  "🌟 Your future self is watching. Make him proud right now.",
+  "🎖️ Streaks are built one decision at a time. This is one.",
+  "🧠 Dopamine fasting makes real rewards feel incredible.",
+  "🔥 Pain is temporary. Your transformation is permanent.",
+  "💪 You didn't come this far to only come this far. Push!",
+  "⚡ Each clean day rewires your brain for success.",
+  "🌅 Morning clarity is the reward of yesterday's discipline.",
+  "🏆 Champions are made in the moments nobody sees.",
+  "💎 Your willpower is a muscle — you're training it daily.",
+  "🚀 Clean energy, clear mind, strong focus — that's YOU.",
+  "🔐 The strongest lock is self-control. You hold the key.",
+  "🌟 Day by day, you're becoming the man you were meant to be.",
+];
+
+function fBuildNofapCalendar(){
+  const now=new Date();
+  const year=now.getFullYear();const month=now.getMonth();
+  const todayStr2=now.toISOString().split('T')[0];
+  const prefix=year+'-'+String(month+1).padStart(2,'0')+'-';
+  const firstDay=new Date(year,month,1).getDay();
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  // nofap PMO-free days stored as nofap_YYYY-MM-DD
+  const pmoFreeSet=new Set();
+  for(let d=1;d<=31;d++){
+    const k='nofap_'+prefix+String(d).padStart(2,'0');
+    if(localStorage.getItem(k)==='1') pmoFreeSet.add(prefix+String(d).padStart(2,'0'));
+  }
+  const todayKey2=prefix+String(now.getDate()).padStart(2,'0');
+  const isTodayFree=pmoFreeSet.has(todayKey2);
+  // Today's quote based on day of month
+  const quoteIdx=(now.getDate()-1)%NOFAP_QUOTES.length;
+  const todayQuote=NOFAP_QUOTES[quoteIdx];
+  // Streak count
+  let streak=0;
+  for(let i=0;i<365;i++){
+    const d=new Date(now);d.setDate(d.getDate()-i);
+    const k='nofap_'+d.toISOString().split('T')[0];
+    if(localStorage.getItem(k)==='1') streak++;
+    else if(i>0) break;
+  }
+  let html=`<div style="background:linear-gradient(135deg,#1a0533,#2d1b69);border-radius:16px;padding:14px;margin-bottom:12px;color:#fff;overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div style="font-size:22px;">🧠</div>
+        <div><div style="font-size:15px;font-weight:800;letter-spacing:.3px;">NoFap Calendar</div>
+        <div style="font-size:11px;opacity:.6;">${now.toLocaleDateString('en-IN',{month:'long',year:'numeric'})}</div></div>
+      </div>
+      <div style="text-align:center;background:rgba(255,255,255,.1);border-radius:12px;padding:6px 12px;">
+        <div style="font-size:24px;font-weight:800;color:#06D6A0;">${streak}</div>
+        <div style="font-size:9px;opacity:.6;text-transform:uppercase;letter-spacing:.5px;">Day Streak</div>
+      </div>
+    </div>
+    <!-- Today's PMO tick button -->
+    <div onclick="fToggleNofap('${todayKey2}')" style="background:${isTodayFree?'linear-gradient(135deg,#064e3b,#06D6A0)':'rgba(255,255,255,.08)'};border:2px solid ${isTodayFree?'#06D6A0':'rgba(255,255,255,.2)'};border-radius:14px;padding:12px 16px;margin-bottom:10px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-size:14px;font-weight:700;">${isTodayFree?'✅ Today — PMO Free!':'⬜ Today — Tap to mark PMO Free'}</div>
+        <div style="font-size:11px;opacity:.7;margin-top:2px;">${isTodayFree?'Great job! Keep the streak alive 💪':'You can do this — one day at a time'}</div>
+      </div>
+      <div style="font-size:28px;">${isTodayFree?'🔥':'💪'}</div>
+    </div>
+    <!-- Motivation quote -->
+    <div style="background:rgba(255,255,255,.06);border-left:3px solid #818cf8;border-radius:0 10px 10px 0;padding:10px 12px;margin-bottom:12px;font-size:12px;font-style:italic;opacity:.9;line-height:1.5;">${todayQuote}</div>
+    <!-- Calendar grid -->
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:6px;">`;
+  ['S','M','T','W','T','F','S'].forEach(d=>html+=`<div style="text-align:center;font-size:9px;font-weight:700;opacity:.5;padding-bottom:4px;">${d}</div>`);
+  for(let i=0;i<firstDay;i++) html+=`<div></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const key=prefix+String(d).padStart(2,'0');
+    const isFree=pmoFreeSet.has(key);
+    const isToday=key===todayKey2;
+    const isFuture=key>todayStr2;
+    const q=NOFAP_QUOTES[(d-1)%NOFAP_QUOTES.length];
+    let bg,clr,border;
+    if(isFuture){bg='rgba(255,255,255,.04)';clr='rgba(255,255,255,.2)';border='transparent';}
+    else if(isFree){bg='linear-gradient(135deg,#064e3b,#06D6A0)';clr='#fff';border='#06D6A0';}
+    else if(isToday){bg='rgba(255,255,255,.15)';clr='#fff';border='#818cf8';}
+    else{bg='rgba(248,113,113,.15)';clr='#f87171';border='rgba(248,113,113,.3)';}
+    html+=`<div onclick="${isFuture?'':(`fToggleNofap('${key}');fShowNofapQuote('${q.replace(/'/g,"\\'")}','${isFree?'false':'true'}')`)}"
+      title="${isFuture?'Future':isFree?'PMO Free ✅':'Not marked'}"
+      style="aspect-ratio:1;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;cursor:${isFuture?'default':'pointer'};background:${bg};color:${clr};border:1.5px solid ${border};transition:all .15s;">${d}</div>`;
+  }
+  html+=`</div>
+    <div style="display:flex;gap:10px;font-size:10px;opacity:.6;">
+      <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:3px;background:#06D6A0;"></div>PMO Free</div>
+      <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;border-radius:3px;background:rgba(248,113,113,.4);"></div>Not marked</div>
+    </div>
+  </div>
+  <!-- Motivation quote popup -->
+  <div id="nofapQuotePopup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;align-items:center;justify-content:center;padding:24px;" onclick="this.style.display='none'">
+    <div style="background:linear-gradient(135deg,#1a0533,#0d2e22);border-radius:20px;padding:24px;max-width:320px;width:100%;text-align:center;">
+      <div style="font-size:40px;margin-bottom:12px;" id="nofapQuoteIcon">🔥</div>
+      <div style="font-size:15px;font-weight:700;color:#fff;line-height:1.6;" id="nofapQuoteText"></div>
+      <div style="margin-top:16px;font-size:12px;color:rgba(255,255,255,.4);">Tap anywhere to close</div>
+    </div>
+  </div>`;
+  return html;
+}
+
+function fToggleNofap(dateKey){
+  const k='nofap_'+dateKey;
+  const cur=localStorage.getItem(k);
+  localStorage.setItem(k,cur==='1'?'0':'1');
+  fRenderToday();fUpdateHeader();
+  // Update streak in progress page if open
+  try{fRenderProgress();}catch(e){}
+}
+
+function fShowNofapQuote(quote,justMarked){
+  const popup=document.getElementById('nofapQuotePopup');
+  if(!popup) return;
+  const isNowFree=justMarked==='true';
+  document.getElementById('nofapQuoteIcon').textContent=isNowFree?'🔥':'💪';
+  document.getElementById('nofapQuoteText').textContent=isNowFree?quote:'Keep going — every clean moment counts!';
+  popup.style.display='flex';
+  setTimeout(()=>{popup.style.display='none';},3500);
+}
 function fBuildWater(){
-  let h=`<div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);margin-bottom:12px;border:1px solid #daeee6;padding:14px;">
+  let h=`<div style="background:#1a1232;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.3);margin-bottom:12px;border:1px solid #2e2060;padding:14px;">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-      <div style="font-size:15px;font-weight:600;color:#1a2e26;">💧 Water Tracker</div>
-      <button onclick="fResetWater()" style="font-size:12px;color:#6b8a7e;background:#f6faf8;border:1px solid #daeee6;border-radius:8px;padding:4px 10px;cursor:pointer;">Reset</button>
+      <div style="font-size:15px;font-weight:600;color:#e2e8f0;">💧 Water Tracker</div>
+      <button onclick="fResetWater()" style="font-size:12px;color:#a5b4fc;background:#1e1646;border:1px solid #2e2060;border-radius:8px;padding:4px 10px;cursor:pointer;">Reset</button>
     </div><div style="display:flex;flex-wrap:wrap;gap:7px;justify-content:center;">`;
   for(let i=0;i<12;i++) h+=`<div class="fat-glass ${i<fWater?'on':''}" onclick="fTapGlass(${i})">💧</div>`;
-  h+=`</div><div style="text-align:center;margin-top:8px;font-size:13px;color:#6b8a7e;"><b style="color:#2c6fad;">${fWater}</b> / 12 glasses ≈ <b style="color:#2c6fad;">${(fWater*0.25).toFixed(1)}L</b></div></div>`;
+  h+=`</div><div style="text-align:center;margin-top:8px;font-size:13px;color:#a5b4fc;"><b style="color:#818cf8;">${fWater}</b> / 12 glasses ≈ <b style="color:#818cf8;">${(fWater*0.25).toFixed(1)}L</b></div></div>`;
   return h;
 }
 function fBuildAvoid(){
-  let h=`<div style="background:#fdeee9;border:1px solid #f5c4b3;border-radius:16px;padding:14px;margin-bottom:12px;">
-    <div style="font-size:14px;font-weight:600;color:#e05c3a;margin-bottom:10px;">🚫 Avoid these</div>
+  let h=`<div style="background:#2d1414;border:1px solid #7f1d1d;border-radius:16px;padding:14px;margin-bottom:12px;">
+    <div style="font-size:14px;font-weight:600;color:#f87171;margin-bottom:10px;">🚫 Avoid these</div>
     <div style="display:flex;flex-wrap:wrap;gap:6px;">`;
-  fAvoid.forEach((a,i)=>h+=`<div style="background:#fff;border:1px solid #f5c4b3;border-radius:20px;padding:4px 12px;font-size:13px;color:#e05c3a;font-weight:500;display:flex;align-items:center;gap:5px;">${a}<button onclick="fDelAvoid(${i})" style="cursor:pointer;font-size:11px;opacity:.6;border:none;background:none;color:#e05c3a;padding:0;">✕</button></div>`);
+  fAvoid.forEach((a,i)=>h+=`<div style="background:#1a0a0a;border:1px solid #7f1d1d;border-radius:20px;padding:4px 12px;font-size:13px;color:#f87171;font-weight:500;display:flex;align-items:center;gap:5px;">${a}<button onclick="fDelAvoid(${i})" style="cursor:pointer;font-size:11px;opacity:.6;border:none;background:none;color:#f87171;padding:0;">✕</button></div>`);
   h+=`</div><div style="display:flex;gap:6px;margin-top:10px;">
-    <input id="fAvoidInp" style="flex:1;border:1px solid #f5c4b3;border-radius:10px;padding:7px 10px;font-size:13px;font-family:Inter,sans-serif;outline:none;background:#fff;color:#1a2e26;" placeholder="Add item..." onkeydown="if(event.key==='Enter')fAddAvoid()">
-    <button onclick="fAddAvoid()" style="background:#e05c3a;color:#fff;border:none;border-radius:10px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif;font-weight:500;">Add</button>
+    <input id="fAvoidInp" style="flex:1;border:1px solid #7f1d1d;border-radius:10px;padding:7px 10px;font-size:13px;font-family:Inter,sans-serif;outline:none;background:#1a0a0a;color:#e2e8f0;" placeholder="Add item..." onkeydown="if(event.key==='Enter')fAddAvoid()">
+    <button onclick="fAddAvoid()" style="background:linear-gradient(135deg,#7f1d1d,#f87171);color:#fff;border:none;border-radius:10px;padding:7px 14px;font-size:13px;cursor:pointer;font-family:Inter,sans-serif;font-weight:500;">Add</button>
   </div></div>`;
   return h;
 }
@@ -1996,12 +2071,12 @@ function fRenderTT(){
     <div style="display:inline-flex;align-items:center;gap:6px;background:#0d6e4c;color:#fff;border-radius:20px;padding:5px 14px;font-size:13px;font-weight:600;margin-bottom:14px;">${label}</div>
     <div style="background:#fef3dc;border:1px solid #fac775;border-radius:12px;padding:10px 14px;margin-bottom:10px;font-size:13px;color:#854f0b;font-weight:500;">⚠️ Social media: only 10:00–10:30 PM. Outside this — no scrolling da!</div>`;
   data.forEach(block=>{
-    html+=`<div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);margin-bottom:10px;border:1px solid #daeee6;overflow:hidden;">
+    html+=`<div style="background:#1a1232;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.3);margin-bottom:10px;border:1px solid #2e2060;overflow:hidden;">
       <div style="padding:11px 14px;display:flex;align-items:center;gap:10px;">
         <div style="font-size:12px;font-weight:500;color:#fff;padding:3px 10px;border-radius:10px;white-space:nowrap;flex-shrink:0;background:${block.color};">${block.time}</div>
-        <div><div style="font-size:14px;font-weight:600;color:#1a2e26;">${block.label}</div><div style="font-size:12px;color:#6b8a7e;margin-top:1px;">${block.sub}</div></div>
+        <div><div style="font-size:14px;font-weight:600;color:#e2e8f0;">${block.label}</div><div style="font-size:12px;color:#a5b4fc;margin-top:1px;">${block.sub}</div></div>
       </div><div style="padding:0 14px 10px;">`;
-    block.items.forEach(item=>html+=`<div style="font-size:13px;color:#6b8a7e;padding:3px 0;border-top:1px solid #daeee6;display:flex;align-items:flex-start;gap:7px;"><div style="width:5px;height:5px;border-radius:50%;background:#1a9e6e;flex-shrink:0;margin-top:6px;"></div><span>${item}</span></div>`);
+    block.items.forEach(item=>html+=`<div style="font-size:13px;color:#a5b4fc;padding:3px 0;border-top:1px solid #2e2060;display:flex;align-items:flex-start;gap:7px;"><div style="width:5px;height:5px;border-radius:50%;background:#1a9e6e;flex-shrink:0;margin-top:6px;"></div><span>${item}</span></div>`);
     html+=`</div></div>`;
   });
   html+=`</div>`;
@@ -2026,7 +2101,7 @@ function fRenderProgress(){
   for(let i=0;i<365;i++){const d=new Date();d.setDate(d.getDate()-i);if(streaks.includes(d.toDateString()))streak++;else if(i>0)break;}
   document.getElementById('fatStreakNum').textContent=streak;
   let bh='';
-  fSections.forEach(sec=>{const t=fTasks[sec.id]||[];const done=t.filter((_,i)=>fState[sec.id+'_'+i]).length;const pct=t.length?Math.round(done/t.length*100):0;bh+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><div style="font-size:13px;font-weight:500;min-width:110px;color:#1a2e26;">${sec.icon} ${sec.name}</div><div style="flex:1;height:7px;background:#daeee6;border-radius:5px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:${sec.color};border-radius:5px;transition:width .4s;"></div></div><div style="font-size:12px;color:#6b8a7e;min-width:34px;text-align:right;font-family:monospace;">${pct}%</div></div>`;});
+  fSections.forEach(sec=>{const t=fTasks[sec.id]||[];const done=t.filter((_,i)=>fState[sec.id+'_'+i]).length;const pct=t.length?Math.round(done/t.length*100):0;bh+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><div style="font-size:13px;font-weight:500;min-width:110px;color:#e2e8f0;">${sec.icon} ${sec.name}</div><div style="flex:1;height:7px;background:#2e2060;border-radius:5px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:${sec.color};border-radius:5px;transition:width .4s;"></div></div><div style="font-size:12px;color:#a5b4fc;min-width:34px;text-align:right;font-family:monospace;">${pct}%</div></div>`;});
   document.getElementById('fatSecBreak').innerHTML=bh;
 }
 
@@ -2036,26 +2111,26 @@ function fRenderSettings(){
     <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid #daeee6;">
       <div style="display:flex;align-items:center;gap:10px;">
         <span style="font-size:20px;">${sec.icon}</span>
-        <div><div style="font-size:15px;font-weight:500;color:#1a2e26;">${sec.name}</div><div style="font-size:12px;color:#6b8a7e;">${(fTasks[sec.id]||[]).length} tasks · ${sec.tab}</div></div>
+        <div><div style="font-size:15px;font-weight:500;color:#e2e8f0;">${sec.name}</div><div style="font-size:12px;color:#a5b4fc;">${(fTasks[sec.id]||[]).length} tasks · ${sec.tab}</div></div>
       </div>
       <div style="display:flex;gap:6px;">
-        <button onclick="fOpenEditSec('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#6b8a7e;">✏️</button>
+        <button onclick="fOpenEditSec('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#a5b4fc;">✏️</button>
         <button onclick="fDelSection('${sec.id}')" style="width:28px;height:28px;border-radius:7px;border:none;background:none;cursor:pointer;font-size:14px;color:#c0392b;">🗑️</button>
       </div>
     </div>`).join('');
   document.getElementById('fatSettingsContent').innerHTML=`
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);margin-bottom:12px;border:1px solid #daeee6;overflow:hidden;">
+    <div style="background:#1a1232;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.3);margin-bottom:12px;border:1px solid #2e2060;overflow:hidden;">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid #daeee6;cursor:pointer;" onclick="fOpenAddSec()">
-        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">➕</span><div><div style="font-size:15px;font-weight:500;color:#1a2e26;">Add new section</div><div style="font-size:12px;color:#6b8a7e;">Custom category create pannunga</div></div></div>
-        <span style="color:#6b8a7e;">›</span>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">➕</span><div><div style="font-size:15px;font-weight:500;color:#e2e8f0;">Add new section</div><div style="font-size:12px;color:#a5b4fc;">Custom category create pannunga</div></div></div>
+        <span style="color:#a5b4fc;">›</span>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;" onclick="if(confirm('Reset today ticks?')){fState={};fSs('v3_state_'+fTodayKey(),fState);fUpdateHeader();fRenderToday();}">
-        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">🗑️</span><div><div style="font-size:15px;font-weight:500;color:#c0392b;">Reset today</div><div style="font-size:12px;color:#6b8a7e;">Clear all ticks</div></div></div>
-        <span style="color:#6b8a7e;">›</span>
+        <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">🗑️</span><div><div style="font-size:15px;font-weight:500;color:#c0392b;">Reset today</div><div style="font-size:12px;color:#a5b4fc;">Clear all ticks</div></div></div>
+        <span style="color:#a5b4fc;">›</span>
       </div>
     </div>
-    <p style="font-size:12px;color:#6b8a7e;margin-bottom:8px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;">All Sections</p>
-    <div style="background:#fff;border-radius:16px;box-shadow:0 2px 12px rgba(13,110,76,.08);border:1px solid #daeee6;overflow:hidden;">${h||'<div style="padding:16px;color:#6b8a7e;font-size:14px;">Sections illai.</div>'}</div>`;
+    <p style="font-size:12px;color:#a5b4fc;margin-bottom:8px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;">All Sections</p>
+    <div style="background:#1a1232;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.3);border:1px solid #2e2060;overflow:hidden;">${h||'<div style="padding:16px;color:#a5b4fc;font-size:14px;">Sections illai.</div>'}</div>`;
 }
 
 // --- SECTION MODAL ---
