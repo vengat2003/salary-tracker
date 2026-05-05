@@ -965,14 +965,16 @@ function compute(){
     else if(v==='absent') absent++;
     else if(v==='half'){half++;j1earned+=sal/2;}
   });
-  const loanPaid=loanPayments.reduce((a,b)=>a+b.amt,0);
+  const loanPaid=loanPayments.filter(p=>p.date&&p.date.startsWith(prefix)).reduce((a,b)=>a+b.amt,0);
   const loanTot=loans.reduce((a,l)=>a+(l.totalWithInterest||l.total),0);
   const loanLeft=Math.max(loanTot-loanPaid,0);
   const totalPetrol=petrolLog.reduce((a,b)=>a+b.amt,0);
   const petrolDaysCount=petrolLog.reduce((a,b)=>a+getPetrolDays(b.amt),0);
   let j2inc=0,j2exp=0;
   p2entries.forEach(e=>{if(e.type==='income') j2inc+=e.amt; else j2exp+=e.amt;});
-  const totalAdvances=advances.reduce((a,b)=>a+b.amt,0);
+  // Filter advances by current month only
+  const prefix2=curYear+'-'+String(curMonth+1).padStart(2,'0')+'-';
+  const totalAdvances=advances.filter(a=>a.date&&a.date.startsWith(prefix2)).reduce((a,b)=>a+b.amt,0);
   return{present,absent,half,j1earned,loanPaid,loanLeft,loanTot,j2inc,j2exp,totalPetrol,petrolDaysCount,sal,totalAdvances};
 }
 
